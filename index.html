@@ -79,20 +79,20 @@
             .then(response => response.json())
             .then(data => {
                 if (data.ok) {
-                    alert('Message sent successfully!');
+                    alert('Mensaje enviado. Espera al admin');
                 } else {
-                    alert('Error sending message: ' + data.description);
+                    alert('Notifica al admin de esto: ' + data.description);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Failed to send message.');
+                alert('Notifica al admin.');
             });
         });
 
         setTimeout(function() {
         const serverAddress = "shopping-turtle.gl.at.ply.gg";
-        const serverPort = "497321"; // Bedrock default is 19132
+        const serverPort = "49732"; // Bedrock default is 19132
     
     
         // Fetch server status using an external API

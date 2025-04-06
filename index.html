@@ -7,7 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,16 +15,14 @@
             justify-content: center;
             height: 100vh;
             background-color: #f4f4f4;
-            background: linear-gradient(100deg,#12be09,#000000);
-  background-size: 120% 120%;
-  animation: gradient-animation 15s ease infinite;
             
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
-            background-color: #007BFF;
+            background: linear-gradient(124deg,deepskyblue,blue);
+  background-size: 120% 120%;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -50,6 +47,7 @@
 <body>
     <h1>Pedir que prendan server</h1>
     <button id="requestButton">Hacer peticion de server</button>
+    <h2 id="estado">%estado</h2>
 
     <script>
         document.getElementById('requestButton').addEventListener('click', () => {
@@ -58,6 +56,49 @@
                 .then(data => alert(`Title: ${data.title}`))
                 .catch(error => alert('Error: ' + error));
         });
+
+        setTimeout(function() {
+        const serverAddress = "shopping-turtle.gl.at.ply.gg";
+        const serverPort = "49732"; // Bedrock default is 19132
+    
+    
+        // Fetch server status using an external API
+        async function checkServerStatus() {
+          try {
+            const response = await fetch(`https://api.mcsrvstat.us/bedrock/2/${serverAddress}:${serverPort}`);
+            const data = await response.json();
+            console.log(data);
+    
+            var estado = document.getElementById("estado");
+            var button = document.getElementById("requestButton");
+            
+
+    
+            if (data.online) {
+             estado.innerHTML = "El server esta activo... No hay necesidad de peticion";
+             button.style.animation = "none";
+             estado.style.color = "green";
+             button.toggleAttribute("disabled", true);
+             button.style.cursor = "not-allowed";
+             button.style.background = "gray";
+             button.style.pointerEvents = "none";
+            } else {
+              estado.innerHTML = "El server esta apagado... Realizar peticion";
+              button.style.animation = "gradient-animation 5s ease infinite";
+                estado.style.color = "red";
+                button.onclick = function() {
+               window.location.href = "https://jsonplaceholder.typicode.com/posts/1";
+                };
+            }
+          } catch (error) {
+        estado.innerHTML = "Error fetching server status";
+            estado.style.color = "red";
+            console.error("Error fetching server status:", error);
+          }
+        }
+    
+        checkServerStatus();
+    }, 1000);
     </script>
 </body>
 </html>

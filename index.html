@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Page</title>
+    <title>Peticion del server</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -119,20 +119,20 @@
             .then(response => response.json())
             .then(data => {
                 if (data.ok) {
-                    alert('Message sent successfully!');
+                    alert('Mensaje enviado correctamente!');
                 } else {
-                    alert('Error sending message: ' + data.description);
+                    alert('Notifica al admin: ' + data.description);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Failed to send message.');
+                alert('Notifica al admin.');
             });
         });
 
         setTimeout(function() {
         const serverAddress = "shopping-turtle.gl.at.ply.gg";
-        const serverPort = "497321"; // Bedrock default is 19132
+        const serverPort = "49732"; // Bedrock default is 19132
     
     
         // Fetch server status using an external API

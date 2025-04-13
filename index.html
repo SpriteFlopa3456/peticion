@@ -35,7 +35,7 @@
             backdrop-filter: blur(5px);
             
         }
-        button {
+        .button {
             padding: 15px 25px;
             font-size: 16px;
             color: #fff;
@@ -50,24 +50,12 @@
             
         }
 
-        button:active {
+        .button:active {
             box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
         }
-        button:hover {
+        .button:hover {
             background-color: #0056b3;
         }
-        
-        
-        button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.5);
-        transform: skewX(-45deg);
-    }
 
 
     @keyframes shine {
@@ -181,28 +169,139 @@
         .remote-button:hover {
             background-color: #0056b3;
         }
+        .admin-button
+        {
+            background-color:rebeccapurple;
+            color: white;
+            padding: 20px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
+            display: inline-block;
+            text-decoration: none;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            
+        }
+        .admin-button:hover {
+            background-color: #5a2d91;
+        }
 
+        .settings-container {
+        background-color: #ccc;
+        color: #000;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        display: none; /* Initially hidden */
+        }
+        .settings-container h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #000;
+        }
+        .settings-container label {
+            font-size: 16px;
+            color: #000;
+        }
+        input[type="checkbox"] {
+           width: 20px;
+            height: 20px;
+
+        }
+        .close-button {
+            background-color: #d30909;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
+        }
+         .settings-container p {
+            font-size: 16px;
+            color: #000;
+            background-color:rgb(226, 164, 8);
+            padding: 5px;
+        }
+    .p {
+        color: rgb(255, 196, 0);
+        font-size: 16px;
+        margin:4px;
+        font-weight: bold;
+    }
+    .commandButton {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s ease;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
+    }
+    #commandResponse {
+        max-height: 200px; /* Set the maximum height */
+        overflow-y: auto; /* Enable vertical scrolling for overflow content */
+        border: 1px solid #4d4d4d; /* Optional: Add a border for better visibility */
+        padding: 12px; /* Optional: Add padding for better readability */
+        font-family: monospace; /* Use monospace font for command output */
+        white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    }
 
     </style>
 </head>
 <body>
+    <div class="settings-container">
+        <h2>Configuracion</h2>
+        <p>Estado desconocido</p>
+        <input type="checkbox" name="Reducir Rendimiento" id="dperf">
+        <label for="perf">Alternar modos de energia</label>
+        <input type="text" placeholder="Comando" id="commandInput">
+        <button class="commandButton" id="commandSend">Ejecutar</button>
+        <div class="commandResponse" id="commandResponse"></div>
+
+
+
+        <button class="close-button">Cerrar</button>
+    </div> 
     <div class="alert-container">
         <h3>Solo puedes enviar 3 peticiones</h3>
         </div>
     <div class="container">
 
     <h1>Pedir que prendan server</h1>
-    <button id="requestButton">Espera...</button>
+    <button class="button" id="requestButton">Espera...</button>
     <h2 id="estado"></h2>
     <input id="messageInput" type="text" placeholder="Personalizar mensaje" id="messageInput" style="display:none;">
     </div>
     <br>
-    <div class="remote-button">Prender Server</div>
+    <div class="button-container">
+        <button class="remote-button" id="remoteButton">Prender Server</button>
+         <button class="admin-button" id="adminButton">Configuracion</button>
+    </div>
     <br>
     <div class="uptime">
         <h3 id="uptime">Tiempo activo: --d --h --m --s </h3>
         <div class="uptime-bar" id="uptime-bar"></div>
         <p id="health">---%</p>
+        <p class="p" id="energy">Estado de energia: --</p>
     </div>
     <script>
         var input = document.getElementById("messageInput");
@@ -335,13 +434,13 @@
         const uptimeParts = uptimeText.split(' ');
         const uptimeValues = uptimeParts.map(part => parseInt(part) || 0);
         const totalSeconds = (uptimeValues[0] * 86400) + (uptimeValues[1] * 3600) + (uptimeValues[2] * 60) + uptimeValues[3];
-        const maxSeconds = 86400 * 2; // Assuming a maximum of 7 days for the bar
+        const maxSeconds = 86400 * 4; // Assuming a maximum of 4 days for the bar
         const healthPercentage = Math.max(0, Math.min(100, ((maxSeconds - totalSeconds) / maxSeconds) * 100));
         const healthElement = document.getElementById('health');
         if (healthElement) {
             healthElement.textContent = 'Vida del server: ' + Math.round(healthPercentage) + '%';
             uptimeBar.style.width = healthPercentage + '%';
-            uptimeBar.style.backgroundColor = healthPercentage > 50 ? 'seagreen' : (healthPercentage > 20 ? 'yellow' : 'red');
+            uptimeBar.style.backgroundColor = healthPercentage > 40 ? 'seagreen' : (healthPercentage > 20 ? 'yellow' : 'red');
             const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
          
             if (healthPercentage < 5) {
@@ -400,6 +499,75 @@ remoteButton.addEventListener('click', function() {
     remoteButton.innerHTML = "Funcion no disponible";
     remoteButton.style.transition = "background 0.2s ease";
 });
+var adminButton = document.querySelector('.admin-button');
+var settingsContainer = document.querySelector('.settings-container');
+adminButton.addEventListener('click', function() {
+    settingsContainer.style.display = 'block';
+    
+});
+var closeButton = document.querySelector('.close-button');
+closeButton.addEventListener('click', function() {
+    settingsContainer.style.display = 'none';
+});
+var dperf = document.getElementById('dperf');
+dperf.addEventListener('change', function() {
+    if (dperf.checked) {
+        dperf.parentElement.querySelector('p').textContent = 'Modo de energia activado';
+        dperf.parentElement.querySelector('p').style.color = 'green';
+        dperf.parentElement.querySelector('p').style.fontWeight = 'bold';
+        dperf.parentElement.querySelector('p').style.backgroundColor = 'rgba(0, 255, 0, 0.2)';
+    } else {
+        dperf.parentElement.querySelector('p').textContent = 'Modo de energia desactivado';
+        dperf.parentElement.querySelector('p').style.color = 'red';
+        dperf.parentElement.querySelector('p').style.fontWeight = 'bold';
+        dperf.parentElement.querySelector('p').style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+    }
+});
+var energy = document.getElementById('energy');
+    // Update energy status every 10 seconds
+   function updateEnergyStatus() {
+        var currentTime = new Date();
+        var currentHour = currentTime.getHours();
+        if (currentHour >= 3 && currentHour < 7) {
+            energy.innerHTML = "Modo de energia: Ahorro de energia";
+            energy.style.color = "red";
+            energy.style.fontWeight = "bold";
+        } else {
+            energy.innerHTML = "Modo de energia: Rendimiento";
+            energy.style.color = "green";
+            energy.style.fontWeight = "bold";
+        }
+    }
+    // Initial call
+    updateEnergyStatus();
+    // Set interval to update every 10 seconds
+    setInterval(updateEnergyStatus, 10000);
+    var commandButton = document.getElementById('commandSend');
+    var commandInput = document.getElementById('commandInput');
+    var commandResponse = document.getElementById('commandResponse');
+
+commandButton.addEventListener('click', async () => {
+    const command = commandInput.value;
+    if (!command) {
+        commandResponse.innerHTML = '<a style="color: red;">Porfavor escribe un comando.</a>';
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://ancilla.serveo.net/execute?cmd=${encodeURIComponent(command)}`);
+        if (!response.ok) {
+            throw new Error('Failed to execute command');
+        }
+        const result = await response.text();
+        commandResponse.innerHTML = result;
+    } catch (error) {
+        console.error('Error:', error);
+        commandResponse.innerHTML = '<a style="color: red;">Error ejecutando el comando</a>';
+    }
+});
+    
+
+    
         
     </script>
 </body>

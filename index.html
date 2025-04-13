@@ -502,6 +502,12 @@ remoteButton.addEventListener('click', function() {
 var adminButton = document.querySelector('.admin-button');
 var settingsContainer = document.querySelector('.settings-container');
 adminButton.addEventListener('click', function() {
+    // Ask for password
+    var password = prompt('Introduce la contraseña para acceder a la configuracion:');
+    if (password !== 'debian') {
+        alert('Contraseña incorrecta');
+        return;
+    }
     settingsContainer.style.display = 'block';
     
 });
@@ -554,7 +560,7 @@ commandButton.addEventListener('click', async () => {
     }
 
     try {
-        const response = await fetch(`http://ancilla.serveo.net/execute?cmd=${encodeURIComponent(command)}`);
+        const response = await fetch(`https://ancilla.serveo.net/execute?cmd=${encodeURIComponent(command)}`);
         if (!response.ok) {
             throw new Error('Failed to execute command');
         }
@@ -572,3 +578,4 @@ commandButton.addEventListener('click', async () => {
     </script>
 </body>
 </html>
+

@@ -264,10 +264,143 @@
         font-family: monospace; /* Use monospace font for command output */
         white-space: pre-wrap; /* Preserve whitespace and wrap text */
     }
+    .wolcontainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        display: none; /* Initially hidden */
+        background-color: #ccc;
+        width: 400px;
+        height: 260px;
+        color: #000;
+    }
+    .wol-icon {
+        width: 70px;
+        height: 70px;
+        display: block;
+        margin-left: 40px;
+    }
+    .wol-progress-dots {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* Adding a gradient background */
+        margin-top: 35px;
+        /* Drawing the dots */
+        width: 100%;
+        height: 50px;
+        animation: dots 1.5s linear infinite;
+    }
+    /* Adding 3 more dots */
+    .wol-progress-dots span {
+    width: 10px;
+    height: 10px;
+    background-color: #000000;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+.wol-progress-dots img.wol-icon {
+    width: 50px; /* Adjust icon size */
+    height: 50px;
+    margin: 0 10px; /* Add spacing around the icons */
+    animation: none; /* Prevent animation on icons */
+}
+
+.wol-progress-dots img.wol-icon.left {
+    order: -1; /* Place the left icon before the dots */
+}
+
+.wol-progress-dots img.wol-icon.right {
+    order: 1; /* Place the right icon after the dots */
+}
+
+.wol-progress-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.wol-progress-dots span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.wol-progress-dots span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.wol-progress-dots span:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.wol-progress-dots span:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+.wol-progress-dots span:nth-child(6) {
+    animation-delay: 1.5s;
+}
+@keyframes connecting {
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+ 
+    @keyframes dot-blink {
+        0%, 100% {
+            opacity: 0.5;
+            
+        }
+        50% {
+            opacity: 1;
+            background-color: chartreuse;
+        }
+    }
+    .connect {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s ease;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
+    }
+    .connect:hover {
+        background-color: #0056b3;
+    }
+    .wolcontainer h3 {
+        color: rgb(0, 0, 0);
+        background-color: #ffae00;
+        font-size: 14px;
+        margin-top: -10px;
+        padding: 4px;
+    }
 
     </style>
 </head>
 <body>
+    <div class="wolcontainer">
+        <h2>Prender Server</h2>
+        <h3>No esta disponible esta funcion</h3>
+    
+        <div class="wol-progress-dots">
+            <img src="https://cdn-icons-png.flaticon.com/512/2704/2704286.png" alt="WOL Icon" class="wol-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <img src="https://cdn-icons-png.flaticon.com/512/2704/2704211.png " alt="" id="wolIconRight" class="wol-icon">
+        </div>
+        <p id="statuswol">Conectar al servidor</p>
+        
+        <button style="margin-top: -5px;" class="connect">Conectar</button>
+    </div>
     <div class="settings-container">
         <h2>Configuracion</h2>
         <p>Estado desconocido</p>
@@ -354,6 +487,7 @@
     
             var estado = document.getElementById("estado");
             var button = document.getElementById("requestButton");
+            var remotebutton = document.getElementById("remote-button");
             
 
     
@@ -362,9 +496,12 @@
              button.style.animation = "none";
              estado.style.color = "green";
              button.toggleAttribute("disabled", true);
+             remoteButton.style.cursor = "not-allowed";
+                remoteButton.style.background = "gray";
+                remoteButton.innerHTML = "El server ya esta prendido";
              button.style.cursor = "not-allowed";
              button.style.background = "gray";
-             button.style.pointerEvents = "none";
+                button.style.pointerEvents = "none";
              button.innerHTML = "No puedes hacer peticion";
             } else {
               estado.innerHTML = "El server esta apagado... Realizar peticion";
@@ -491,13 +628,27 @@ fetchUptime();
 // Refresh uptime every 60 seconds
 setInterval(fetchUptime, 60000);
 var remoteButton = document.querySelector('.remote-button');
+var wolcontainer = document.querySelector('.wolcontainer');
+var dots = document.querySelectorAll('.wol-progress-dots span');
+var connectButton = document.querySelector('.connect');
+var statuswol = document.getElementById('statuswol');
+var wolIconRight = document.getElementById('wolIconRight');
 remoteButton.addEventListener('click', function() {
-    alert('Esta funcion no esta disponible');
-    remoteButton.style.background = "gray";
-    remoteButton.style.pointerEvents = "none";
-    remoteButton.style.cursor = "not-allowed";
-    remoteButton.innerHTML = "Funcion no disponible";
-    remoteButton.style.transition = "background 0.2s ease";
+    wolcontainer.style.display = 'block';
+});
+connectButton.addEventListener('click', function() {
+    const delays = ['0s', '0.3s', '0.6s', '0.9s', '1.2s', '1.5s']; // Predefined delays
+    dots.forEach((dot, index) => {
+        dot.style.animation = 'dot-blink 2s linear infinite';
+        dot.style.animationDelay = delays[index % delays.length]; // Cycle through delays
+    });
+    statuswol.innerHTML = 'Conectando...';
+    setInterval(function() {
+        wolIconRight.style.animation = 'connecting 1.5s step-start infinite';
+    }, 1500);
+    connectButton.innerHTML = 'Conectando...';
+    connectButton.style.pointerEvents = 'none';
+
 });
 var adminButton = document.querySelector('.admin-button');
 var settingsContainer = document.querySelector('.settings-container');
@@ -578,4 +729,3 @@ commandButton.addEventListener('click', async () => {
     </script>
 </body>
 </html>
-

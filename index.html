@@ -9,6 +9,8 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            animation: gradient-animation 12s ease infinite;
+
             margin: 0;
             padding: 0;
             display: flex;
@@ -266,15 +268,23 @@
     }
     .wolcontainer {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         z-index: 1000;
         display: none; /* Initially hidden */
-        background-color: #ccc;
+        background-color: #f3f3f3b9;
+        animation: fadeIn 0.6s ease-in-out;
+        backdrop-filter: blur(5px);
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
         width: 400px;
         height: 260px;
         color: #000;
+    }
+    .wolcontainer h2 {
+        margin: 5px;
+        font-size: 24px;
+        color: #000;
+        padding: 10px;
     }
     .wol-icon {
         width: 70px;
@@ -302,8 +312,8 @@
     margin: 0 5px;
 }
 .wol-progress-dots img.wol-icon {
-    width: 50px; /* Adjust icon size */
-    height: 50px;
+    width: 55px; /* Adjust icon size */
+    height: 55px;
     margin: 0 10px; /* Add spacing around the icons */
     animation: none; /* Prevent animation on icons */
 }
@@ -379,6 +389,22 @@
         margin-top: -10px;
         padding: 4px;
     }
+    .settings-container h3 {
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+        margin:0px;
+        padding: 4px;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
     </style>
 </head>
@@ -403,9 +429,10 @@
     </div>
     <div class="settings-container">
         <h2>Configuracion</h2>
-        <p>Estado desconocido</p>
-        <input type="checkbox" name="Reducir Rendimiento" id="dperf">
-        <label for="perf">Alternar modos de energia</label>
+        <p></p>
+        <label for="dperf">Modo de energia:</label>
+        <input type="checkbox" id="dperf" name="dperf">
+        <h3>Terminal LINUX</h3>
         <input type="text" placeholder="Comando" id="commandInput">
         <button class="commandButton" id="commandSend">Ejecutar</button>
         <div class="commandResponse" id="commandResponse"></div>
@@ -498,7 +525,7 @@
              button.toggleAttribute("disabled", true);
              remoteButton.style.cursor = "not-allowed";
                 remoteButton.style.background = "gray";
-                remoteButton.innerHTML = "El server ya esta prendido";
+                remoteButton.innerHTML = "Ya esta prendido";
              button.style.cursor = "not-allowed";
              button.style.background = "gray";
                 button.style.pointerEvents = "none";
@@ -540,7 +567,7 @@
     }, 10000);
     async function fetchUptime() {
     try {
-        const response = await fetch('https://ancilla.serveo.net/');
+        const response = await fetch('https://ludos.serveo.net/');
         if (!response.ok) throw new Error('Network response was not ok');
         const html = await response.text();
 
@@ -577,6 +604,7 @@
         if (healthElement) {
             healthElement.textContent = 'Vida del server: ' + Math.round(healthPercentage) + '%';
             uptimeBar.style.width = healthPercentage + '%';
+            uptimeBar.style.transition = 'width 1s ease-in-out';
             uptimeBar.style.backgroundColor = healthPercentage > 40 ? 'seagreen' : (healthPercentage > 20 ? 'yellow' : 'red');
             const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
          
@@ -656,7 +684,7 @@ adminButton.addEventListener('click', function() {
     // Ask for password
     var password = prompt('Introduce la contraseña para acceder a la configuracion:');
     if (password !== 'debian') {
-        alert('Contraseña incorrecta');
+        alert('Acceso denegado.');
         return;
     }
     settingsContainer.style.display = 'block';
@@ -711,7 +739,7 @@ commandButton.addEventListener('click', async () => {
     }
 
     try {
-        const response = await fetch(`https://ancilla.serveo.net/execute?cmd=${encodeURIComponent(command)}`);
+        const response = await fetch(`https://ludos.serveo.net/execute?cmd=${encodeURIComponent(command)}`);
         if (!response.ok) {
             throw new Error('Failed to execute command');
         }
@@ -729,3 +757,4 @@ commandButton.addEventListener('click', async () => {
     </script>
 </body>
 </html>
+

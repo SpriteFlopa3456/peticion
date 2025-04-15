@@ -9,8 +9,6 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            animation: gradient-animation 12s ease infinite;
-
             margin: 0;
             padding: 0;
             display: flex;
@@ -59,35 +57,6 @@
             background-color: #0056b3;
         }
 
-
-    @keyframes shine {
-        0% {
-            left: -100%;
-        }
-        100% {
-            left: 110%;
-        }
-    }
-
-    
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-        h1 {
-            color: #e7e6e6;
-        }
-        h2 {
-            color: #666;
-        }
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
@@ -100,10 +69,7 @@
             border-color: #007bff;
             outline: none;
         }
-        h3 {
-            color: #bbb;
-            margin-top: 20px;
-        }
+
         .alert-container {
             position: absolute;
             top: 200px;
@@ -147,18 +113,17 @@
         border-radius: 5px;
         margin-top: 10px;
     }
-    .remote-button
+    .remote-button , .connect , .commandButton
         {
             background-color: #007bff;
             color: white;
-            padding: 20px 25px;
+            padding: 15px 25px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             transition: background 0.3s ease;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-            display: inline-block;
             text-decoration: none;
         }
         .remote-button:disabled {
@@ -246,18 +211,6 @@
         margin:4px;
         font-weight: bold;
     }
-    .commandButton {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background 0.3s ease;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-    }
     #commandResponse {
         max-height: 200px; /* Set the maximum height */
         overflow-y: auto; /* Enable vertical scrolling for overflow content */
@@ -275,7 +228,7 @@
         backdrop-filter: blur(5px);
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-
+       will-change: filter;
         width: 400px;
         height: 260px;
         color: #f5f5f5;
@@ -326,29 +279,6 @@
     order: 1; /* Place the right icon after the dots */
 }
 
-.wol-progress-dots span:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.wol-progress-dots span:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.wol-progress-dots span:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-.wol-progress-dots span:nth-child(4) {
-    animation-delay: 0.9s;
-}
-
-.wol-progress-dots span:nth-child(5) {
-    animation-delay: 1.2s;
-}
-
-.wol-progress-dots span:nth-child(6) {
-    animation-delay: 1.5s;
-}
 @keyframes connecting {
     50% {
         opacity: 0;
@@ -367,20 +297,6 @@
             opacity: 1;
             background-color: chartreuse;
         }
-    }
-    .connect {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background 0.3s ease;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-    }
-    .connect:hover {
-        background-color: #0056b3;
     }
     .wolcontainer h3 {
         color: rgb(0, 0, 0);
@@ -405,10 +321,31 @@
             transform: translateY(0);
         }
     }
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #0000007e;
+        color: #fff;
+        font-size: 24px;
+    }
+    .body-load {
+        display: none; /* Initially hidden */
+    }
 
     </style>
 </head>
 <body>
+
+        
+    <div class="loading" id="loadingScreen">
+        <p>Cargando...</p>
+        </div>
+
+
+<div class="body-load" id="bodyLoad">
     <div class="wolcontainer">
         <h2>Prender Server</h2>
         <h3>Proximamente</h3>
@@ -432,6 +369,7 @@
         <p></p>
         <label for="dperf">Modo de energia:</label>
         <input type="checkbox" id="dperf" name="dperf">
+        <br>
         <h3>Terminal LINUX</h3>
         <input type="text" placeholder="Comando" id="commandInput">
         <button class="commandButton" id="commandSend">Ejecutar</button>
@@ -463,13 +401,27 @@
         <p id="health">---%</p>
         <p class="p" id="energy">Estado de energia: --</p>
     </div>
+    </div>
     <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        
+        // Hide the loading screen after 2 seconds
+        setTimeout(function() {
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('bodyLoad').style.display = 'block';
+            document.getElementById('bodyLoad').style.animation = 'fadeIn 0.6s ease-in-out';
+        }, 2000); // Adjust the time as needed
+        // Token and chat ID for Telegram Bot
+        const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
+        const chatId = '7688071745';
+
+
+
         var input = document.getElementById("messageInput");
         document.getElementById('requestButton').addEventListener('click', () => {
             // Get the value from the input field
             const inputValue = input.value;
-            const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
-            const chatId = '7688071745';     // Replace with your chat ID
             const message = 'Prende server, ' + inputValue;
 
             const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -590,10 +542,6 @@
             console.error('Element with ID "uptime" not found');
         }
  
-        // Token and chat id
-       
-           const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
-            const chatId = '7688071745';     // Replace with your chat ID
         // Uptime bar health calculation in reverse from 100% to 0%
         const uptimeParts = uptimeText.split(' ');
         const uptimeValues = uptimeParts.map(part => parseInt(part) || 0);
@@ -750,7 +698,8 @@ commandButton.addEventListener('click', async () => {
         commandResponse.innerHTML = '<a style="color: red;">Error ejecutando el comando</a>';
     }
 });
-    
+console.log('DOM fully loaded and parsed');
+});
 
     
         

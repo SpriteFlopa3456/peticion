@@ -454,7 +454,7 @@ if (isWebview) {
     var timeout = 4000; // 2 seconds
 } else {
     webviewElement.innerHTML = '';
-    mobui.style.display = 'block';
+    mobui.style.display = 'none'; // Hide the mobile UI if not in webview
     var timeout = 1000; // 1 second
 }
 // Refresh button functionality

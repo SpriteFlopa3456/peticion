@@ -71,21 +71,24 @@
         }
 
         .alert-container {
-            position: absolute;
-            top: 15vh;
-            left: 25vw;
             animation: alert 0.6s ease-in-out;
             background-color: rgb(255, 196, 0);
             color: black;
             transform: skew(-12deg);
+            width: 60%;
             display: none;
             will-change: transform;
+            position: fixed;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            margin-top: -30px;
             transition: transform 0.3s ease;
         }
         @keyframes alert {
             0% {
                 opacity: 0;
-                transform: translateX(-200px);
+                transform: translateX(-100%);
             }
             100% {
                 opacity: 1;
@@ -96,7 +99,6 @@
         }
         .alert-container h3 {
             margin: 0;
-            padding: 10px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             color: black;
@@ -249,7 +251,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
        will-change: filter;
         width: 400px;
-        height: 260px;
+        height: 270px;
         color: #f5f5f5;
     }
     .wolcontainer h2 {
@@ -385,6 +387,7 @@
             <img src="https://cdn-icons-png.flaticon.com/512/2704/2704211.png " alt="" id="wolIconRight" class="wol-icon">
         </div>
         <p id="statuswol">Conectar al servidor</p>
+        <button id="wolclose" style="padding: 15px 25px;" class="close-button">Cerrar</button>
         
         <button style="margin-top: -5px;" class="connect">Conectar</button>
     </div>
@@ -439,9 +442,11 @@
 // Update the text based on the detection
 const webviewElement = document.getElementById('webview');
 if (isWebview) {
-    webviewElement.innerHTML = 'Optimizado';
+    webviewElement.innerHTML = 'Version de celular experimental.';
+    var timeout = 4000; // 2 seconds
 } else {
     webviewElement.innerHTML = '';
+    var timeout = 1000; // 1 second
 }
 
         // Hide the loading screen after 2 seconds
@@ -449,7 +454,7 @@ if (isWebview) {
             document.getElementById('loadingScreen').style.display = 'none';
             document.getElementById('bodyLoad').style.display = 'block';
             document.getElementById('bodyLoad').style.animation = 'fadeIn 0.6s ease-in-out';
-        }, 1000); // Adjust the time as needed
+        }, timeout); // Adjust the time as needed
         // Token and chat ID for Telegram Bot
         const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
         const chatId = '7688071745';
@@ -654,6 +659,7 @@ fetchUptime();
 setInterval(fetchUptime, 60000);
 var remoteButton = document.querySelector('.remote-button');
 var wolcontainer = document.querySelector('.wolcontainer');
+var wolclose = document.getElementById('wolclose');
 var dots = document.querySelectorAll('.wol-progress-dots span');
 var connectButton = document.querySelector('.connect');
 var statuswol = document.getElementById('statuswol');
@@ -674,6 +680,16 @@ connectButton.addEventListener('click', function() {
     connectButton.innerHTML = 'Conectando...';
     connectButton.style.pointerEvents = 'none';
 
+});
+wolclose.addEventListener('click', function() {
+    wolcontainer.style.display = 'none';
+    dots.forEach(dot => {
+        dot.style.animation = 'none'; // Stop the animation
+    });
+    statuswol.innerHTML = 'Conectar al servidor';
+    connectButton.innerHTML = 'Conectar';
+    connectButton.style.pointerEvents = 'auto';
+    wolIconRight.style.animation = 'none'; // Stop the animation on the icon
 });
 var adminButton = document.querySelector('.admin-button');
 var settingsContainer = document.querySelector('.settings-container');

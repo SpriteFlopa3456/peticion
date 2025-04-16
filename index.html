@@ -57,7 +57,7 @@
             background-color: #0056b3;
         }
 
-        input[type="text"] {
+        input[type="text"], .login input[type="password"] {
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
@@ -237,7 +237,7 @@
         font-family: monospace; /* Use monospace font for command output */
         white-space: pre-wrap; /* Preserve whitespace and wrap text */
     }
-    .wolcontainer {
+    .wolcontainer, .login {
         position: absolute;
         z-index: 1000;
         display: none; /* Initially hidden */
@@ -393,18 +393,12 @@
     </div>
     <div class="settings-container">
         <h2>Configuracion</h2>
-        <p></p>
-        <label for="dperf">Modo de energia:</label>
-        <input type="checkbox" id="dperf" name="dperf">
         <br>
         <h3>Terminal LINUX</h3>
         <input type="text" placeholder="Comando" id="commandInput">
         <button class="commandButton" id="commandSend">Ejecutar</button>
         <div class="commandResponse" id="commandResponse"></div>
-
-
-
-        <button class="close-button">Cerrar</button>
+        <button id="close-settings" class="close-button">Cerrar</button>
     </div> 
     <div class="alert-container">
         <h3>Solo puedes enviar 3 peticiones</h3>
@@ -434,6 +428,13 @@
         <p class="p" id="energy">Estado de energia: --</p>
     </div>
     </div>
+    <div class="login" id="login">
+        <h2>Iniciar Sesion</h2>
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button id="loginButton">Iniciar Sesion</button>
+        <p id="loginMessage"></p>
+        <button id="loginClose" class="close-button">Cerrar</button>
+    </div>
     <script>
      // Check if user is in a webview or mobile app
     
@@ -447,6 +448,7 @@
 // Update the text based on the detection
 const webviewElement = document.getElementById('webview');
 const mobui = document.getElementById('mobile-ui');
+
 
 if (isWebview) {
     webviewElement.innerHTML = 'Version experimental.';
@@ -482,6 +484,36 @@ const fixperfButton = document.getElementById('fixperf');
         const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
         const chatId = '7688071745';
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+// Login button functionality
+        const loginButton = document.getElementById('loginButton');
+        const loginCloseButton = document.getElementById('loginClose');
+        const loginContainer = document.getElementById('login');
+        const passwordInput = document.getElementById('passwordInput');
+        const settingsContainer = document.querySelector('.settings-container');
+        const adminButton = document.getElementById('adminButton');
+        adminButton.addEventListener('click', function() {
+            loginContainer.style.display = 'block';
+        });
+        loginButton.addEventListener('click', function() {
+            const password = passwordInput.value;
+            if (password === 'debian') {
+                settingsContainer.style.display = 'block';
+                loginContainer.style.display = 'none';
+            } else {
+                document.getElementById('loginMessage').innerText = 'Acceso denegado.';
+                document.getElementById('loginMessage').style.color = 'red';
+            }
+        });
+        loginCloseButton.addEventListener('click', function() {
+            loginContainer.style.display = 'none';
+        });
+
+        // Settings close button functionality
+        const closeSettingsButton = document.getElementById('close-settings');
+        closeSettingsButton.addEventListener('click', function() {
+            settingsContainer.style.display = 'none';
+        });
 
 
 
@@ -715,37 +747,10 @@ wolclose.addEventListener('click', function() {
     connectButton.style.pointerEvents = 'auto';
     wolIconRight.style.animation = 'none'; // Stop the animation on the icon
 });
-var adminButton = document.querySelector('.admin-button');
-var settingsContainer = document.querySelector('.settings-container');
-adminButton.addEventListener('click', function() {
-    // Ask for password
-    var password = prompt('Introduce la contraseña para acceder a la configuracion:');
-    if (password !== 'debian') {
-        alert('Acceso denegado.');
-        return;
-    }
-    settingsContainer.style.display = 'block';
-    
-});
 var closeButton = document.querySelector('.close-button');
 closeButton.addEventListener('click', function() {
     settingsContainer.style.display = 'none';
 });
-var dperf = document.getElementById('dperf');
-dperf.addEventListener('change', function() {
-    if (dperf.checked) {
-        dperf.parentElement.querySelector('p').textContent = 'Modo de energia activado';
-        dperf.parentElement.querySelector('p').style.color = 'green';
-        dperf.parentElement.querySelector('p').style.fontWeight = 'bold';
-        dperf.parentElement.querySelector('p').style.backgroundColor = 'rgba(0, 255, 0, 0.2)';
-    } else {
-        dperf.parentElement.querySelector('p').textContent = 'Modo de energia desactivado';
-        dperf.parentElement.querySelector('p').style.color = 'red';
-        dperf.parentElement.querySelector('p').style.fontWeight = 'bold';
-        dperf.parentElement.querySelector('p').style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
-    }
-});
-var energy = document.getElementById('energy');
     // Update energy status every 10 seconds
    function updateEnergyStatus() {
         var currentTime = new Date();

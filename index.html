@@ -328,6 +328,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         height: 100vh;
         width: 100vw;
         background-color: #0000007e;
@@ -408,7 +409,19 @@
         <p class="p" id="energy">Estado de energia: --</p>
     </div>
     </div>
+    <script type="text/javascript">
+        function showAndroidToast(toast) {
+            Android.showToast(toast);
+        }
+    </script>
     <script>
+        if (window.Android) {
+            window.Android.showToast("Hello from JavaScript!");
+        } else {
+            console.log("Android interface not available.");
+        }
+        // send wol package to server
+        // Function to send WOL packet
         
         document.addEventListener('DOMContentLoaded', function() {
         
@@ -417,7 +430,7 @@
             document.getElementById('loadingScreen').style.display = 'none';
             document.getElementById('bodyLoad').style.display = 'block';
             document.getElementById('bodyLoad').style.animation = 'fadeIn 0.6s ease-in-out';
-        }, 2000); // Adjust the time as needed
+        }, 1000); // Adjust the time as needed
         // Token and chat ID for Telegram Bot
         const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
         const chatId = '7688071745';

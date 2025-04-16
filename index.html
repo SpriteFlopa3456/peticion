@@ -72,23 +72,39 @@
 
         .alert-container {
             position: absolute;
-            top: 200px;
+            top: 15vh;
+            left: 25vw;
+            animation: alert 0.6s ease-in-out;
             background-color: rgb(255, 196, 0);
             color: black;
             transform: skew(-12deg);
             display: none;
+            will-change: transform;
+            transition: transform 0.3s ease;
+        }
+        @keyframes alert {
+            0% {
+                opacity: 0;
+                transform: translateX(-200px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            
         }
         .alert-container h3 {
             margin: 0;
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-in-out;
             color: black;
             transform: skew(12deg);
             text-align: center;
             font-size: 20px;
             font-weight: bold;
+
         }
       .uptime {
         background-color: rgba(0, 0, 0, 0.7);
@@ -530,15 +546,17 @@ if (isWebview) {
     }, 1000);
     var alertcontainer = document.querySelector('.alert-container');
     // Show the alert past 1AM
-    setInterval(function() {
-        var currentTime = new Date();
-        var currentHour = currentTime.getHours();
-        if (currentHour >= 1 && currentHour < 6) {
+    var currentTime = new Date();
+    var currentHour = currentTime.getHours();
+    if (currentHour >= 1 && currentHour < 7) {
+        setTimeout(function() {
             alertcontainer.style.display = 'block';
-        } else {
+        }, 3000); // Show after 1 second
+        setTimeout(function() {
             alertcontainer.style.display = 'none';
-        }
-    }, 10000);
+        }, 25000); // Hide after 5 seconds
+    }
+
     async function fetchUptime() {
         try {
        const response = fetch('https://robin-pure-miserably.ngrok-free.app',

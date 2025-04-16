@@ -415,7 +415,12 @@
     <button class="button" id="requestButton">Espera...</button>
     <h2 id="estado"></h2>
     <input id="messageInput" type="text" placeholder="Personalizar mensaje" id="messageInput" style="display:none;">
-    </div>
+   <div id="mobile-ui" class="button-container">
+    <button id="refresh">Refrescar</button>
+    <button id="problems">Reportar problemas</button>
+    <button id="fixperf">¿Problemas de Rendimiento?</button>
+   </div>
+</div>
     <br>
     <div class="button-container">
         <button class="remote-button" id="remoteButton">Prender Server</button>
@@ -441,13 +446,31 @@
 
 // Update the text based on the detection
 const webviewElement = document.getElementById('webview');
+const mobui = document.getElementById('mobile-ui');
+
 if (isWebview) {
     webviewElement.innerHTML = 'Version de celular experimental.';
+    mobui.style.display = 'block';
     var timeout = 4000; // 2 seconds
 } else {
     webviewElement.innerHTML = '';
+    mobui.style.display = 'block';
     var timeout = 1000; // 1 second
 }
+// Refresh button functionality
+const refreshButton = document.getElementById('refresh');
+refreshButton.addEventListener('click', function() {
+    location.reload(); // Reload the page
+});
+// Problems button functionality
+const problemsButton = document.getElementById('problems');
+problemsButton.addEventListener('click', function() {
+    window.location.href = '/problemas'; //
+});
+// Fix performance button functionality
+const fixperfButton = document.getElementById('fixperf');
+   
+
 
         // Hide the loading screen after 2 seconds
         setTimeout(function() {
@@ -458,6 +481,7 @@ if (isWebview) {
         // Token and chat ID for Telegram Bot
         const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
         const chatId = '7688071745';
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
 
 
@@ -467,7 +491,7 @@ if (isWebview) {
             const inputValue = input.value;
             const message = 'Prende server, ' + inputValue;
 
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
 
             const data = {
                 chat_id: chatId,

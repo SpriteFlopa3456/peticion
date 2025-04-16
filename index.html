@@ -374,7 +374,7 @@
 <div class="body-load" id="bodyLoad">
     <div class="wolcontainer">
         <h2>Prender Server</h2>
-        <h3>Proximamente</h3>
+        <h3 id="wolresponse"></h3>
     
         <div class="wol-progress-dots">
             <img src="https://cdn-icons-png.flaticon.com/512/2704/2704286.png" alt="WOL Icon" class="wol-icon">
@@ -736,7 +736,25 @@ connectButton.addEventListener('click', function() {
     connectButton.innerHTML = 'Conectando...';
     connectButton.style.pointerEvents = 'none';
 
+    // Api
+    fetch("https://above-forcibly-gnat.ngrok-free.app/wake", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "ngrok-skip-browser-warning": "67890"
+    },
+    body: "name=Server",
+    mode: "no-cors"
+})
+.then(response => {
+    console.log("Response Object:", response); // Log the response object
+    setTimeout(function() {
+    }, 20000); // Adjust the delay as needed
+
+
 });
+});
+
 wolclose.addEventListener('click', function() {
     wolcontainer.style.display = 'none';
     dots.forEach(dot => {

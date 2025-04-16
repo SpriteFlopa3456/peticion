@@ -39,8 +39,10 @@
             background-color: #007bff;
             color: white;
             border: none;
+            font-size: 16px;
             border-radius: 4px;
             cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
         }
         button:hover {
             background-color: #0056b3;
@@ -55,7 +57,7 @@
             color: white;
             width: 100vw;
         }
-        .topbar button {
+        .topbar-button {
             background-color: #d10e0e;
             color: white;
             border: none;
@@ -63,9 +65,10 @@
             font-size: 16px;
             padding: 10px 20px;
             margin: 5px auto;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
             margin-left: 10px;
         }
-        .topbar button:hover {
+        .topbar-button:hover {
             background-color: #b10c0c;
         }
         @keyframes fadeIn {
@@ -82,13 +85,13 @@
 </head>
 <body>
     <div class="topbar">
-        <button id="return">Regresar</button>
     </div>
+    
     <div class="container">
         <h1>Reportar problemas</h1>
-        <p>Describe que problemas presentaste con la app:</p>
-        <input type="text" id="errorInput" placeholder="Describe..." />
+        <input type="text" id="errorInput" placeholder="Describe tu problema..." />
         <button onclick="sendReport()">Enviar reporte</button>
+        <button class="topbar-button" id="return">Regresar</button>
         <p id="response"></p>
     </div>
 

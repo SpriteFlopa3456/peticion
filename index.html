@@ -449,9 +449,9 @@ const webviewElement = document.getElementById('webview');
 const mobui = document.getElementById('mobile-ui');
 
 if (isWebview) {
-    webviewElement.innerHTML = 'Version de celular experimental.';
+    webviewElement.innerHTML = 'Version experimental.';
     mobui.style.display = 'block';
-    var timeout = 4000; // 2 seconds
+    var timeout = 2000; // 2 seconds
 } else {
     webviewElement.innerHTML = '';
     mobui.style.display = 'none'; // Hide the mobile UI if not in webview

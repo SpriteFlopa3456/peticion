@@ -7,461 +7,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #1f1c2c, #928dab);
-            color: #fff;
-            
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #0000007e;
-            border-radius: 7px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-            
-        }
-        .button {
-            padding: 15px 25px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #d30909;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-             overflow: hidden;
-             position: relative;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            pointer-events: none;
-            
-        }
-
-        .button:active {
-            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        input[type="text"], .login input[type="password"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 20px;
-            width: 300px;
-        }
-        input[type="text"]:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .alert-container {
-            animation: alert 0.6s ease-in-out;
-            background-color: rgb(255, 196, 0);
-            color: black;
-            transform: skew(-12deg);
-            width: 60%;
-            display: none;
-            will-change: transform;
-            position: fixed;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            margin-top: -30px;
-            transition: transform 0.3s ease;
-        }
-        @keyframes alert {
-            0% {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            
-            
-        }
-        .alert-container h3 {
-            margin: 0;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: black;
-            transform: skew(12deg);
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-
-        }
-      .uptime {
-        background-color: rgba(0, 0, 0, 0.7);
-        color: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        font-size: 14px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .uptime p {
-        margin: 3px;
-        font-size: 14px;
-    }
-    .uptime-bar {
-        background-color: seagreen;
-        height: 10px;
-        width: 100%;
-        max-width: 100%;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-    .remote-button , .connect , .commandButton
-        {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-            text-decoration: none;
-        }
-        .remote-button:disabled {
-            background: gray;
-            cursor: not-allowed;
-        }
-        .remote-button:active {
-            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-        }
-        .remote-button:hover {
-            background-color: #0056b3;
-        }
-        .admin-button
-        {
-            background-color:rebeccapurple;
-            color: white;
-            padding: 20px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-            display: inline-block;
-            text-decoration: none;
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            
-        }
-        .admin-button:hover {
-            background-color: #5a2d91;
-        }
-
-        .settings-container {
-        background-color: #ccc;
-        color: #000;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-        display: none; /* Initially hidden */
-        }
-        .settings-container h2 {
-            margin: 0;
-            font-size: 24px;
-            color: #000;
-        }
-        .settings-container label {
-            font-size: 16px;
-            color: #000;
-        }
-        input[type="checkbox"] {
-           width: 20px;
-            height: 20px;
-
-        }
-        .close-button {
-            background-color: #d30909;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-        }
-         .settings-container p {
-            font-size: 16px;
-            color: #000;
-            background-color:rgb(226, 164, 8);
-            padding: 5px;
-        }
-    .p {
-        color: rgb(255, 196, 0);
-        font-size: 16px;
-        margin:4px;
-        font-weight: bold;
-    }
-    #commandResponse {
-        max-height: 200px; /* Set the maximum height */
-        overflow-y: auto; /* Enable vertical scrolling for overflow content */
-        border: 1px solid #4d4d4d; /* Optional: Add a border for better visibility */
-        padding: 12px; /* Optional: Add padding for better readability */
-        font-family: monospace; /* Use monospace font for command output */
-        white-space: pre-wrap; /* Preserve whitespace and wrap text */
-    }
-    .wolcontainer, .login {
-        position: absolute;
-        z-index: 1000;
-        display: none; /* Initially hidden */
-        background-color: #2e2e2eb9;
-        animation: fadeIn 0.6s ease-in-out;
-        backdrop-filter: blur(5px);
-        border-radius: 5px;
-        translate: -50% -50%;
-        top: 50%;
-        left: 50%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-       will-change: filter;
-        width: 400px;
-        height: 270px;
-        color: #f5f5f5;
-    }
-    .wolcontainer h2 {
-        margin: 5px;
-        font-size: 24px;
-        color: #ffffff;
-        padding: 10px;
-    }
-    .wol-icon {
-        width: 70px;
-        height: 70px;
-        display: block;
-        margin-left: 40px;
-    }
-    .wol-progress-dots {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        /* Adding a gradient background */
-        margin-top: 35px;
-        /* Drawing the dots */
-        width: 100%;
-        height: 50px;
-        animation: dots 1.5s linear infinite;
-    }
-    /* Adding 3 more dots */
-    .wol-progress-dots span {
-    width: 10px;
-    height: 10px;
-    background-color: #000000;
-    border-radius: 50%;
-    margin: 0 5px;
-}
-.wol-progress-dots img.wol-icon {
-    width: 55px; /* Adjust icon size */
-    height: 55px;
-    margin: 0 10px; /* Add spacing around the icons */
-    animation: none; /* Prevent animation on icons */
-}
-
-.wol-progress-dots img.wol-icon.left {
-    order: -1; /* Place the left icon before the dots */
-}
-
-.wol-progress-dots img.wol-icon.right {
-    order: 1; /* Place the right icon after the dots */
-}
-
-@keyframes connecting {
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
- 
-    @keyframes dot-blink {
-        0%, 100% {
-            opacity: 0.5;
-            
-        }
-        50% {
-            opacity: 1;
-            background-color: chartreuse;
-        }
-    }
-    .wolcontainer h3 {
-        color: rgb(0, 0, 0);
-        background-color: #ffae00;
-        font-size: 14px;
-        margin-top: -10px;
-        padding: 4px;
-    }
-    .settings-container h3 {
-        color: rgb(0, 0, 0);
-        font-size: 18px;
-        margin:0px;
-        padding: 4px;
-    }
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    .loading {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        width: 100vw;
-        background-color: #0000007e;
-        color: #fff;
-        font-size: 24px;
-        backdrop-filter: blur(5px);
-        will-change: filter;
-        animation: fadeIn 0.6s ease-in-out;
-    }
-    .body-load {
-        display: none; /* Initially hidden */
-    }
-    .notice-container {
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgb(27, 27, 27);
-        color: #0a0a0a;
-        padding: 10px;
-        border-radius: 5px;
-        z-index: 2000;
-    }
-    .notice-container p {
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 20%;
-        color: #000000;
-        background-color: #ffae00;
-    }
-    .notice-container button {
-        padding: 15px 25px;
-        font-size: 16px;
-        color: #fff;
-        background-color: #333333;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-    .notice-container strong {
-        font-size: 18px;
-        color: #c7c7c7;
-        margin-top: 20px;
-    }
-
+      
     </style>
 </head>
 <body>
-    <div class="notice-container" id="noticeContainer">
-        <p id="noticeMessage">
-            El server cerro...
-        </p>
-        <button id="download">
-            Descargar el mundo
-        </button>
-        <br>
-        <strong id="downloadtime">La descarga estara disponible en:</strong>
-    </div>
- <script>
- // Timer for april 22nd 2025
-const targetDate = new Date('2025-04-22T00:00:00'); // Set your target date here
-const currentDate = new Date();
-const timeDifference = targetDate - currentDate; // Difference in milliseconds
-const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-document.getElementById('downloadtime').innerText = `La descarga estara disponible en: ${days} dia`;
-
- </script>
         
-    <div class="loading" id="loadingScreen">
-        <p>Cargando...</p>
-        <p id="webview"></p>
-        </div>
 
 
 <div class="body-load" id="bodyLoad">
-    <div class="wolcontainer">
-        <h2>Prender Server</h2>
-        <h3 id="wolresponse"></h3>
-    
-        <div class="wol-progress-dots">
-            <img src="https://cdn-icons-png.flaticon.com/512/2704/2704286.png" alt="WOL Icon" class="wol-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <img src="https://cdn-icons-png.flaticon.com/512/2704/2704211.png " alt="" id="wolIconRight" class="wol-icon">
-        </div>
-        <p id="statuswol">Conectar al servidor</p>
-        <button id="wolclose" style="padding: 15px 25px;" class="close-button">Cerrar</button>
-        
-        <button style="margin-top: -5px;" class="connect">Conectar</button>
-    </div>
-    <div class="settings-container">
-        <h2>Configuracion</h2>
-        <br>
-        <h3>Terminal LINUX</h3>
-        <input type="text" placeholder="Comando" id="commandInput">
-        <button class="commandButton" id="commandSend">Ejecutar</button>
-        <div class="commandResponse" id="commandResponse"></div>
-        <button id="close-settings" class="close-button">Cerrar</button>
-    </div> 
     <div class="alert-container">
         <h3>Solo puedes enviar 3 peticiones</h3>
         </div>
-    <div class="container">
+        <div class="background-opacity" id="background-opacity"></div>
+        <div class="topbar">
+            <button class="menu-bars" id="menu">&#9776;</button>
+        </div>
+        <div class="side-menu" id="side-menu">
+            <h1>Menu</h1>
+            <button class="menu-bars" id="close-menu">&#9776;</button>
+            <button class="side-menu-button" id="home">Inicio</button>
+            <button class="side-menu-button" id="themes">Temas</button>
+            <button class="side-menu-button" id="settings">Ajustes</button>
+            <button class="side-menu-button" id="logout">Reportar problemas</button>
 
+        </div>
+        <div class="theme-container" id="themeContainer">
+            <h1>Temas</h1>
+            <h3>Selecciona un tema</h3>
+            <p id="current-theme">Tema actual: </p>
+            <button class="theme-button" id="modern">Moderno</button>
+            <button class="theme-button" id="classic">Clasico</button>
+            <button class="theme-button" id="close-theme">Cerrar</button>
+        </div>
+       
+    <div class="container">
+        
     <h1>Pedir que prendan server</h1>
     <button class="button" id="requestButton">Espera...</button>
     <h2 id="estado"></h2>
     <input id="messageInput" type="text" placeholder="Personalizar mensaje" id="messageInput" style="display:none;">
-   <div id="mobile-ui" class="button-container">
+   <div style="display: none;" id="mobile-ui" class="button-container">
     <button id="refresh">Refrescar</button>
     <button id="problems">Reportar problemas</button>
     <button id="fixperf">¿Problemas de Rendimiento?</button>
@@ -469,8 +54,6 @@ document.getElementById('downloadtime').innerText = `La descarga estara disponib
 </div>
     <br>
     <div class="button-container">
-        <button class="remote-button" id="remoteButton">Prender Server</button>
-         <button class="admin-button" id="adminButton">Configuracion</button>
     </div>
     <br>
     <div class="uptime">
@@ -480,35 +63,15 @@ document.getElementById('downloadtime').innerText = `La descarga estara disponib
         <p class="p" id="energy">Estado de energia: --</p>
     </div>
     </div>
-    <div class="login" id="login">
-        <h2>Iniciar Sesion</h2>
-        <input type="password" id="passwordInput" placeholder="Contraseña">
-        <button id="loginButton">Iniciar Sesion</button>
-        <p id="loginMessage"></p>
-        <button id="loginClose" class="close-button">Cerrar</button>
-    </div>
     <script>
-    document.getElementById('download').addEventListener('click', function() {
-        window.location.href = 'https://drive.google.com/drive/folders/1r0g2vX3j4qk5x6z7y8z9a0b1c2d3e4f5?usp=sharing'; // Replace with your download link
-    });
-        
-      document.addEventListener('', function() {
+        // On page load
+      document.onreadystatechange = function() {
             const isWebview = /wv|WebView|MobileApp/i.test(window.navigator.userAgent);
 
 // Update the text based on the detection
 const webviewElement = document.getElementById('webview');
 const mobui = document.getElementById('mobile-ui');
 
-
-if (isWebview) {
-    webviewElement.innerHTML = 'Version experimental.';
-    mobui.style.display = 'block';
-    var timeout = 2000; // 2 seconds
-} else {
-    webviewElement.innerHTML = '';
-    mobui.style.display = 'none'; // Hide the mobile UI if not in webview
-    var timeout = 1000; // 1 second
-}
 // Refresh button functionality
 const refreshButton = document.getElementById('refresh');
 refreshButton.addEventListener('click', function() {
@@ -524,48 +87,13 @@ const fixperfButton = document.getElementById('fixperf');
    
 
 
-        // Hide the loading screen after 2 seconds
-        setTimeout(function() {
-            document.getElementById('loadingScreen').style.display = 'none';
-            document.getElementById('bodyLoad').style.display = 'block';
-            document.getElementById('bodyLoad').style.animation = 'fadeIn 0.6s ease-in-out';
-        }, timeout); // Adjust the time as needed
-        // Token and chat ID for Telegram Bot
+        // Hide the loading screen after 2 second        // Token and chat ID for Telegram Bot
         const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
         const chatId = '7688071745';
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
 // Login button functionality
-        const loginButton = document.getElementById('loginButton');
-        const loginCloseButton = document.getElementById('loginClose');
-        const loginContainer = document.getElementById('login');
-        const passwordInput = document.getElementById('passwordInput');
-        const settingsContainer = document.querySelector('.settings-container');
-        const adminButton = document.getElementById('adminButton');
-        adminButton.addEventListener('click', function() {
-            loginContainer.style.display = 'block';
-        });
-        loginButton.addEventListener('click', function() {
-            const password = passwordInput.value;
-            if (password === 'debian') {
-                settingsContainer.style.display = 'block';
-                loginContainer.style.display = 'none';
-            } else {
-                document.getElementById('loginMessage').innerText = 'Acceso denegado.';
-                document.getElementById('loginMessage').style.color = 'red';
-            }
-        });
-        loginCloseButton.addEventListener('click', function() {
-            loginContainer.style.display = 'none';
-        });
-
-        // Settings close button functionality
-        const closeSettingsButton = document.getElementById('close-settings');
-        closeSettingsButton.addEventListener('click', function() {
-            settingsContainer.style.display = 'none';
-        });
-
-
+        
 
         var input = document.getElementById("messageInput");
         document.getElementById('requestButton').addEventListener('click', () => {
@@ -615,8 +143,7 @@ const fixperfButton = document.getElementById('fixperf');
     
             var estado = document.getElementById("estado");
             var button = document.getElementById("requestButton");
-            var remotebutton = document.getElementById("remote-button");
-            
+            var messageInput = document.getElementById("messageInput");
 
     
             if (data.online) {
@@ -624,9 +151,6 @@ const fixperfButton = document.getElementById('fixperf');
              button.style.animation = "none";
              estado.style.color = "green";
              button.toggleAttribute("disabled", true);
-             remoteButton.style.cursor = "not-allowed";
-                remoteButton.style.background = "gray";
-                remoteButton.innerHTML = "Ya esta prendido";
              button.style.cursor = "not-allowed";
              button.style.background = "gray";
                 button.style.pointerEvents = "none";
@@ -763,62 +287,7 @@ fetchUptime();
 
 // Refresh uptime every 60 seconds
 setInterval(fetchUptime, 60000);
-var remoteButton = document.querySelector('.remote-button');
-var wolcontainer = document.querySelector('.wolcontainer');
-var wolclose = document.getElementById('wolclose');
-var dots = document.querySelectorAll('.wol-progress-dots span');
-var connectButton = document.querySelector('.connect');
-var statuswol = document.getElementById('statuswol');
-var wolIconRight = document.getElementById('wolIconRight');
-remoteButton.addEventListener('click', function() {
-    wolcontainer.style.display = 'block';
-});
-connectButton.addEventListener('click', function() {
-    const delays = ['0s', '0.3s', '0.6s', '0.9s', '1.2s', '1.5s']; // Predefined delays
-    dots.forEach((dot, index) => {
-        dot.style.animation = 'dot-blink 2s linear infinite';
-        dot.style.animationDelay = delays[index % delays.length]; // Cycle through delays
-    });
-    statuswol.innerHTML = 'Conectando...';
-    setInterval(function() {
-        wolIconRight.style.animation = 'connecting 1.5s step-start infinite';
-    }, 1500);
-    connectButton.innerHTML = 'Conectando...';
-    connectButton.style.pointerEvents = 'none';
 
-    // Api
-    fetch("https://above-forcibly-gnat.ngrok-free.app/wake", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "ngrok-skip-browser-warning": "67890"
-    },
-    body: "name=Server",
-    mode: "no-cors"
-})
-.then(response => {
-    console.log("Response Object:", response); // Log the response object
-    setTimeout(function() {
-    }, 20000); // Adjust the delay as needed
-
-
-});
-});
-
-wolclose.addEventListener('click', function() {
-    wolcontainer.style.display = 'none';
-    dots.forEach(dot => {
-        dot.style.animation = 'none'; // Stop the animation
-    });
-    statuswol.innerHTML = 'Conectar al servidor';
-    connectButton.innerHTML = 'Conectar';
-    connectButton.style.pointerEvents = 'auto';
-    wolIconRight.style.animation = 'none'; // Stop the animation on the icon
-});
-var closeButton = document.querySelector('.close-button');
-closeButton.addEventListener('click', function() {
-    settingsContainer.style.display = 'none';
-});
     // Update energy status every 10 seconds
    function updateEnergyStatus() {
         var currentTime = new Date();
@@ -861,11 +330,89 @@ commandButton.addEventListener('click', async () => {
     }
 });
 console.log('DOM fully loaded and parsed');
+}
+var menu = document.getElementById('menu');
+var sideMenu = document.getElementById('side-menu');
+var closeMenu = document.getElementById('close-menu');
+menu.addEventListener('click', () => {
+    sideMenu.style.display = 'block';
+    setTimeout(() => {
+        sideMenu.style.animation = 'none';
+    }, 302);
+    sideMenu.style.animation = 'slide-in 0.3s ease-in-out';
+});
+closeMenu.addEventListener('click', () => {
+    setTimeout(() => {
+        sideMenu.style.display = 'none';
+        sideMenu.style.animation = 'none';
+    }, 298);
+    sideMenu.style.animation = 'slide-out 0.3s ease-in-out';
+});
+var themeButton = document.getElementById('themes');
+themeButton.addEventListener('click', () => {
+    themeContainer.style.display = 'block';
+    themeContainer.style.animation = 'open-menus 0.3s ease-in-out';
+    backgroundOpacity.style.display = 'block';
+});
+var closeTheme = document.getElementById('close-theme');
+closeTheme.addEventListener('click', () => {
+    backgroundOpacity.style.display = 'none';
+    setTimeout(() => {
+        themeContainer.style.animation = 'none';
+        themeContainer.style.display = 'none';
+    }, 302);
+    themeContainer.style.animation = 'close-menus 0.3s ease-in-out';
 });
 
-    
+
         
     </script>
+    <script>
+   function setCookie(name, value, days) {
+       const expires = new Date();
+       expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+       document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+   }
+
+   function getCookie(name) {
+       const value = `; ${document.cookie}`;
+       const parts = value.split(`; ${name}=`);
+       if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+// Theme handling
+const themeStyle = document.createElement('link');
+const moderntheme = document.getElementById('modern');
+const classicTheme = document.getElementById('classic');
+const currentTheme = document.getElementById('current-theme');
+const themeContainer = document.getElementById('themeContainer');
+const backgroundOpacity = document.getElementById('background-opacity');
+themeStyle.rel = 'stylesheet';
+document.head.appendChild(themeStyle);
+
+function setTheme(theme) {
+    themeStyle.setAttribute('href', `${theme}.css`);
+    setCookie('theme', theme, 7);
+    currentTheme.innerHTML = `Tema actual: ${theme === 'classic' ? 'Clasico' : 'Moderno'}`;
+}
+
+// Initialize theme from cookie or default to classic
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = getCookie('theme') || 'classic';
+    setTheme(savedTheme);
+});
+
+// Update your existing theme button listeners
+moderntheme.addEventListener('click', () => {
+    setTheme('modern');
+});
+
+classicTheme.addEventListener('click', () => {
+    setTheme('classic');
+});
+
+</script>
 </body>
 </html>
 

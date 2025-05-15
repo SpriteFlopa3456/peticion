@@ -22,7 +22,7 @@
         <div class="background-opacity" id="background-opacity"></div>
         <div class="topbar">
             <button class="menu-bars" id="menu">&#9776;</button>
-            <h2>Peticion Forzada</h2>
+            <h2 id="currentmenu">Peticion Forzada</h2>
         </div>
         <div class="side-menu" id="side-menu">
             <div class="topbar">
@@ -31,7 +31,7 @@
             </div>
             <button class="side-menu-button" id="home">Inicio</button>
             <button class="side-menu-button" id="themes">Temas</button>
-            <button class="side-menu-button" id="settings">Mijos del server</button>
+            <button class="side-menu-button" id="users">Mijos del server</button>
             <button class="side-menu-button" id="account">Iniciar Sesión</button>
             <button class="side-menu-button" id="logout">Reportar problemas</button>
             <button class="side-menu-button" id=""></button>
@@ -71,6 +71,27 @@
     </div>
     
     </div>
+    <div class="users-container">
+        <div class="users-cards">
+            <div class="user-card">
+                <p class="user-card-name">User 1</p>
+                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            </div>
+            <div class="user-card">
+                <p class="user-card-name">User 2</p>
+                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            </div>
+            <div class="user-card">
+                <p class="user-card-name">User 3</p>
+                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            </div>
+            <div class="user-card">
+                <p class="user-card-name">User 4</p>
+                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // On page load
       document.onreadystatechange = function() {
@@ -356,8 +377,11 @@ homeButton.addEventListener('click', () => {
   setTimeout(() => {
         sideMenu.style.display = 'none';
         sideMenu.style.animation = 'none';
+
     }, 298);
     sideMenu.style.animation = 'slide-out 0.5s ease';
+    userContainer.style.display = 'none';
+    currentMenu.innerHTML = 'Peticion Forzada';
 });
 
 closeMenu.addEventListener('click', () => {
@@ -382,10 +406,73 @@ closeTheme.addEventListener('click', () => {
     }, 302);
     themeContainer.style.animation = 'close-menus 0.3s ease-in-out';
 });
+var userContainer = document.querySelector('.users-container');
+var usersButton = document.getElementById('users');
+var currentMenu = document.getElementById('currentmenu');
+usersButton.addEventListener('click', () => {
+    userContainer.style.display = 'flex';
+    sideMenu.style.animation = 'slide-out 0.5s ease';
+    currentMenu.innerHTML = 'Mijos del server';
+    setTimeout(() => {
+        sideMenu.style.animation = 'none';
+        sideMenu.style.display = 'none';
+    }, 302);
 
+});
+var statusElements = document.querySelectorAll('.user-card-status');
+statusElements.forEach((statusElement) => {
+    const userCard = statusElement.closest('.user-card');
+    const userName = userCard.querySelector('.user-card-name').textContent;
+    const userId = userName.replace('User ', '');
 
-
-        
+    fetch('banned_users.txt')
+        .then(response => response.text())
+        .then(data => {
+            const bannedUsers = data.split('\n')
+                .map(line => line.trim())
+                .filter(line => line)
+                .map(line => {
+                    const [id, endTime] = line.split(',');
+                    return { id, endTime: new Date(endTime) };
+                });
+            
+            const bannedUser = bannedUsers.find(user => user.id === userId);
+            
+            if (bannedUser) {
+                const now = new Date();
+                const endTime = new Date(bannedUser.endTime);
+                
+                if (now < endTime) {
+                    // Still banned, calculate remaining time
+                    const timeLeft = endTime - now;
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    
+                    statusElement.innerHTML = `
+                        Estado: <span class="user-card-banned-text">Baneado</span><br>
+                        <span class="ban-time">Tiempo restante: ${days}d ${hours}h ${minutes}m</span>
+                    `;
+                    statusElement.classList.add('banned');
+                    userCard.classList.add('banned-user');
+                } else {
+                    // Ban expired
+                    statusElement.textContent = 'Estado: Desbaneado';
+                    statusElement.classList.remove('banned');
+                    userCard.classList.remove('banned-user');
+                }
+            } else {
+                // Not banned
+                statusElement.textContent = 'Estado: No baneado';
+                statusElement.classList.remove('banned');
+                userCard.classList.remove('banned-user');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading banned users:', error);
+            statusElement.textContent = 'Estado: Error al cargar';
+        });
+});
     </script>
     <script>
         var cookiexp = document.getElementById('cookieexp');

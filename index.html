@@ -182,7 +182,8 @@ const fixperfButton = document.getElementById('fixperf');
              button.toggleAttribute("disabled", true);
              button.style.cursor = "not-allowed";
              button.style.background = "gray";
-                button.style.pointerEvents = "none";
+             button.classList.remove("peticion");
+             button.style.pointerEvents = "none";
              button.innerHTML = "No puedes hacer peticion";
             } else {
               estado.innerHTML = "El server esta apagado... Realizar peticion";
@@ -190,9 +191,9 @@ const fixperfButton = document.getElementById('fixperf');
               messageInput.style.display = "block";
                 estado.style.color = "red";
                 button.style.pointerEvents = "auto";
-                button.style.background= "linear-gradient(to bottom, #4a90e2, #357abd)";
-                button.style.border = "1px solid #9e9e9e";
+                button.classList.add("peticion");
                 button.innerHTML = "Realizar peticion";
+
 
 
 

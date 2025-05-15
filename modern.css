@@ -445,3 +445,6 @@ body {
 .user-card.banned-user .ban-time {
     color: rgba(244, 67, 54, 0.8);
 }
+.peticion {
+    background: linear-gradient(127deg, blue , deepskyblue);
+}

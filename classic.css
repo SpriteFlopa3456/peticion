@@ -488,3 +488,6 @@ body {
             color: #f44336;
             font-weight: 500;
         }
+        .peticion {
+           background: linear-gradient(to bottom, #618edd, #4570cb);
+        }

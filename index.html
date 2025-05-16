@@ -43,8 +43,8 @@
             <h1>Temas</h1>
             <h3>Selecciona un tema</h3>
             <p id="current-theme">Tema actual: </p>
-            <button class="theme-button" id="modern">Moderno</button>
-            <button class="theme-button" id="classic">Clasico</button>
+            <button class="theme-button" id="modern">Moderno (Recomendado para celulares full premium o PC)</button>
+            <button class="theme-button" id="classic">Clasico (Recomendado para celulares del tianguis)</button>
             <button class="theme-button" id="close-theme">Cerrar</button>
         </div>
        
@@ -78,34 +78,42 @@
             <div class="user-card admin"  user-id="1">
                 <p class="user-card-name">WaxiestChunk200</p>
                 <p class="user-card-status admin">Estado: No se pudo conectar</p>
+                <p class="user-card-moto">Admineando lo admineable desde 2011</p>
             </div>
             <div class="user-card moderator" user-id="2">
                 <p class="user-card-name">Tren Lokote Peru</p>
                 <p class="user-card-status moderator">Estado: No se pudo conectar</p>
+                <p class="user-card-moto">A determinar</p>
             </div>
             <div class="user-card" user-id="3">
                 <p class="user-card-name">Pasillas2354 / Dilanh22</p>
                 <p class="user-card-status">Estado: No se pudo conectar</p>
+                <p class="user-card-moto">A determinar</p>
             </div>
             <div class="user-card" user-id="4">
                 <p class="user-card-name">Minivers097</p>
                 <p class="user-card-status">Estado: No se pudo conectar</p>
+                <p class="user-card-moto">A determinar</p>
             </div>
         <div class="user-card" user-id="5">
             <p class="user-card-name">DREAM56512</p>
             <p class="user-card-status">Estado: No se pudo conectar</p>
+            <p class="user-card-moto">A determinar</p>
         </div>
         <div class="user-card" user-id="6">
             <p class="user-card-name">XxjuanxX98754</p>
             <p class="user-card-status">Estado: No se pudo conectar</p>
+            <p class="user-card-moto">A determinar</p>
         </div>
         <div class="user-card" user-id="7">
             <p class="user-card-name">Mauricio22881</p>
             <p class="user-card-status">Estado: No se pudo conectar</p>
+            <p class="user-card-moto">A determinar</p>
         </div>
         <div class="user-card" user-id="8">
             <p class="user-card-name">Ikereader078747</p>
             <p class="user-card-status">Estado: No se pudo conectar</p>
+            <p class="user-card-moto">A determinar</p>
         </div>
 
     </div>
@@ -488,14 +496,14 @@ statusElements.forEach((statusElement) => {
             }
                             if (userId === '1') {
             statusElement.innerHTML = `
-            <span>Estado: </span><span class="user-card-admin-text">Es admin (Admineando lo admineable desde 2011)</span>`;
+            <span>Estado: </span><span class="user-card-admin-text">Es admin</span>`;
             statusElement.classList.remove('banned');
             userCard.classList.remove('banned-user');
         
         }
         if (userId === '2') {
             statusElement.innerHTML = `
-            <span>Estado: </span><span class="user-card-moderator-text">Es moderador (Moderando lo moderable desde 2011)</span>`;
+            <span>Estado: </span><span class="user-card-moderator-text">Es moderador</span>`;
             statusElement.classList.remove('banned');
             userCard.classList.remove('banned-user');
             

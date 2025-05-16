@@ -413,6 +413,7 @@ body {
             align-items: center;
             width: 100vw;
             height: 100vh;
+           
             position: absolute;
             z-index: 9;
             background: linear-gradient(to bottom, #e8e8e8, #d1d1d1);
@@ -473,6 +474,10 @@ body {
             align-items: center;
             gap: 6px;
         }
+        .user-card-moto {
+            font-size: 14px;
+            margin: 0;
+        }
 
         .user-card-status::before {
             content: '';
@@ -496,9 +501,13 @@ body {
         }
         .user-card-status.admin::before {
             background: #ff9800;
+            width: 8px;
+            height: 8px;
         }
         .user-card-status.moderator::before {
             background: #2196F3;
+            width: 8px;
+            height: 8px;
         }
         .user-card-admin-text {
             color: #ff9800;

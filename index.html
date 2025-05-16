@@ -420,6 +420,7 @@ var statusElements = document.querySelectorAll('.user-card-status');
 statusElements.forEach((statusElement) => {
     const userCard = statusElement.closest('.user-card');
     const userId = userCard.getAttribute('user-id');
+    const userName = userCard.querySelector('.user-card-name').textContent;
 
     if (!userId) {
         statusElement.textContent = 'Estado: Error ID no encontrado';
@@ -498,6 +499,12 @@ statusElements.forEach((statusElement) => {
             statusElement.classList.remove('banned');
             userCard.classList.remove('banned-user');
             
+        }
+        if (userName === 'Minivers097') {
+            statusElement.innerHTML = `
+            Estado: No baneada`;
+            statusElement.classList.remove('banned');
+            userCard.classList.remove('banned-user');
         }
 
         })

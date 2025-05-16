@@ -31,10 +31,12 @@
             </div>
             <button class="side-menu-button" id="home">Inicio</button>
             <button class="side-menu-button" id="themes">Temas</button>
-            <button class="side-menu-button" id="users">Mijos del server</button>
+            <button class="side-menu-button" id="users">Mijos del server <span class="counter">(8) Registrados</span></button>
             <button class="side-menu-button" id="account">Iniciar Sesión</button>
             <button class="side-menu-button" id="logout">Reportar problemas</button>
+            <div class="separator">Server Alternativo</div>
             <button class="side-menu-button" id=""></button>
+            
           <footer>&copy; 2025 El server de los papus</footer>
         </div>
         <div class="theme-container" id="themeContainer">
@@ -73,23 +75,39 @@
     </div>
     <div class="users-container">
         <div class="users-cards">
-            <div class="user-card">
-                <p class="user-card-name">User 1</p>
-                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            <div class="user-card admin"  user-id="1">
+                <p class="user-card-name">WaxiestChunk200</p>
+                <p class="user-card-status admin">Estado: No se pudo conectar</p>
             </div>
-            <div class="user-card">
-                <p class="user-card-name">User 2</p>
-                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            <div class="user-card moderator" user-id="2">
+                <p class="user-card-name">Tren Lokote Peru</p>
+                <p class="user-card-status moderator">Estado: No se pudo conectar</p>
             </div>
-            <div class="user-card">
-                <p class="user-card-name">User 3</p>
-                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            <div class="user-card" user-id="3">
+                <p class="user-card-name">Pasillas2354 / Dilanh22</p>
+                <p class="user-card-status">Estado: No se pudo conectar</p>
             </div>
-            <div class="user-card">
-                <p class="user-card-name">User 4</p>
-                <p id="user-card-status" class="user-card-status">Estado: No se pudo conectar</p>
+            <div class="user-card" user-id="4">
+                <p class="user-card-name">Minivers097</p>
+                <p class="user-card-status">Estado: No se pudo conectar</p>
             </div>
+        <div class="user-card" user-id="5">
+            <p class="user-card-name">DREAM56512</p>
+            <p class="user-card-status">Estado: No se pudo conectar</p>
         </div>
+        <div class="user-card" user-id="6">
+            <p class="user-card-name">XxjuanxX98754</p>
+            <p class="user-card-status">Estado: No se pudo conectar</p>
+        </div>
+        <div class="user-card" user-id="7">
+            <p class="user-card-name">Mauricio22881</p>
+            <p class="user-card-status">Estado: No se pudo conectar</p>
+        </div>
+        <div class="user-card" user-id="8">
+            <p class="user-card-name">Ikereader078747</p>
+            <p class="user-card-status">Estado: No se pudo conectar</p>
+        </div>
+
     </div>
 
     <script>
@@ -337,29 +355,7 @@ setInterval(fetchUptime, 60000);
     updateEnergyStatus();
     // Set interval to update every 10 seconds
     setInterval(updateEnergyStatus, 10000);
-    var commandButton = document.getElementById('commandSend');
-    var commandInput = document.getElementById('commandInput');
-    var commandResponse = document.getElementById('commandResponse');
-
-commandButton.addEventListener('click', async () => {
-    const command = commandInput.value;
-    if (!command) {
-        commandResponse.innerHTML = '<a style="color: red;">Porfavor escribe un comando.</a>';
-        return;
-    }
-
-    try {
-        const response = await fetch(`https://ludos.serveo.net/execute?cmd=${encodeURIComponent(command)}`);
-        if (!response.ok) {
-            throw new Error('Failed to execute command');
-        }
-        const result = await response.text();
-        commandResponse.innerHTML = result;
-    } catch (error) {
-        console.error('Error:', error);
-        commandResponse.innerHTML = '<a style="color: red;">Error ejecutando el comando</a>';
-    }
-});
+    
 console.log('DOM fully loaded and parsed');
 }
 var menu = document.getElementById('menu');
@@ -423,28 +419,51 @@ usersButton.addEventListener('click', () => {
 var statusElements = document.querySelectorAll('.user-card-status');
 statusElements.forEach((statusElement) => {
     const userCard = statusElement.closest('.user-card');
-    const userName = userCard.querySelector('.user-card-name').textContent;
-    const userId = userName.replace('User ', '');
+    const userId = userCard.getAttribute('user-id');
+
+    if (!userId) {
+        statusElement.textContent = 'Estado: Error ID no encontrado';
+        return;
+    }
 
     fetch('banned_users.txt')
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to load banned users file');
+            }
+            return response.text();
+        })
+    
+
         .then(data => {
+            // First split and filter empty lines
             const bannedUsers = data.split('\n')
-                .map(line => line.trim())
-                .filter(line => line)
+                .filter(line => line && line.trim().length > 0) // Remove empty lines
                 .map(line => {
-                    const [id, endTime] = line.split(',');
-                    return { id, endTime: new Date(endTime) };
-                });
+                    try {
+                        const [id, endTime] = line.trim().split(',');
+                        if (!id || !endTime) {
+                            console.warn('Invalid line format:', line);
+                            return null;
+                        }
+                        return {
+                            id: id.trim(),
+                            endTime: new Date(endTime.trim())
+                        };
+                    } catch (err) {
+                        console.warn('Error parsing line:', line, err);
+                        return null;
+                    }
+                })
+                .filter(user => user !== null); // Remove failed parses
             
             const bannedUser = bannedUsers.find(user => user.id === userId);
-            
-            if (bannedUser) {
+
+            if (bannedUser && !isNaN(bannedUser.endTime.getTime())) {
                 const now = new Date();
-                const endTime = new Date(bannedUser.endTime);
+                const endTime = bannedUser.endTime;
                 
                 if (now < endTime) {
-                    // Still banned, calculate remaining time
                     const timeLeft = endTime - now;
                     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -457,18 +476,32 @@ statusElements.forEach((statusElement) => {
                     statusElement.classList.add('banned');
                     userCard.classList.add('banned-user');
                 } else {
-                    // Ban expired
                     statusElement.textContent = 'Estado: Desbaneado';
                     statusElement.classList.remove('banned');
                     userCard.classList.remove('banned-user');
                 }
             } else {
-                // Not banned
                 statusElement.textContent = 'Estado: No baneado';
                 statusElement.classList.remove('banned');
                 userCard.classList.remove('banned-user');
             }
+                            if (userId === '1') {
+            statusElement.innerHTML = `
+            <span>Estado: </span><span class="user-card-admin-text">Es admin (Admineando lo admineable desde 2011)</span>`;
+            statusElement.classList.remove('banned');
+            userCard.classList.remove('banned-user');
+        
+        }
+        if (userId === '2') {
+            statusElement.innerHTML = `
+            <span>Estado: </span><span class="user-card-moderator-text">Es moderador (Moderando lo moderable desde 2011)</span>`;
+            statusElement.classList.remove('banned');
+            userCard.classList.remove('banned-user');
+            
+        }
+
         })
+
         .catch(error => {
             console.error('Error loading banned users:', error);
             statusElement.textContent = 'Estado: Error al cargar';

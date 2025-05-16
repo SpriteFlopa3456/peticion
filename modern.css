@@ -186,6 +186,7 @@ body {
             backdrop-filter: blur(5px);
             border-bottom: 1px solid #999;
             display: none;
+            overflow: hidden;
     flex-direction: column;
     padding-top: 60px; /* Add padding to account for topbar height */
     align-items: center;
@@ -196,7 +197,7 @@ body {
     backface-visibility: hidden;
     will-change: transform, backdrop-filter;
     }
-    .side-menu-button {
+    .side-menu-button, .theme-button {
     width: 85%;
     padding: 15px 25px;
     margin: 8px auto;
@@ -216,19 +217,19 @@ body {
     text-align: left;
 }
 
-.side-menu-button:hover {
+.side-menu-button:hover , .theme-button:hover {
     background: linear-gradient(45deg, rgba(9, 154, 211, 0.2), rgba(9, 154, 211, 0.3));
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.side-menu-button:active {
+.side-menu-button:active , .theme-button:active {
     transform: translateY(1px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.side-menu-button::after {
+.side-menu-button::after ,.theme-button::after {
     content: '';
     position: absolute;
     left: -100%;
@@ -239,17 +240,17 @@ body {
     transition: 0.5s;
 }
 
-.side-menu-button:hover::after {
+.side-menu-button:hover::after, .theme-button:hover::after {
     left: 100%;
 }
 
-/* Empty button style override */
-.side-menu-button:empty {
+/* Empty button style override 
+.side-menu-button:empty, .theme-button:empty {
     display: none;
 }
-
+*/
 /* Active state for the current menu item */
-.side-menu-button.active {
+.side-menu-button.active, .theme-button.active {
     background: linear-gradient(45deg, rgba(9, 154, 211, 0.3), rgba(9, 154, 211, 0.4));
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 15px rgba(9, 154, 211, 0.3);
@@ -333,20 +334,6 @@ body {
 
 
         
-        .theme-button {
-            padding: 15px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #099ad3;
-            width: 80%;
-            margin: 5px 0;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset 0px -1px 2px rgba(255, 255, 255, 0.5); /* Light for glossy effect */
-            position: relative;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            
-        }
 
         footer {
     margin-top: auto; /* Push footer to bottom */
@@ -367,6 +354,7 @@ body {
     background-color: #0000007e;
     backdrop-filter: blur(5px);
     padding-top: 60px;
+    overflow: scroll;
 }
 
 .users-cards {
@@ -442,6 +430,35 @@ body {
     background: #f44336;
     box-shadow: 0 0 10px #f44336;
 }
+        .user-card-status.admin::before {
+            background: #ff9800;
+            box-shadow: 0 0 10px #ff9800;
+        }
+        .user-card-status.moderator::before {
+            background: #2196F3;
+            box-shadow: 0 0 10px #2196F3;
+        }
+.user-card-status.moderator {
+    color: #2196F3;
+}
+
+.user-card-status.admin {
+    color: #ff9800;
+}
+.user-card.admin {
+    background: linear-gradient(45deg, rgba(255, 152, 0, 0.1), rgba(255, 152, 0, 0.2));
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+.user-card.admin:hover {
+    background: linear-gradient(45deg, rgba(255, 152, 0, 0.2), rgba(255, 152, 0, 0.3));
+}
+.user-card.moderator {
+    background: linear-gradient(45deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.2));
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+.user-card.moderator:hover {
+    background: linear-gradient(45deg, rgba(33, 150, 243, 0.2), rgba(33, 150, 243, 0.3));
+}
 
 .user-card-banned-text {
     color: #f44336;
@@ -470,4 +487,20 @@ body {
     backface-visibility: hidden;
     perspective: 1000px;
     will-change: transform;
+}
+.separator {
+            width: 100%;
+            padding: 10px 20px;
+            margin: 0;
+            background: linear-gradient(45deg, rgba(9, 154, 211, 0.1), rgba(9, 154, 211, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+}
+.counter {
+    font-weight: bold;
+    color: #fff;
+    margin-left: 20px;
+    text-align: center;
 }

@@ -34,6 +34,7 @@
             <button class="side-menu-button" type="button" id="users">Mijos del server <span class="counter">(8) Registrados</span></button>
             <button class="side-menu-button" type="button" id="account">Iniciar Sesión</button>
             <button class="side-menu-button" type="button" id="logout">Reportar problemas</button>
+            <button class="side-menu-button" type="button" id="worldsettings">Cambiar configuracion del mundo</button>
             <div class="separator">Server Alternativo</div>
             <button class="side-menu-button" type="button" id=""></button>
 
@@ -114,8 +115,26 @@
             <p class="user-card-status">Estado: No se pudo conectar</p>
             <p class="user-card-moto">A determinar</p>
         </div>
+      
 
     </div>
+    </div>
+    <div class="login-container">
+        <h1>Iniciar Sesion</h1>
+        <p>Inicia sesion con tu cuenta para poder acceder a funciones adicionales como establecer preferencias de usuario, cambiar paquetes de textura del server, cambiar configuraciones del mundo (Excepto trampas), ser desbaneado más rapido y más.</p>
+       <input type="text" id="username" placeholder="Usuario">
+       <button type="submit" id="login">Iniciar Sesion</button>
+
+    </div>
+    <div class="banned-toast" id="bannedToast">
+        <h3>Has sido baneado del servidor.</h3>
+        <p>Si crees que esto es un error, contacta a un administrador.</p>
+        <p>Si repites este tipo de actividades, tu tiempo ira aumentando segun la gravedad de la infracción.</p>
+        <p>Tiempo restante: <span id="banDuration">--</span></p>
+        <button id="closeToast">Cerrar</button>
+
+    </div>
+
 
     <script>
         // On page load
@@ -385,6 +404,7 @@ homeButton.addEventListener('click', () => {
     sideMenu.style.animation = 'slide-out 0.5s ease';
     userContainer.style.display = 'none';
     currentMenu.innerHTML = 'Peticion Forzada';
+    LoginContainer.style.display = 'none';
 });
 
 closeMenu.addEventListener('click', () => {
@@ -416,6 +436,7 @@ usersButton.addEventListener('click', () => {
     userContainer.style.display = 'flex';
     sideMenu.style.animation = 'slide-out 0.5s ease';
     currentMenu.innerHTML = 'Mijos del server';
+    LoginContainer.style.display = 'none';
     setTimeout(() => {
         sideMenu.style.animation = 'none';
         sideMenu.style.display = 'none';
@@ -575,7 +596,206 @@ moderntheme.addEventListener('click', () => {
 classicTheme.addEventListener('click', () => {
     setTheme('classic');
 });
+var LoginButton = document.getElementById('account');
+var LoginContainer = document.querySelector('.login-container');
 
+LoginButton.addEventListener('click', () => {
+    LoginContainer.style.display = 'flex';
+    sideMenu.style.animation = 'slide-out 0.5s ease';
+    currentMenu.innerHTML = 'Iniciar Sesion';
+    setTimeout(() => {
+        sideMenu.style.animation = 'none';
+        sideMenu.style.display = 'none';
+    }, 302);
+});
+
+</script>
+<script>
+// User data from cards
+function getUsersFromCards() {
+    const userCards = document.querySelectorAll('.user-card');
+    return Array.from(userCards).map(card => ({
+        id: card.getAttribute('user-id'),
+        username: card.querySelector('.user-card-name').textContent.trim(),
+        isAdmin: card.classList.contains('admin'),
+        isModerator: card.classList.contains('moderator')
+    }));
+}
+
+// Login handling
+function handleLogin() {
+    const username = document.getElementById('username').value;
+    const users = getUsersFromCards();
+    const user = users.find(u => u.username.toLowerCase() === username.toLowerCase());
+
+    if (user) {
+        // Set login cookie
+        setCookie('loggedInUser', JSON.stringify(user), 7);
+        updateLoginState();
+        LoginContainer.style.display = 'none';
+        currentMenu.innerHTML = 'Peticion Forzada';
+        alert('Inicio de sesión exitoso!');
+    } else {
+        alert('Usuario no encontrado');
+    }
+}
+
+// Update UI based on login state
+function updateLoginState() {
+    const loginButton = document.getElementById('account');
+    const worldSettingsButton = document.getElementById('worldsettings');
+    const loggedInUser = getCookie('loggedInUser');
+
+    if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        loginButton.textContent = user.username;
+        loginButton.classList.add('logged-in');
+        
+        // Show world settings only for admin/moderator
+        if (user.isAdmin || user.isModerator || loggedInUser) {
+            worldSettingsButton.style.display = 'block';
+        } else {
+            worldSettingsButton.style.display = 'none';
+        }
+    } else {
+        loginButton.textContent = 'Iniciar Sesión';
+        loginButton.classList.remove('logged-in');
+        worldSettingsButton.style.display = 'none';
+    }
+}
+
+// Logout function
+function handleLogout() {
+    document.cookie = 'loggedInUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    updateLoginState();
+    alert('Sesión cerrada');
+}
+
+// Initialize login state
+document.addEventListener('DOMContentLoaded', () => {
+    updateLoginState();
+    
+    // Add login button listener
+    const loginButton = document.getElementById('login');
+    loginButton.addEventListener('click', handleLogin);
+    
+    // Add logout functionality to account button when logged in
+    const accountButton = document.getElementById('account');
+    accountButton.addEventListener('click', () => {
+        if (getCookie('loggedInUser')) {
+            if (confirm('¿Deseas cerrar sesión?')) {
+                handleLogout();
+            } else {
+                // Return to home if logout is canceled
+                userContainer.style.display = 'none';
+                currentMenu.innerHTML = 'Peticion Forzada';
+                LoginContainer.style.display = 'none';
+                sideMenu.style.animation = 'slide-out 0.5s ease';
+                setTimeout(() => {
+                    sideMenu.style.animation = 'none';
+                    sideMenu.style.display = 'none';
+                }, 502);
+            }
+        } else {
+            LoginContainer.style.display = 'flex';
+            sideMenu.style.animation = 'slide-out 0.5s ease';
+            currentMenu.innerHTML = 'Iniciar Sesion';
+            setTimeout(() => {
+                sideMenu.style.animation = 'none';
+                sideMenu.style.display = 'none';
+            }, 302);
+        }
+        
+    });
+});
+var bannedToast = document.getElementById('bannedToast');
+var closeToastButton = document.getElementById('closeToast');
+var banDuration = document.getElementById('banDuration');
+var loggedInUser = getCookie('loggedInUser');
+
+function checkUserBanStatus() {
+    if (!loggedInUser) return;
+    
+    const user = JSON.parse(loggedInUser);
+    const userId = user.id;
+
+    fetch('banned_users.txt')
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to load banned users file');
+            return response.text();
+        })
+        .then(data => {
+            const bannedUsers = data.split('\n')
+                .filter(line => line && line.trim().length > 0)
+                .map(line => {
+                    try {
+                        const [id, endTime] = line.trim().split(',');
+                        return {
+                            id: id.trim(),
+                            endTime: new Date(endTime.trim())
+                        };
+                    } catch (err) {
+                        console.warn('Error parsing ban data:', err);
+                        return null;
+                    }
+                })
+                .filter(user => user !== null);
+
+            const bannedUser = bannedUsers.find(banned => banned.id === userId);
+            
+            if (bannedUser) {
+                const now = new Date();
+                const endTime = bannedUser.endTime;
+                
+                if (now < endTime) {
+                    const timeLeft = endTime - now;
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    
+                    banDuration.textContent = `${days}d ${hours}h ${minutes}m`;
+                    bannedToast.style.display = 'flex';
+                    bannedToast.style.animation = 'fadeIn 0.5s ease-in-out';
+                    setTimeout(() => {
+                        bannedToast.style.animation = 'none';
+                        bannedToast.style.display = 'none';
+
+                    }, 5300);
+                    setTimeout (() => {
+                        bannedToast.style.animation = 'fadeOut 0.3s ease-in-out';
+                        
+                    }, 5000);
+                    
+                    // Update user cookie with ban status
+                    user.isBanned = true;
+                    user.banEndTime = endTime;
+                    setCookie('loggedInUser', JSON.stringify(user), 7);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error checking ban status:', error);
+        });
+}
+
+// Check ban status on login and page load
+document.addEventListener('DOMContentLoaded', checkUserBanStatus);
+
+// Update toast close button
+closeToastButton.addEventListener('click', () => {
+    bannedToast.style.animation = 'fadeOut 0.3s ease-in-out';
+    setTimeout(() => {
+        bannedToast.style.display = 'none';
+        bannedToast.style.animation = 'none';
+    }, 290);
+});
+
+// Update login handler to check ban status
+const originalHandleLogin = handleLogin;
+handleLogin = function() {
+    originalHandleLogin();
+    checkUserBanStatus();
+};
 </script>
 
 </body>

@@ -513,3 +513,161 @@ body {
     margin-left: 20px;
     text-align: center;
 }
+.login-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+
+    background-color: #0000007e;
+    backdrop-filter: blur(5px);
+    padding-top: 60px;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, backdrop-filter;
+    
+}
+.login-container button {
+    width: 85%;
+    padding: 15px 25px;
+    margin: 8px auto;
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.1), rgba(9, 154, 211, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+    will-change: transform, backdrop-filter;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+.login-container button:hover {
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.2), rgba(9, 154, 211, 0.3));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.login-container button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.login-container button::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+.login-container button:hover::after {
+    left: 100%;
+}
+.login-container button:empty {
+    display: none;
+}
+.login-container p {
+    color: #fff;
+    font-size: 16px;
+    margin: 40px;
+}
+.banned-toast {
+   background: linear-gradient(45deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.2));
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    position: fixed;
+    top: 20px;
+        max-width: 550px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 300px;
+    backdrop-filter: blur(5px);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+.banned-toast .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f44336;
+    text-shadow: 0 0 5px rgba(244, 67, 54, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.banned-toast .title::before {
+    content: '⚠️';
+    font-size: 20px;
+}
+
+.banned-toast .message {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.banned-toast button {
+    align-self: flex-end;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, rgba(244, 67, 54, 0.2), rgba(244, 67, 54, 0.3));
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.banned-toast button:hover {
+    background: linear-gradient(45deg, rgba(244, 67, 54, 0.3), rgba(244, 67, 54, 0.4));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate3d(20px, -20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(20px, -20px, 0);
+    }
+}
+
+.banned-toast.show {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.banned-toast.hide {
+    animation: fadeOut 0.3s ease-in forwards;
+}
+

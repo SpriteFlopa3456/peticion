@@ -635,6 +635,8 @@ function handleLogin() {
         LoginContainer.style.display = 'none';
         currentMenu.innerHTML = 'Peticion Forzada';
         alert('Inicio de sesión exitoso!');
+        // Check if user is banned
+        checkUserBanStatus();
     } else {
         alert('Usuario no encontrado');
     }

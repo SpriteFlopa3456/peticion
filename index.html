@@ -33,7 +33,6 @@
             <button class="side-menu-button" type="button" id="themes">Temas</button>
             <button class="side-menu-button" type="button" id="users">Mijos del server <span class="counter">(8) Registrados</span></button>
             <button class="side-menu-button" type="button" id="account">Iniciar Sesión</button>
-            <button class="side-menu-button" type="button" id="logout">Reportar problemas</button>
             <button class="side-menu-button" type="button" id="worldsettings">Cambiar configuracion del mundo</button>
             <div class="separator">Server Alternativo</div>
             <button class="side-menu-button" type="button" id=""></button>
@@ -134,7 +133,64 @@
         <button id="closeToast">Cerrar</button>
 
     </div>
+    <Div class="worldsettings-container" id="worldsettings">
+        <h1>Configuraciones del Mundo</h1>
+        <p>Selecciona las configuraciones que deseas aplicar al mundo.</p>
+        <p>Se aplicaran las configuraciones en el siguiente reinicio del server o nadie este.</p>
+        <label for="difficulty">Dificultad:</label>
+        <select id="difficulty">
+            <option value="default">Predeterminado</option>
+            <option value="peaceful">Pacifico</option>
+            <option value="easy">Fácil</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Difícil</option>
+        </select>
+        <label for="worldFile">Subir archivo del pack de texturas o comportamiento:</label>
+        <input type="file" id="worldFile" accept=".zip,.mcpack">
+        <p>Muchos mods en el server pueden afectar el rendimiento. El limite son 3</p>
+        <div class="installed-packs">
+            <h3>Packs de textura y de comportamiento instalados:</h3>
+          <div class="installed-packs-cards-container">
+              <div class="installed-pack-card">
+                  <IMG src="pack.png" alt="Pack 1"></IMG>
+                  <div>Pack 1</div>
+                    <div>Instalado por:</div><div id="installedBy1">Usuario</div>
+              </div>
+              <div class="installed-pack-card">
+                  <IMG src="pack.png" alt="Pack 2"></IMG>
+                  <div>Pack 2</div>
+                  <div>Instalado por:</div><div id="installedBy2">Usuario</div>
+              </div>
+              <div class="installed-pack-card">
+                  <IMG src="pack.png" alt="Pack 3"></IMG>
+                  <div>Pack 3</div>
+                  <div>Instalado por:</div><div id="installedBy3">Usuario</div>
+              </div>
+          </div>
+          <div class="installed-pack-remove-button-container">
+              <button>Eliminar Pack 1</button>
+              <button>Eliminar Pack 2</button>
+              <button>Eliminar Pack 3</button>
+          </div>
+        </div>
+      <button type="button" id="saveWorldSettings">Guardar Configuraciones</button>
+    <!----    <div class="advanced-settings" id="advancedSettings">
+            <input type="text" id="newWorldName" placeholder="Ingrese el nombre del nuevo mundo">
 
+            <input type="text" id="worldSeed" placeholder="Ingrese la semilla del mundo">
+            <label for="gameMode">Modo de juego:</label>
+            <select id="gameMode">
+                <option value="survival">Supervivencia</option>
+                <option value="creative">Creativo</option>
+                <option value="adventure">Aventura</option>
+                <option value="spectator">Espectador</option>
+                
+            </select>
+            <input type="checkbox" name="enablecheats" id="enablecheats">
+            <label for="enablecheats">Habilitar trucos</label>
+        </div>
+        
+    </Div> ---->
 
     <script>
         // On page load
@@ -405,6 +461,7 @@ homeButton.addEventListener('click', () => {
     userContainer.style.display = 'none';
     currentMenu.innerHTML = 'Peticion Forzada';
     LoginContainer.style.display = 'none';
+    worldSettingsForm.style.display = 'none';
 });
 
 closeMenu.addEventListener('click', () => {
@@ -437,6 +494,7 @@ usersButton.addEventListener('click', () => {
     sideMenu.style.animation = 'slide-out 0.5s ease';
     currentMenu.innerHTML = 'Mijos del server';
     LoginContainer.style.display = 'none';
+    worldSettingsForm.style.display = 'none';
     setTimeout(() => {
         sideMenu.style.animation = 'none';
         sideMenu.style.display = 'none';
@@ -601,6 +659,7 @@ var LoginContainer = document.querySelector('.login-container');
 
 LoginButton.addEventListener('click', () => {
     LoginContainer.style.display = 'flex';
+    worldSettingsForm.style.display = 'none';
     sideMenu.style.animation = 'slide-out 0.5s ease';
     currentMenu.innerHTML = 'Iniciar Sesion';
     setTimeout(() => {
@@ -798,6 +857,140 @@ handleLogin = function() {
     originalHandleLogin();
     checkUserBanStatus();
 };
+</script>
+<script>
+// World Settings Handler
+const worldSettingsForm = document.querySelector('.worldsettings-container');
+const difficultySelect = document.getElementById('difficulty');
+const worldFileInput = document.getElementById('worldFile');
+const saveWorldSettings = document.getElementById('saveWorldSettings');
+
+// Add Telegram bot credentials
+const settingsBotToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY';
+const settingsChatId = '7688071745';
+
+saveWorldSettings.addEventListener('click', async () => {
+    const loggedInUser = getCookie('loggedInUser');
+    
+    if (!loggedInUser) {
+        alert('Debes iniciar sesión para cambiar la configuración');
+        return;
+    }
+
+    const user = JSON.parse(loggedInUser);
+    const selectedDifficulty = difficultySelect.value;
+    const file = worldFileInput.files[0];
+    
+    let message = `🔧 Cambios en la configuración del mundo:\n\n`;
+    message += `👤 Usuario: ${user.username}\n`;
+    message += `🎮 Dificultad: ${selectedDifficulty}\n`;
+
+    if (file) {
+        if (file.size > 100 * 1024 * 1024) { // 100MB limit
+            alert('El archivo es demasiado grande. Máximo 100MB.');
+            return;
+        }
+
+        const allowedTypes = ['.zip', '.mcpack'];
+        const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+        
+        if (!allowedTypes.includes(fileExtension)) {
+            alert('Tipo de archivo no válido. Solo se permiten archivos .zip o .mcpack');
+            return;
+        }
+
+        message += `📦 Pack subido: ${file.name}\n`;
+        message += `📊 Tamaño: ${(file.size / 1024 / 1024).toFixed(2)}MB\n`;
+    }
+
+    // Add timestamp
+    const now = new Date();
+    message += `\n⏰ Fecha: ${now.toLocaleString()}\n`;
+
+
+    // Send to Telegram
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${settingsBotToken}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: settingsChatId,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+
+        const data = await response.json();
+        
+        if (data.ok) {
+            alert('Configuración guardada exitosamente!');
+            
+            // If there's a file, upload it as a document
+            if (file) {
+                const formData = new FormData();
+                formData.append('chat_id', settingsChatId);
+                formData.append('document', file);
+                
+                const fileResponse = await fetch(`https://api.telegram.org/bot${settingsBotToken}/sendDocument`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const fileData = await fileResponse.json();
+                if (!fileData.ok) {
+                    throw new Error('Error al subir el archivo');
+                }
+            }
+            
+            // Clear file input
+            worldFileInput.value = '';
+            
+            // Update installed packs display
+            updateInstalledPacks(user.username, file?.name);
+        } else {
+            throw new Error(data.description || 'Error al guardar la configuración');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al guardar la configuración: ' + error.message);
+    }
+});
+
+function updateInstalledPacks(username, fileName) {
+    // Find an empty slot or the oldest pack
+    const packCards = document.querySelectorAll('.installed-pack-card');
+    let targetCard = null;
+    
+    for (const card of packCards) {
+        const packName = card.querySelector('div:nth-child(2)');
+        if (packName.textContent === 'Pack 1' || 
+            packName.textContent === 'Pack 2' || 
+            packName.textContent === 'Pack 3') {
+            targetCard = card;
+            break;
+        }
+    }
+    
+    if (targetCard && fileName) {
+        const packName = targetCard.querySelector('div:nth-child(2)');
+        const installedBy = targetCard.querySelector('div:last-child');
+        
+        packName.textContent = fileName;
+        installedBy.textContent = username;
+    }
+}
+var worldSettingsButton = document.getElementById('worldsettings');
+worldSettingsButton.addEventListener('click', () => {
+    worldSettingsForm.style.display = 'flex';
+    sideMenu.style.animation = 'slide-out 0.5s ease';
+    currentMenu.innerHTML = 'Configuraciones del mundo';
+    setTimeout(() => {
+        sideMenu.style.animation = 'none';
+        sideMenu.style.display = 'none';
+    }, 302);
+});
 </script>
 
 </body>

@@ -656,3 +656,251 @@ body {
         transform: translateY(-20px) scale(0.95);
     }
 }
+.worldsettings-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 9;
+    background: linear-gradient(to bottom, #e8e8e8, #d1d1d1);
+}
+    .worldsettings-container h1 {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0;
+            padding: 10px 0;
+            line-height: 1.2;
+        }
+        .worldsettings-container button {
+            padding: 15px 25px;
+            background: linear-gradient(to bottom, #618edd, #4570cb);
+           border: 1px solid #9e9e9e;
+           font-family: 'Roboto', sans-serif;
+            color: #fff;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+        }
+        .worldsettings-container button:active {
+            background: linear-gradient(to bottom, #357abd, #2a5f9e);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px);
+        }
+        .worldsettings-container button:hover {
+            background: linear-gradient(to bottom, #5a9fe2, #4a90e2);
+        }
+        .worldsettings-container button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(97, 142, 255, 0.5);
+        }
+    .worldsettings-container p {
+        color: #666;
+        margin: 5px 0;
+    }
+    .worldsettings-container select {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 300px;
+        background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+    .worldsettings-container select:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+   
+    .worldsettings-container input[type="file"]:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+    .worldsettings-container input[type="file"]::file-selector-button {
+        background: linear-gradient(to bottom, #618edd, #4570cb);
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    .worldsettings-container input[type="file"]::file-selector-button:hover {
+        background: linear-gradient(to bottom, #5a9fe2, #4a90e2);
+    }
+    .advanced-settings {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .worldsettings-container input[type="checkbox"],
+    .worldsettings-container input[type="radio"] {
+        margin-right: 10px;
+        cursor: pointer;
+        padding: 20px;
+    }
+    .installed-packs {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        z-index: 9;
+       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3), inset 0px 1px 3px rgba(255, 255, 255, 0.6); /* Outer and inner shadow */
+    background: linear-gradient(0deg, rgb(22, 22, 22) 0%, rgb(51, 51, 51) 100%);
+    }
+    .installed-packs h3 {
+        font-size: 21px;
+        color: #fff;
+        text-align: center;
+        margin-top: 0;
+    }
+    .installed-packs-cards-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+    }
+    .installed-pack-card {
+        background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+        border: 1px solid #ccc;
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        color: #333;
+        transition: all 0.3s ease;
+    }
+    .installed-pack-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        background: linear-gradient(to bottom, #618edd, #4570cb);
+        border-left: 5px solid #1f6ef8;
+        color: #fff;
+    }
+    .installed-pack-remove-button-container button {
+        background: linear-gradient(to bottom, #f44336, #d32f2f);
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    .installed-pack-remove-button-container button:hover {
+        background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+    }
+    .installed-pack-remove-button-container button:active {
+        background: linear-gradient(to bottom, #b71c1c, #d32f2f);
+    }
+    .installed-pack-remove-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        gap: 10px;
+    }
+    .installed-pack-card img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+    .admin-approval-toast,
+.user-approval-toast {
+    background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+    border: 1px solid #ccc;
+    padding: 15px 20px;
+    border-radius: 5px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-approval-toast .title,
+.user-approval-toast .title {
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.admin-approval-toast .button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.admin-approval-toast button,
+.user-approval-toast button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid;
+    transition: all 0.3s ease;
+}
+
+.admin-approval-toast #approveChanges {
+    background: linear-gradient(to bottom, #4CAF50, #388E3C);
+    color: white;
+    border-color: #388E3C;
+}
+
+.admin-approval-toast #rejectChanges {
+    background: linear-gradient(to bottom, #f44336, #d32f2f);
+    color: white;
+    border-color: #d32f2f;
+}
+
+.user-approval-toast.approved {
+    border-left: 5px solid #4CAF50;
+}
+
+.user-approval-toast.rejected {
+    border-left: 5px solid #f44336;
+}
+
+.user-approval-toast .close-toast {
+    align-self: flex-end;
+    background: linear-gradient(to bottom, #e0e0e0, #bdbdbd);
+    color: #333;
+    border-color: #bdbdbd;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}

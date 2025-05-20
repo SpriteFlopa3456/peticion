@@ -358,7 +358,6 @@ body {
     background-color: #0000007e;
     backdrop-filter: blur(5px);
     padding-top: 60px;
-    overflow: scroll;
 }
 
 .users-cards {
@@ -669,5 +668,194 @@ body {
 
 .banned-toast.hide {
     animation: fadeOut 0.3s ease-in forwards;
+}
+.worldsettings-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+    background-color: #0000007e;
+    backdrop-filter: blur(5px);
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, backdrop-filter;
+    padding-top: 40%;
+    /* Add some additional styling for better presentation */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+
+.worldsettings-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    padding: 10px 0;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.worldsettings-container button {
+    width: 85%;
+    padding: 15px 25px;
+    margin: 8px auto;
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.1), rgba(9, 154, 211, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.worldsettings-container button:hover {
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.2), rgba(9, 154, 211, 0.3));
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.worldsettings-container button:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.worldsettings-container p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 5px 0;
+}
+
+.worldsettings-container select {
+    width: 300px;
+    padding: 12px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: #fff;
+    backdrop-filter: blur(5px);
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.worldsettings-container select option {
+    background: rgba(255, 255, 255, 0.2);
+    color: #000;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.worldsettings-container select:focus {
+    border-color: rgba(9, 154, 211, 0.5);
+    outline: none;
+    box-shadow: 0 0 15px rgba(9, 154, 211, 0.3);
+}
+
+.worldsettings-container input[type="file"] {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.worldsettings-container input[type="file"]::file-selector-button {
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.1), rgba(9, 154, 211, 0.2));
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.worldsettings-container input[type="file"]::file-selector-button:hover {
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.2), rgba(9, 154, 211, 0.3));
+    transform: translateY(-1px);
+}
+
+.installed-packs {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+}
+
+.installed-packs h3 {
+    font-size: 21px;
+    color: #fff;
+    text-align: center;
+    margin-top: 0;
+}
+
+.installed-packs-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+     flex-direction: row;
+}
+
+.installed-pack-card {
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.1), rgba(9, 154, 211, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+   
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.installed-pack-card:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, rgba(9, 154, 211, 0.2), rgba(9, 154, 211, 0.3));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.installed-pack-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.installed-pack-remove-button-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.installed-pack-remove-button-container button {
+    background: linear-gradient(45deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.2));
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.installed-pack-remove-button-container button:hover {
+    background: linear-gradient(45deg, rgba(244, 67, 54, 0.2), rgba(244, 67, 54, 0.3));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.2);
 }
 

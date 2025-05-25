@@ -39,7 +39,16 @@ body.modern-theme .theme-container.open {
 
 
 <div class="body-load" id="bodyLoad">
-    
+    <div id="uxnotice" class="slide-notice">
+        <h1>Interfaz de usuario</h1>
+        <p>Desliza desde la izquierda al centro para regresar al inicio</p>
+    </div>
+    <script>
+        var uxnotice = document.getElementById('uxnotice')
+        setTimeout(() => {
+            uxnotice.style.animation = ('fade-out 4s forwards');
+        }, 5000);
+    </script>
     
         
         <div class="side-menu" id="side-menu">
@@ -322,6 +331,7 @@ function updateClickCount() {
         requestButton.textContent = "Límite alcanzado";
         requestButton.style.cursor = "not-allowed";
         requestButton.style.background = "gray";
+        requestButton.pointerEvents = "none";
     } else {
         requestButton.disabled = false;
         requestButton.textContent = "Realizar peticion";
@@ -344,7 +354,8 @@ requestButton.addEventListener('click', function() {
 
 
         // Hide the loading screen after 2 second        // Token and chat ID for Telegram Bot
-        const botToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY'; // Replace with your bot token
+        const botToken = '7529214947:AAGqRyGp9S3qDJJPnNgkR3uNQkStxQczUsc';
+         // Replace with your bot token
         const chatId = '7688071745';
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 

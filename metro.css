@@ -1137,4 +1137,46 @@ pre {
     word-wrap: break-word;
     margin-top: 20px;
 }
+.slide-notice {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    background-color: #1f0068;
+    width: 50%;
+    padding: 20px;
+    flex-direction: column;
+    z-index: 100;
+    color: #fff;
+    margin-top: 10px;
+    animation: notice 0.5s forwards;
+}
+@keyframes notice {
+    from {
+        transform: translateX(200px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes fade-out {
+      from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.slide-notice h1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+   
+}
+.slide-notice p {
+    font-size:17px;
+    margin: 0;
+    text-align: left;
 
+}

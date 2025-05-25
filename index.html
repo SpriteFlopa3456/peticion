@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peticion Forzada</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-      
+        body.metro-theme .side-menu-button .menu-icon {
+    opacity: 1;
+}
+body.classic-theme .side-menu-button .menu-icon,
+body.modern-theme .side-menu-button .menu-icon {
+    opacity: 0;
+    width: 0;
+    margin-right: 0;
+}
+/* Dropdown style for Metro */
+
+body.metro-theme .theme-dropdown.open {
+    display: block;
+}
+body.modern-theme .theme-dropdown,
+body.classic-theme .theme-dropdown {
+    display: none;
+}
+/* Modal style for Classic/Modern */
+
+body.classic-theme .theme-container.open,
+body.modern-theme .theme-container.open {
+    display: block;
+}
     </style>
 </head>
 <body>
@@ -15,25 +39,29 @@
 
 
 <div class="body-load" id="bodyLoad">
-    <div class="alert-container">
-        <h3>&#9888; Solo puedes enviar 3 peticiones</h3>
-        </div>
     
-        <div class="background-opacity" id="background-opacity"></div>
-        <div class="topbar">
-            <button class="menu-bars" id="menu">&#9776;</button>
-            <h2 id="currentmenu">Peticion Forzada</h2>
-        </div>
+    
+        
         <div class="side-menu" id="side-menu">
             <div class="topbar">
             <h1>Menu</h1>
-            <button class="menu-bars" id="close-menu">&#9776;</button>
+            <button class="menu-bars" id="close-menu"></button>
             </div>
-            <button class="side-menu-button" type="button" id="home">Inicio</button>
-            <button class="side-menu-button" type="button" id="themes">Temas</button>
-            <button class="side-menu-button" type="button" id="users">Mijos del server <span class="counter">(8) Registrados</span></button>
-            <button class="side-menu-button" type="button" id="account">Iniciar Sesión</button>
-            <button class="side-menu-button" type="button" id="worldsettings">Cambiar configuracion del mundo</button>
+            <button class="side-menu-button" type="button" data-icon="&#xE10F" id="home"><span class="menu-icon"></span>Inicio</button>
+            <div class="theme-menu-container" style="position:relative;">
+  <button class="side-menu-button" type="button" data-icon="" id="themes">
+    <span class="menu-icon"></span>Temas
+  </button>
+  <div class="theme-dropdown" id="themeDropdown">
+      <button class="theme-button" type="button" id="moderndrop">Moderno</button>
+      <button class="theme-button" type="button" id="classicdrop">Clasico</button>
+      <button class="theme-button" type="button" id="metrodrop">Metro</button>
+  </div>
+</div>
+            <button class="side-menu-button" type="button" data-icon="&#xE13D" id="users"><span class="menu-icon"></span>Mijos del server <span class="counter">(8) Registrados</span></button>
+            <button class="side-menu-button" type="button" data-icon="" id="account"><span class="menu-icon"></span><span id="account-text">Iniciar Sesión</span></button>
+            <button class="side-menu-button" type="button" data-icon="" id="worldsettings"><span class="menu-icon"></span>Cambiar configuracion del mundo</button>
+            <button class="side-menu-button" type="button" data-icon="" id="wiki"><span class="menu-icon"></span> <span id="wiki-span">Wiki (Solo tema metro)</span></button>
             <div class="separator">Server Alternativo</div>
             <button class="side-menu-button" type="button" id=""></button>
 
@@ -45,9 +73,15 @@
             <p id="current-theme">Tema actual: </p>
             <button class="theme-button" type="button" id="modern">Moderno (Recomendado para celulares full premium o PC)</button>
             <button class="theme-button" type="button" id="classic">Clasico (Recomendado para celulares del tianguis)</button>
+            <button class="theme-button" type="button" id="metro">Metro (Recomendado para todos los dispositivos)</button>
             <button class="theme-button" type="button" id="close-theme">Cerrar</button>
         </div>
-       
+       <div class="main-page">
+       <div class="background-opacity" id="background-opacity"></div>
+        <div class="topbar">
+            <button class="menu-bars" id="menu"></button>
+            <h2 id="currentmenu">Peticion Forzada</h2>
+        </div>
     <div class="container">
         
     <h1>Pedir que prendan server</h1>
@@ -72,6 +106,7 @@
     </div>
     
     </div>
+</div>
     <div class="users-container">
         <div class="users-cards">
             <div class="user-card admin"  user-id="1">
@@ -82,12 +117,12 @@
             <div class="user-card moderator" user-id="2">
                 <p class="user-card-name">Tren Lokote Peru</p>
                 <p class="user-card-status moderator">Estado: No se pudo conectar</p>
-                <p class="user-card-moto">A determinar</p>
+                <p class="user-card-moto">후안 카키타</p>
             </div>
             <div class="user-card" user-id="3">
                 <p class="user-card-name">Pasillas2354 / Dilanh22</p>
                 <p class="user-card-status">Estado: No se pudo conectar</p>
-                <p class="user-card-moto">A determinar</p>
+                <p class="user-card-moto">Today America X wins the tetracapeonato 💛🦅🩵</p>
             </div>
             <div class="user-card" user-id="4">
                 <p class="user-card-name">Minivers097</p>
@@ -102,7 +137,7 @@
         <div class="user-card" user-id="6">
             <p class="user-card-name">XxjuanxX98754</p>
             <p class="user-card-status">Estado: No se pudo conectar</p>
-            <p class="user-card-moto">A determinar</p>
+            <p class="user-card-moto">El tiempo de dios es perfecto</p>
         </div>
         <div class="user-card" user-id="7">
             <p class="user-card-name">Mauricio22881</p>
@@ -174,6 +209,48 @@
           </div>
         </div>
       <button type="button" id="saveWorldSettings">Guardar Configuraciones</button>
+  </div>
+      <div id="wikiContainer" class="wiki-container">
+        <h1>Wiki</h1>
+        <p>En esta seccion puedes ver las ideas que han sido propuestas por los usuarios.</p>
+        <div class="wiki-section">
+            <h2>Generados por usuarios</h2>
+            <div id="roles" class="idea-card">
+                <h3>Roles de los mijos</h3>
+                <p>Explicacion de los roles de cada mijo en el server.</p>
+            </div>
+            <div class="idea-card">
+                <h3>Los 3 jinetes del orto cagado</h3>
+                <p>Quienes son los 3 jinetes del orto cagado.</p>
+            </div>
+            <div class="idea-card">
+                <h3>¿Juan tiene el nucleo del diavlo?</h3>
+                <p>.</p>
+            </div>
+            <div class="idea-card">
+                <h3>Toda la existencia del server</h3>
+                <p>La razon de existir del server.</p>
+            </div>
+            <div class="idea-card">
+                <h3>Especificaciones del server</h3>
+                <p>Especificaciones del server.</p>
+            </div>
+            <div class="idea-card">
+                <h3>¿Donde esta almacenado el server?</h3>
+                <p>Donde esta almacenado.</p>
+            </div>
+            <div class="idea-card">
+                <h3>Mi IP y mi cuenta bancaria no</h3>
+                <p>NO.</p>
+            </div>
+            <div class="idea-card">
+                <h3>¿Porque juan es caquita?</h3>
+                <p>Porque.</p>
+            </div>
+            </div>
+            <div id="wikiReader" class="wiki-reader">
+                <pre id="wikiContent">Contenido de la wiki aquí...</pre>
+            </div>
     <!----    <div class="advanced-settings" id="advancedSettings">
             <input type="text" id="newWorldName" placeholder="Ingrese el nombre del nuevo mundo">
 
@@ -196,10 +273,15 @@
         // On page load
       document.onreadystatechange = function() {
             const isWebview = /wv|WebView|MobileApp/i.test(window.navigator.userAgent);
+if (isWebview) {
+        const currentMenu = document.getElementById('currentmenu');
+        if (currentMenu) currentMenu.textContent = '¿Que haces aqui dale pa fuera';
+    }
 
 // Update the text based on the detection
 const webviewElement = document.getElementById('webview');
 const mobui = document.getElementById('mobile-ui');
+
 
 // Refresh button functionality
 const refreshButton = document.getElementById('refresh');
@@ -439,53 +521,93 @@ setInterval(fetchUptime, 60000);
     
 console.log('DOM fully loaded and parsed');
 }
+// Fix for sideMenu open/close animation issues
 var menu = document.getElementById('menu');
 var sideMenu = document.getElementById('side-menu');
 var closeMenu = document.getElementById('close-menu');
 var homeButton = document.getElementById('home');
-menu.addEventListener('click', () => {
-    sideMenu.style.display = 'block';
-    setTimeout(() => {
-        sideMenu.style.animation = 'none';
-        bodyLoad.style.animation = 'none';
-    }, 302);
-    sideMenu.style.animation = 'slide-in 0.5s ease';
-});
-homeButton.addEventListener('click', () => {
-  setTimeout(() => {
-        sideMenu.style.display = 'none';
-        sideMenu.style.animation = 'none';
+var bodyLoad = document.getElementById('bodyLoad');
+var mainPage = document.querySelector('.main-page');
 
-    }, 298);
-    sideMenu.style.animation = 'slide-out 0.5s ease';
+function openSideMenu() {
+    if (document.body.classList.contains('metro-theme')) {
+        sideMenu.style.display = 'block';
+        sideMenu.style.animation = 'slide-in 0.7s ease';
+        mainPage.style.animation = 'slide-body-out 0.7s ease';
+        setTimeout(() => {
+            mainPage.style.animation = 'none'; // Reset animation state
+            mainPage.style.opacity = '0';
+        }, 700);
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        sideMenu.style.display = 'block';
+        sideMenu.style.animation = 'slide-in 0.5s ease';
+    }
+}
+
+function closeSideMenu() {
+    if (document.body.classList.contains('metro-theme')) {
+        sideMenu.style.animation = 'slide-out 0.7s ease';
+        mainPage.style.animation = 'slide-body-in 0.7s ease';
+        mainPage.style.opacity = '1';
+        setTimeout(() => {
+        sideMenu.style.display = 'none';
+        sideMenu.style.animation = 'none'; // Reset animation state
+        mainPage.style.animation = 'none'; // Reset animation state
+    }, 700);
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        sideMenu.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            sideMenu.style.display = 'none';
+            sideMenu.style.animation = 'none'; // Reset animation state
+        }, 500);
+    }
+}
+
+
+menu.addEventListener('click', openSideMenu);
+closeMenu.addEventListener('click', closeSideMenu);
+homeButton.addEventListener('click', () => {
+    closeSideMenu();
     userContainer.style.display = 'none';
     currentMenu.innerHTML = 'Peticion Forzada';
     LoginContainer.style.display = 'none';
     worldSettingsForm.style.display = 'none';
 });
-
-closeMenu.addEventListener('click', () => {
-    setTimeout(() => {
-        sideMenu.style.display = 'none';
-        sideMenu.style.animation = 'none';
-    }, 298);
-    sideMenu.style.animation = 'slide-out 0.5s ease';
-});
 var themeButton = document.getElementById('themes');
-themeButton.addEventListener('click', () => {
-    themeContainer.style.display = 'block';
-    themeContainer.style.animation = 'open-menus 0.3s ease-in-out';
-    backgroundOpacity.style.display = 'block';
-});
-var closeTheme = document.getElementById('close-theme');
-closeTheme.addEventListener('click', () => {
-    backgroundOpacity.style.display = 'none';
-    setTimeout(() => {
-        themeContainer.style.animation = 'none';
+const themeDropdown = document.getElementById('themeDropdown');
+
+themeButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (document.body.classList.contains('metro-theme')) {
+        // Metro: show dropdown
+        const isOpen = themeDropdown.classList.contains('open');
+        themeContainer.classList.remove('open');
         themeContainer.style.display = 'none';
-    }, 302);
-    themeContainer.style.animation = 'close-menus 0.3s ease-in-out';
+        document.querySelectorAll('.theme-dropdown').forEach(d => d.classList.remove('open'));
+        if (!isOpen)
+         themeDropdown.classList.add('open');
+           themeContainer.classList.remove('open');
+        themeContainer.style.display = 'none';
+    } else {
+        // Classic/Modern: show modal
+        themeContainer.style.display = 'block';
+        themeContainer.style.animation = 'open-menus 0.5s ease';
+        setTimeout(() => {
+            themeContainer.classList.add('open');
+            themeContainer.style.animation = 'none'; // Reset animation state
+        }, 500);
+        document.getElementById('background-opacity').style.display = 'block';
+    }
 });
+
+// Hide dropdown/modal when clicking outside or closing
+document.addEventListener('click', () => {
+    if (themeDropdown) themeDropdown.classList.remove('open');
+    if (themeContainer) themeContainer.classList.remove('open');
+    document.getElementById('background-opacity').style.display = 'none';
+});
+if (themeDropdown) themeDropdown.addEventListener('click', e => e.stopPropagation());
+if (themeContainer) themeContainer.addEventListener('click', e => e.stopPropagation());
 var userContainer = document.querySelector('.users-container');
 var usersButton = document.getElementById('users');
 var currentMenu = document.getElementById('currentmenu');
@@ -628,32 +750,90 @@ statusElements.forEach((statusElement) => {
 const themeStyle = document.createElement('link');
 const moderntheme = document.getElementById('modern');
 const classicTheme = document.getElementById('classic');
+const menubar = document.getElementById('menu');
+const metroTheme = document.getElementById('metro');
 const currentTheme = document.getElementById('current-theme');
 const themeContainer = document.getElementById('themeContainer');
 const backgroundOpacity = document.getElementById('background-opacity');
+const classicThemeButton = document.getElementById('classicdrop');
+const modernThemeButton = document.getElementById('moderndrop');
+const metroThemeButton = document.getElementById('metrodrop');
+const closeThemeButton = document.getElementById('close-theme');
 themeStyle.rel = 'stylesheet';
 document.head.appendChild(themeStyle);
+
+function updateMenuIcons() {
+    document.querySelectorAll('.side-menu-button').forEach(btn => {
+        const iconSpan = btn.querySelector('.menu-icon');
+        if (iconSpan && btn.dataset.icon) {
+            iconSpan.innerHTML = btn.dataset.icon;
+        }
+    });
+}
+closeThemeButton.addEventListener('click', closeThemeContainer);
+function closeThemeContainer() {
+    themeContainer.style.animation = 'close-menus 0.5s ease';
+    backgroundOpacity.style.display = 'none';
+    setTimeout(() => {
+        themeContainer.style.display = 'none';
+        themeContainer.style.animation = 'none'; // Reset animation state
+    }, 500);
+ 
+}
 
 function setTheme(theme) {
     themeStyle.setAttribute('href', `${theme}.css`);
     setCookie('theme', theme, 7);
     currentTheme.innerHTML = `Tema actual: ${theme === 'classic' ? 'Clasico' : 'Moderno'}`;
+    document.body.classList.remove('metro-theme', 'classic-theme', 'modern-theme');
+    document.body.classList.add(`${theme}-theme`);
+    if (theme === 'classic' || theme === 'modern') {
+        if (closeMenu) closeMenu.innerHTML = '&#9776;';
+        if (menubar) menubar.innerHTML = '&#9776;';
+       if (wikiButtonSpan) wikiButtonSpan.innerText = 'Wiki solo disponible en el tema metro';
+    }
+    if (theme === 'metro') {
+        if (closeMenu) closeMenu.innerHTML = '';
+        if (menubar) menubar.innerHTML = '';
+    }
+    updateMenuIcons();
 }
+const wikiButtonSpan = document.getElementById('wikiButtonSpan');
 
 // Initialize theme from cookie or default to classic
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = getCookie('theme') || 'classic';
+    const savedTheme = getCookie('theme') || 'metro';
     setTheme(savedTheme);
 });
-
+metroTheme.addEventListener('click', () => {
+    setTheme('metro');
+        themeContainer.classList.remove('open');
+    backgroundOpacity.style.display = 'none';
+});
 // Update your existing theme button listeners
 moderntheme.addEventListener('click', () => {
     setTheme('modern');
+    mainPage.style.opacity = '1';
 });
 
 classicTheme.addEventListener('click', () => {
     setTheme('classic');
+    mainPage.style.opacity = '1';
+    
 });
+classicThemeButton.addEventListener('click', () => {
+    setTheme('classic');
+    mainPage.style.opacity = '1';
+});
+modernThemeButton.addEventListener('click', () => {
+    setTheme('modern');
+    mainPage.style.opacity = '1';
+});
+metroThemeButton.addEventListener('click', () => {
+    setTheme('metro');
+
+});
+
 var LoginButton = document.getElementById('account');
 var LoginContainer = document.querySelector('.login-container');
 
@@ -703,14 +883,13 @@ function handleLogin() {
 
 // Update UI based on login state
 function updateLoginState() {
-    const loginButton = document.getElementById('account');
+    const loginButton = document.getElementById('account-text');
     const worldSettingsButton = document.getElementById('worldsettings');
     const loggedInUser = getCookie('loggedInUser');
 
     if (loggedInUser) {
         const user = JSON.parse(loggedInUser);
-        loginButton.textContent = user.username;
-        loginButton.classList.add('logged-in');
+       loginButton.textContent = user.username;
         
         // Show world settings only for admin/moderator
         if (user.isAdmin || user.isModerator || loggedInUser) {
@@ -720,7 +899,7 @@ function updateLoginState() {
         }
     } else {
         loginButton.textContent = 'Iniciar Sesión';
-        loginButton.classList.remove('logged-in');
+            
         worldSettingsButton.style.display = 'none';
     }
 }
@@ -749,8 +928,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // Return to home if logout is canceled
                 userContainer.style.display = 'none';
+                mainPage.style.opacity = '1';
+                mainPage.style.animation = 'none';
                 currentMenu.innerHTML = 'Peticion Forzada';
                 LoginContainer.style.display = 'none';
+                worldSettingsForm.style.display = 'none';
                 sideMenu.style.animation = 'slide-out 0.5s ease';
                 setTimeout(() => {
                     sideMenu.style.animation = 'none';
@@ -760,7 +942,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             LoginContainer.style.display = 'flex';
             sideMenu.style.animation = 'slide-out 0.5s ease';
-            currentMenu.innerHTML = 'Iniciar Sesion';
+            currentMenu.innerText = 'Iniciar Sesion';
+            
             setTimeout(() => {
                 sideMenu.style.animation = 'none';
                 sideMenu.style.display = 'none';
@@ -932,21 +1115,21 @@ saveWorldSettings.addEventListener('click', async () => {
                 const formData = new FormData();
                 formData.append('chat_id', settingsChatId);
                 formData.append('document', file);
-                
+
                 const fileResponse = await fetch(`https://api.telegram.org/bot${settingsBotToken}/sendDocument`, {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const fileData = await fileResponse.json();
                 if (!fileData.ok) {
                     throw new Error('Error al subir el archivo');
                 }
             }
-            
+
             // Clear file input
             worldFileInput.value = '';
-            
+
             // Update installed packs display
             updateInstalledPacks(user.username, file?.name);
         } else {
@@ -962,21 +1145,21 @@ function updateInstalledPacks(username, fileName) {
     // Find an empty slot or the oldest pack
     const packCards = document.querySelectorAll('.installed-pack-card');
     let targetCard = null;
-    
+
     for (const card of packCards) {
         const packName = card.querySelector('div:nth-child(2)');
-        if (packName.textContent === 'Pack 1' || 
-            packName.textContent === 'Pack 2' || 
+        if (packName.textContent === 'Pack 1' ||
+            packName.textContent === 'Pack 2' ||
             packName.textContent === 'Pack 3') {
             targetCard = card;
             break;
         }
     }
-    
+
     if (targetCard && fileName) {
         const packName = targetCard.querySelector('div:nth-child(2)');
         const installedBy = targetCard.querySelector('div:last-child');
-        
+
         packName.textContent = fileName;
         installedBy.textContent = username;
     }
@@ -989,10 +1172,121 @@ worldSettingsButton.addEventListener('click', () => {
     setTimeout(() => {
         sideMenu.style.animation = 'none';
         sideMenu.style.display = 'none';
-    }, 302);
+    }, 290);
+});
+</script>
+<script>
+let touchStartX = 0;
+let touchEndX = 0;
+
+function handleGesture() {
+    // Only for metro theme and only if swiping right (from left to right)
+    if (
+        document.body.classList.contains('metro-theme') &&
+        touchEndX - touchStartX > 60 // adjust threshold as needed
+    ) {
+        // Check if any overlay/section is open
+        if (
+            userContainer.style.display === 'flex' ||
+            LoginContainer.style.display === 'flex' ||
+            worldSettingsForm.style.display === 'flex' ||
+            sideMenu.style.display === 'block' ||
+             wikiContainer.style.display === 'flex' ||
+             wikiReader.style.display === 'flex'
+
+        ) {
+            // Slide out current section
+            let currentSection = null;
+            if (userContainer.style.display === 'flex') currentSection = userContainer;
+            if (LoginContainer.style.display === 'flex') currentSection = LoginContainer;
+            if (sideMenu.style.display === 'block') currentSection = sideMenu;
+            if (worldSettingsForm.style.display === 'flex') currentSection = worldSettingsForm;
+            if (wikiContainer.style.display === 'flex') currentSection = wikiContainer;
+            if (wikiReader.style.display === 'flex') currentSection = wikiReader;
+
+            if (currentSection) {
+                currentSection.style.animation = 'slide-out 0.5s forwards';
+                setTimeout(() => {
+                    currentSection.style.display = 'none';
+                    currentSection.style.animation = '';
+                    // Slide in main page
+                    mainPage.style.display = 'block';
+                    mainPage.style.opacity = '1';
+                    mainPage.style.animation = 'slide-body-in 0.5s forwards';
+                    currentMenu.innerHTML = 'Peticion Forzada';
+                }, 480);
+            }
+        }
+    }
+}
+
+// Attach to overlays/sections that can be closed with swipe
+[userContainer, LoginContainer, worldSettingsForm].forEach(section => {
+    section.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    section.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGesture();
+    });
+});
+
+
+const ideaCards = document.querySelectorAll('.idea-card');
+const wikiContainer = document.getElementById('wikiContainer');
+const wikiButton = document.getElementById('wiki');
+wikiButton.addEventListener('click', () => {
+    wikiContainer.style.display = 'flex';
+    if (document.body.classList.contains('metro-theme')) {
+        sideMenu.style.animation = 'slide-body-out 0.5s ease';
+        ideaCards.forEach(card => {
+            card.style.animation = 'none'; // Reset animation
+            // Force reflow
+            void card.offsetWidth;
+            card.style.animation = 'rotate-cards-in 0.5s forwards';
+        });
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        sideMenu.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            sideMenu.style.animation = 'none';
+            sideMenu.style.display = 'none';
+        }, 500);
+    }
+    currentMenu.innerHTML = 'Wiki';
+
+});
+
+
+const rolesButton = document.getElementById('roles');
+const wikiReader = document.getElementById('wikiReader');
+const wikiContent = document.getElementById('wikiContent');
+rolesButton.addEventListener('click', () => {
+    wikiReader.style.display = 'flex';
+    fetch('/wiki/roles.txt')
+        .then(response => response.text())
+        .then(data => {
+            wikiContent.innerHTML = data;
+
+        })
+        .catch(error => {
+            console.error('Error fetching roles:', error);
+            wikiReader.innerHTML = 'Error al cargar los roles.';
+        });
+    
+    if (document.body.classList.contains('metro-theme')) {
+        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
+        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        wikiContainer.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            wikiContainer.style.animation = 'none';
+            wikiContainer.style.display = 'none';
+        }, 500);
+    }
+    currentMenu.innerHTML = 'Roles de los mijos';
+
 });
 </script>
 
 </body>
 </html>
-

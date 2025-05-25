@@ -39,3 +39,22 @@ server-certificate.cer
 server-certificate.pfx
 RebexTinyWebServer.exe.config
 login.html
+problemas/index.html
+font/headline/ *.TTF
+
+font/headline/BAHNSCHRIFT 1.TTF
+font/headline/BAHNSCHRIFT 2.TTF
+font/headline/BAHNSCHRIFT 3.TTF
+font/headline/BAHNSCHRIFT 4.TTF
+font/headline/BAHNSCHRIFT 5.TTF
+font/headline/BAHNSCHRIFT 6.TTF
+font/headline/BAHNSCHRIFT 7.TTF
+font/headline/BAHNSCHRIFT 8.TTF
+font/headline/BAHNSCHRIFT 9.TTF
+font/headline/BAHNSCHRIFT 10.TTF
+font/headline/BAHNSCHRIFT 11.TTF
+font/headline/BAHNSCHRIFT 12.TTF
+font/headline/BAHNSCHRIFT 13.TTF
+font/headline/BAHNSCHRIFT 14.TTF
+font/headline/BAHNSCHRIFT 15.TTF
+font/headline/BAHNSCHRIFT.TTF

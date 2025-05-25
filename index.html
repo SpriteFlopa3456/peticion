@@ -1262,7 +1262,7 @@ const wikiReader = document.getElementById('wikiReader');
 const wikiContent = document.getElementById('wikiContent');
 rolesButton.addEventListener('click', () => {
     wikiReader.style.display = 'flex';
-    fetch('wiki/roles.txt')
+    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/roles.txt')
         .then(response => response.text())
         .then(data => {
             wikiContent.innerHTML = data;
@@ -1271,7 +1271,7 @@ rolesButton.addEventListener('click', () => {
         .catch(error => {
             console.error('Error fetching roles:', error);
             wikiReader.innerHTML = 'Error al cargar los roles.';
-        });
+        }); 
     
     if (document.body.classList.contains('metro-theme')) {
         wikiContainer.style.animation = 'slide-body-out 0.5s ease';

@@ -16,15 +16,15 @@ body {
 }
 @font-face {
     font-family: 'Segoe-UI';
-    src: url(/font/Segoe\ UI.ttf);
+    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI.ttf);
 }
 @font-face {
     font-family: 'Segoe-UI-Bold';
-    src: url(/font/Segoe\ UI\ Bold.ttf);
+    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI%20Bold.ttf);
 }
 @font-face {
     font-family: 'Segoe-UI-Light';
-    src: url(/font/Segoe\ UI\ Light.ttf);
+    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI%20Light.ttf);
 }
 
 .container {
@@ -321,7 +321,7 @@ margin: 0;
 
 @font-face {
     font-family: 'Segoe-UI-Symbol';
-    src: url('font/Segoe\ UI\ Symbol.ttf');
+    src: url('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI%20Symbol.ttf');
 }
 
 .side-menu .topbar {
@@ -639,10 +639,7 @@ footer {
     border-radius: 0;
     font-family: Segoe-UI-Bold;
 }
-@font-face {
-    font-family: 'Segoe-UI-Bold';
-    src: url(/font/Segoe\ UI\ Bold.ttf);
-}
+
 .separator::before {
     content: '';
     display: inline-block;

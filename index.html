@@ -86,6 +86,7 @@ body.modern-theme .theme-container.open {
         
     <h1>Pedir que prendan server</h1>
     <button class="button" type="submit" id="requestButton">Espera...</button>
+    <p style="margin: 0;" id="clickCount">Limite: 0/5</p>
     <h2 id="estado"></h2>
     <input id="messageInput" type="text" placeholder="Personalizar mensaje" id="messageInput" style="display:none;">
    <div style="display: none;" id="mobile-ui" class="button-container">
@@ -299,7 +300,47 @@ problemsButton.addEventListener('click', function() {
 });
 // Fix performance button functionality
 const fixperfButton = document.getElementById('fixperf');
-   
+const requestButton = document.getElementById('requestButton');
+const clickCount = document.getElementById('clickCount');
+const REQUEST_LIMIT = 5;
+
+// Helper to get/set request count in cookie
+function getRequestCount() {
+    const value = getCookie('requestCount');
+    return value ? parseInt(value, 10) : 0;
+}
+function setRequestCount(count) {
+    setCookie('requestCount', count, 1); // 1 day expiry
+}
+
+// Initialize click count on page load
+function updateClickCount() {
+    const count = getRequestCount();
+    clickCount.textContent = `Limite: ${count}/${REQUEST_LIMIT}`;
+    if (count >= REQUEST_LIMIT) {
+        requestButton.disabled = true;
+        requestButton.textContent = "Límite alcanzado";
+        requestButton.style.cursor = "not-allowed";
+        requestButton.style.background = "gray";
+    } else {
+        requestButton.disabled = false;
+        requestButton.textContent = "Realizar peticion";
+        requestButton.style.cursor = "";
+        requestButton.style.background = "";
+    }
+}
+updateClickCount();
+
+// On click, increment and store in cookie
+requestButton.addEventListener('click', function() {
+    let count = getRequestCount();
+    if (count < REQUEST_LIMIT) {
+        count++;
+        setRequestCount(count);
+        updateClickCount();
+        // Your existing request logic here...
+    }
+});
 
 
         // Hide the loading screen after 2 second        // Token and chat ID for Telegram Bot
@@ -313,6 +354,7 @@ const fixperfButton = document.getElementById('fixperf');
         var input = document.getElementById("messageInput");
         document.getElementById('requestButton').addEventListener('click', () => {
             // Get the value from the input field
+            
             const inputValue = input.value;
             const message = 'Prende server, ' + inputValue;
 

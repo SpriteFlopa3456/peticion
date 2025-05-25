@@ -1262,7 +1262,7 @@ const wikiReader = document.getElementById('wikiReader');
 const wikiContent = document.getElementById('wikiContent');
 rolesButton.addEventListener('click', () => {
     wikiReader.style.display = 'flex';
-    fetch('/wiki/roles.txt')
+    fetch('wiki/roles.txt')
         .then(response => response.text())
         .then(data => {
             wikiContent.innerHTML = data;

@@ -1150,6 +1150,7 @@ pre {
     color: #fff;
     margin-top: 10px;
     animation: notice 0.5s forwards;
+    z-index: 1200;
 }
 @keyframes notice {
     from {

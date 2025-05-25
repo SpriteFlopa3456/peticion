@@ -1122,7 +1122,7 @@ border-left: 6px solid #0078d7;
 .wiki-reader {
     display: none;
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
     position: absolute;
     z-index: 109;
     background: #232323;

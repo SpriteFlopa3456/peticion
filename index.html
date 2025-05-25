@@ -1176,6 +1176,8 @@ worldSettingsButton.addEventListener('click', () => {
 });
 </script>
 <script>
+    var wikiReader = document.getElementById('wikiReader');
+    var wikiContainer = document.getElementById('wikiContainer');
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -1192,7 +1194,7 @@ function handleGesture() {
             worldSettingsForm.style.display === 'flex' ||
             sideMenu.style.display === 'block' ||
              wikiContainer.style.display === 'flex' ||
-             wikiReader.style.display === 'flex'
+             wikiReader.style.display === 'flex' 
 
         ) {
             // Slide out current section
@@ -1221,19 +1223,21 @@ function handleGesture() {
 }
 
 // Attach to overlays/sections that can be closed with swipe
-[userContainer, LoginContainer, worldSettingsForm].forEach(section => {
-    section.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-    section.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleGesture();
-    });
+[userContainer, LoginContainer, worldSettingsForm, wikiContainer, wikiReader, sideMenu].forEach(section => {
+    if (section) {
+        section.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        section.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+    }
 });
 
 
 const ideaCards = document.querySelectorAll('.idea-card');
-const wikiContainer = document.getElementById('wikiContainer');
+
 const wikiButton = document.getElementById('wiki');
 wikiButton.addEventListener('click', () => {
     wikiContainer.style.display = 'flex';
@@ -1258,7 +1262,7 @@ wikiButton.addEventListener('click', () => {
 
 
 const rolesButton = document.getElementById('roles');
-const wikiReader = document.getElementById('wikiReader');
+
 const wikiContent = document.getElementById('wikiContent');
 rolesButton.addEventListener('click', () => {
     wikiReader.style.display = 'flex';

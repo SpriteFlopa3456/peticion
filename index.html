@@ -1348,7 +1348,7 @@ rolesButton.addEventListener('click', () => {
 
 });
 const lifecycle = document.getElementById('lifeCycle');
-rolesButton.addEventListener('click', () => {
+lifecycle.addEventListener('click', () => {
     wikiReader.style.display = 'flex';
     fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ciclo.txt')
         .then(response => response.text())

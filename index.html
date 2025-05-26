@@ -241,9 +241,9 @@ body.modern-theme .theme-container.open {
                 <h3>¿Juan tiene el nucleo del diavlo?</h3>
                 <p>.</p>
             </div>
-            <div class="idea-card">
+            <div id="lifeCycle" class="idea-card">
                 <h3>Toda la existencia del server</h3>
-                <p>La razon de existir del server.</p>
+                <p>"La persistencia de lo útil: la odisea de una netbook en la era de la obsolescencia programada".</p>
             </div>
             <div class="idea-card">
                 <h3>Especificaciones del server</h3>
@@ -1345,6 +1345,33 @@ rolesButton.addEventListener('click', () => {
         }, 500);
     }
     currentMenu.innerHTML = 'Roles de los mijos';
+
+});
+const lifecycle = document.getElementById('lifeCycle');
+rolesButton.addEventListener('click', () => {
+    wikiReader.style.display = 'flex';
+    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ciclo.txt')
+        .then(response => response.text())
+        .then(data => {
+            wikiContent.innerHTML = data;
+
+        })
+        .catch(error => {
+            console.error('Error fetching roles:', error);
+            wikiReader.innerHTML = 'Error al cargar los roles.';
+        }); 
+    
+    if (document.body.classList.contains('metro-theme')) {
+        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
+        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        wikiContainer.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            wikiContainer.style.animation = 'none';
+            wikiContainer.style.display = 'none';
+        }, 500);
+    }
+    currentMenu.innerHTML = 'Ciclo de vida filosofico';
 
 });
 </script>

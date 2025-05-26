@@ -1,0 +1,17 @@
+Procesador: Intel Atom N470 @ 1.88 Ghz
+            1 Nucleo 2 Hilos
+Graficos: Intel Graphics Media Accelerator 3150
+Ram: Samsung SODIMM DDR2 2 GB 667mhz
+Disco Duro: Toshiba MK1234GSX 120 GB SATA II
+Chipset: Intel Pineview NM10
+Adaptador de red: Realtek RTL810xE
+Bateria: ~50% de capacidad completa 2800/5200
+
+Sistema Operativo: Debian GNU/Linux 12 Bookworm x86-64
+Sistema Operativo 2: Windows 10 LTSC Enterprise
+Sistema Operativo 3: Lenovo Quickstart Splashtop
+Sistema Operativo 4: Recuperacion de Debian GNU/Linux
+Kernel: 6.1.0.137 x86-64 Generic
+Version del server: 1.21.70.01
+
+

@@ -65,6 +65,7 @@ body.modern-theme .theme-container.open {
       <button class="theme-button" type="button" id="moderndrop">Moderno</button>
       <button class="theme-button" type="button" id="classicdrop">Clasico</button>
       <button class="theme-button" type="button" id="metrodrop">Metro</button>
+      <button class="theme-button" type="button" id="mcdrop">Minecraft Launcher</button>
   </div>
 </div>
             <button class="side-menu-button" type="button" data-icon="&#xE13D" id="users"><span class="menu-icon"></span>Mijos del server <span class="counter">(8) Registrados</span></button>
@@ -83,6 +84,7 @@ body.modern-theme .theme-container.open {
             <button class="theme-button" type="button" id="modern">Moderno (Recomendado para celulares full premium o PC)</button>
             <button class="theme-button" type="button" id="classic">Clasico (Recomendado para celulares del tianguis)</button>
             <button class="theme-button" type="button" id="metro">Metro (Recomendado para todos los dispositivos)</button>
+            <button class="theme-button" type="button" id="mc">Minecraft Launcher (Recomendado para nose)</button>
             <button class="theme-button" type="button" id="close-theme">Cerrar</button>
         </div>
        <div class="main-page">
@@ -95,7 +97,7 @@ body.modern-theme .theme-container.open {
         
     <h1>Pedir que prendan server</h1>
     <button class="button" type="submit" id="requestButton">Espera...</button>
-    <p style="margin: 0;" id="clickCount">Limite: 0/5</p>
+    <p style="margin: 0;" id="clickCount">Limite: 0/10</p>
     <h2 id="estado"></h2>
     <input id="messageInput" type="text" placeholder="Personalizar mensaje" id="messageInput" style="display:none;">
    <div style="display: none;" id="mobile-ui" class="button-container">
@@ -108,10 +110,10 @@ body.modern-theme .theme-container.open {
 
     <br>
     <div class="uptime">
-        <h3 id="uptime">Tiempo activo: --d --h --m --s </h3>
-        <div class="uptime-bar" id="uptime-bar"></div>
-        <p id="health">---%</p>
-        <p class="p" id="energy">Estado de energia: --</p>
+        <h3 >Proximamente noticias aqui... </h3>
+       <!---<div class="uptime-bar" id="uptime-bar"></div>
+        <p id="health">---%</p> 
+        <p class="p" id="energy">Estado de energia: --</p> --->
         <p style="margin: 0; font-size: 12px; color: gray;" id="cookieexp">Expira en: --</p>
     </div>
     
@@ -132,7 +134,7 @@ body.modern-theme .theme-container.open {
             <div class="user-card" user-id="3">
                 <p class="user-card-name">Pasillas2354 / Dilanh22</p>
                 <p class="user-card-status">Estado: No se pudo conectar</p>
-                <p class="user-card-moto">Today America X wins the tetracapeonato 💛🦅🩵</p>
+                <p class="user-card-moto">Today America X wins the tetracampeonato 💛🦅🩵</p>
             </div>
             <div class="user-card" user-id="4">
                 <p class="user-card-name">Minivers097</p>
@@ -233,7 +235,7 @@ body.modern-theme .theme-container.open {
                 <h3>Roles de los mijos</h3>
                 <p>Explicacion de los roles de cada mijo en el server.</p>
             </div>
-            <div class="idea-card">
+            <div id="jinetes" class="idea-card">
                 <h3>Los 3 jinetes del orto cagado</h3>
                 <p>Quienes son los 3 jinetes del orto cagado.</p>
             </div>
@@ -289,7 +291,7 @@ body.modern-theme .theme-container.open {
             const isWebview = /wv|WebView|MobileApp/i.test(window.navigator.userAgent);
 if (isWebview) {
         const currentMenu = document.getElementById('currentmenu');
-        if (currentMenu) currentMenu.textContent = '¿Que haces aqui dale pa fuera';
+        if (currentMenu) currentMenu.textContent = 'Que haces aqui dale pa fuera';
     }
 
 // Update the text based on the detection
@@ -311,7 +313,7 @@ problemsButton.addEventListener('click', function() {
 const fixperfButton = document.getElementById('fixperf');
 const requestButton = document.getElementById('requestButton');
 const clickCount = document.getElementById('clickCount');
-const REQUEST_LIMIT = 5;
+const REQUEST_LIMIT = 10;
 
 // Helper to get/set request count in cookie
 function getRequestCount() {
@@ -461,121 +463,7 @@ requestButton.addEventListener('click', function() {
         }, 25000); // Hide after 5 seconds
     }
 
-    async function fetchUptime() {
-        try {
-       const response = fetch('https://robin-pure-miserably.ngrok-free.app',
-        {
-    method: 'GET',
-    headers: {
-        'ngrok-skip-browser-warning': '67890'
-    }
-        });
-        // Check if the response is ok (status in the range 200-299)
-        
-        
-        if (!response.ok) throw new Error('Network response was not ok');
-        const html = await response.text();
 
-        // Parse the fetched HTML to extract uptime
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const uptimeText = doc.querySelector('p')?.textContent || 'No se encontro';
-
-        // Log the extracted uptime for debugging
-        console.log('Extracted Uptime:', uptimeText);
-
-        // Get the DOM elements
-        const uptimeElement = document.getElementById('uptime');
-        const uptimeBar = document.getElementById('uptime-bar');
-
-        // Update the uptime text
-        if (uptimeElement) {
-            uptimeElement.textContent = 'Tiempo activo: ' + uptimeText;
-        } else {
-            console.error('Element with ID "uptime" not found');
-        }
- 
-        // Uptime bar health calculation in reverse from 100% to 0%
-        const uptimeParts = uptimeText.split(' ');
-        const uptimeValues = uptimeParts.map(part => parseInt(part) || 0);
-        const totalSeconds = (uptimeValues[0] * 86400) + (uptimeValues[1] * 3600) + (uptimeValues[2] * 60) + uptimeValues[3];
-        const maxSeconds = 86400 * 4; // Assuming a maximum of 4 days for the bar
-        const healthPercentage = Math.max(0, Math.min(100, ((maxSeconds - totalSeconds) / maxSeconds) * 100));
-        const healthElement = document.getElementById('health');
-        if (healthElement) {
-            healthElement.textContent = 'Vida del server: ' + Math.round(healthPercentage) + '%';
-            uptimeBar.style.width = healthPercentage + '%';
-            uptimeBar.style.transition = 'width 1s ease-in-out';
-            uptimeBar.style.backgroundColor = healthPercentage > 40 ? 'seagreen' : (healthPercentage > 20 ? 'yellow' : 'red');
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-         
-            if (healthPercentage < 5) {
-                const message = 'El server esta por apagarse, tiempo activo: ' + uptimeText;
-
-                const data = {
-                    chat_id: chatId,
-                    text: message
-                };
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        console.log('Mensaje enviado correctamente!');
-                    } else {
-                        console.error('Error al enviar el mensaje:', data.description);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        } else {
-            console.error('Element with ID "health" not found');
-        }
-
-
-        
-        // Update the uptime bar
-    } catch (error) {
-        console.error('Error fetching uptime:', error);
-        const uptimeElement = document.getElementById('uptime');
-        if (uptimeElement) {
-            uptimeElement.textContent = 'No se pudo obtener la informacion...';
-        }  
-    }
-}
-
-// Initial fetch
-fetchUptime();
-
-// Refresh uptime every 60 seconds
-setInterval(fetchUptime, 60000);
-
-    // Update energy status every 10 seconds
-   function updateEnergyStatus() {
-        var currentTime = new Date();
-        var currentHour = currentTime.getHours();
-        if (currentHour >= 3 && currentHour < 7) {
-            energy.innerHTML = "Modo de energia: Ahorro de energia";
-            energy.style.color = "red";
-            energy.style.fontWeight = "bold";
-        } else {
-            energy.innerHTML = "Modo de energia: Rendimiento";
-            energy.style.color = "green";
-            energy.style.fontWeight = "bold";
-        }
-    }
-    // Initial call
-    updateEnergyStatus();
-    // Set interval to update every 10 seconds
-    setInterval(updateEnergyStatus, 10000);
-    
 console.log('DOM fully loaded and parsed');
 }
 // Fix for sideMenu open/close animation issues
@@ -785,9 +673,9 @@ statusElements.forEach((statusElement) => {
        if (cookie) {
            var expires = new Date();
            expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
-           cookiexp.innerHTML = `Expira el: ${expires.toUTCString()}`;
+           cookiexp.innerHTML = `Tu tema se restablecera el: ${expires.toUTCString()}`;
        } else {
-           cookiexp.innerHTML = `Expira el: --`;
+           cookiexp.innerHTML = `Tu tema se restablecera el: --`;
        }
 
    function setCookie(name, value, days) {
@@ -1106,7 +994,7 @@ const worldFileInput = document.getElementById('worldFile');
 const saveWorldSettings = document.getElementById('saveWorldSettings');
 
 // Add Telegram bot credentials
-const settingsBotToken = '7529214947:AAFq5gh_ZvzjNNBtYTSCVJlGwwml5Hy2OYY';
+const settingsBotToken = '7529214947:AAGqRyGp9S3qDJJPnNgkR3uNQkStxQczUsc';
 const settingsChatId = '7688071745';
 
 saveWorldSettings.addEventListener('click', async () => {
@@ -1431,6 +1319,110 @@ specs.addEventListener('click', () => {
     currentMenu.innerHTML = 'Ciclo de vida filosofico';
 
 });
+const locationOfServer = document.getElementById('locationOfServer');
+locationOfServer.addEventListener('click', () => {
+    wikiReader.style.display = 'flex';
+    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ubicacion.txt')
+        .then(response => response.text())
+        .then(data => {
+            wikiContent.innerHTML = data;
+
+        })
+        .catch(error => {
+            console.error('Error fetching roles:', error);
+            wikiReader.innerHTML = 'Error al cargar.';
+        }); 
+    
+    if (document.body.classList.contains('metro-theme')) {
+        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
+        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        wikiContainer.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            wikiContainer.style.animation = 'none';
+            wikiContainer.style.display = 'none';
+        }, 500);
+    }
+    currentMenu.innerHTML = 'Ubicacion del servidor';
+
+});
+const ipaddress= document.getElementById('ipaddress');
+ipaddress.addEventListener('click', () => {
+    wikiReader.style.display = 'flex';
+    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ip.txt')
+        .then(response => response.text())
+        .then(data => {
+            wikiContent.innerHTML = data; 
+
+        })
+
+        .catch(error => {
+            console.error('Error fetching roles:', error);
+            wikiReader.innerHTML = 'Error al cargar.';
+        }); 
+    // Get client IP using a public IP lookup service
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            wikiContent.innerHTML += `\n\nTu dirección IP es: ${data.ip}`;
+        })
+        .catch(error => {
+            console.error('Error getting IP:', error);
+            wikiContent.innerHTML += '\n\nNo se pudo obtener tu IP';
+        });
+
+    // Get location using IP-API
+    fetch('http://ip-api.com/json/')
+        .then(response => response.json())
+        .then(data => {
+            wikiContent.innerHTML += `\n\nTu ubicación es:\nPaís: ${data.country}\nCiudad: ${data.city}\nRegión: ${data.regionName}\nLatitud: ${data.lat}\nLongitud: ${data.lon}\n Por chistosito y la ubicacion no es exacta pero la latitud y longitud si....`;
+        })
+        .catch(error => {
+            console.error('Error getting location:', error);
+            wikiContent.innerHTML += '\n\nNo se pudo obtener tu ubicación';
+        });
+
+    if (document.body.classList.contains('metro-theme')) {
+        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
+        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        wikiContainer.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            wikiContainer.style.animation = 'none';
+            wikiContainer.style.display = 'none';
+        }, 500);
+    }
+    currentMenu.innerHTML = 'IP del servidor';
+
+});
+const jinetes = document.getElementById('jinetes');
+jinetes.addEventListener('click', () => {
+    wikiReader.style.display = 'flex';
+    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/jinetes.txt')
+        .then(response => response.text())
+        .then(data => {
+            wikiContent.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error fetching roles:', error);
+            wikiReader.innerHTML = 'Error al cargar.';
+        });
+    if (document.body.classList.contains('metro-theme')) {
+        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
+        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
+    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
+        wikiContainer.style.animation = 'slide-out 0.5s ease';
+        setTimeout(() => {
+            wikiContainer.style.animation = 'none';
+            wikiContainer.style.display = 'none';
+        }, 500);
+    }
+    currentMenu.innerHTML = 'Jinetes del orto cagado';
+
+});
+
+
+
 </script>
 
 </body>

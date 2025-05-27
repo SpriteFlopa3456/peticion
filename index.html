@@ -1372,10 +1372,10 @@ ipaddress.addEventListener('click', () => {
         });
 
     // Get location using IP-API
-    fetch('http://ip-api.com/json/')
+    fetch('https://ipapi.co/json/')
         .then(response => response.json())
         .then(data => {
-            wikiContent.innerHTML += `\n\nTu ubicación es:\nPaís: ${data.country}\nCiudad: ${data.city}\nRegión: ${data.regionName}\nLatitud: ${data.lat}\nLongitud: ${data.lon}\n Por chistosito y la ubicacion no es exacta pero la latitud y longitud si....`;
+            wikiContent.innerHTML += `\n\nTu ubicación es:\nPaís: ${data.country}\nCiudad: ${data.city}\nRegión: ${data.region}\nLatitud: ${data.latitude}\nLongitud: ${data.longitude}\nTu Internet es: ${data.org}\n Por chistosito y la ubicacion no es exacta pero la latitud y longitud si....`;
         })
         .catch(error => {
             console.error('Error getting location:', error);

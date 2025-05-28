@@ -21,7 +21,11 @@ body {
 
 @font-face {
     font-family: 'Minecraft';
-    src: url('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Minecraft.ttf');
+    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/MinecraftRegular-Bmg3.otf);
+}
+@font-face {
+    font-family: 'Minecraft-Titles';
+    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/MinecraftTen-VGORe.ttf);
 }
 
 .container {
@@ -54,8 +58,7 @@ body {
     padding-left: 24px;
     font-size: 25px;
     letter-spacing: 1px;
-    font-weight: 500;
-    font-family: 'Minecraft';
+    font-family: 'Minecraft-Titles';
     text-transform: none;
     background: #2d2d2d;
 }
@@ -67,7 +70,7 @@ body {
     line-height: 1;
     color: #fff;
     letter-spacing: 2px;
-    font-family: 'Minecraft';
+    font-family: 'Minecraft-Titles';
     text-transform: none;
     flex: 1;
     display: flex;
@@ -89,7 +92,6 @@ body {
     font-family: 'Minecraft';
     transition: background 0.2s, transform 0.1s;
     outline: none;
-    font-weight: bold;
     letter-spacing: 0.5px;
 }
 
@@ -147,7 +149,6 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     padding: 16px;
     border-radius: 4px;
     font-size: 20px;
-    font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border: 2px solid #4a4a4a;
     font-family: 'Minecraft';
@@ -167,7 +168,6 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     color: #f0a020;
     font-size: 16px;
     margin: 4px;
-    font-weight: bold;
     text-shadow: none;
     letter-spacing: 0.5px;
     font-family: 'Minecraft';
@@ -551,7 +551,6 @@ footer {
 
 .user-card-name {
     font-size: 18px;
-    font-weight: bold;
     margin: 0;
     text-align: left;
     font-family: 'Minecraft';
@@ -583,7 +582,6 @@ footer {
     margin: 0;
     text-align: left;
     color: #3b8526;
-    font-weight: bold;
     font-family: 'Minecraft';
 }
 
@@ -602,7 +600,6 @@ footer {
 
 .user-card-banned-text {
     color: #A20025;
-    font-weight: 500;
     font-family: 'Minecraft';
 }
 
@@ -635,7 +632,6 @@ footer {
     background: #2d2d2d;
     text-align: left;
     font-size: 20px;
-    font-weight: bold;
     color: #fff;
     border-radius: 0;
     font-family: 'Minecraft';
@@ -695,7 +691,7 @@ footer {
 }
 
 .logged-in {
-    font-weight: bold;
+    font-family: 'Minecraft';
 }
 
 .banned-toast {
@@ -738,7 +734,6 @@ footer {
 }
 
 .banned-toast h3 {
-    font-weight: bold;
     text-align: left;
     font-size: 22px;
     font-family: 'Minecraft';
@@ -795,7 +790,6 @@ footer {
 
 .worldsettings-container h1 {
     font-size: 28px;
-    font-weight: bold;
     text-align: center;
     margin-top: 0;
     padding: 10px 0;
@@ -998,7 +992,6 @@ footer {
 
 .admin-approval-toast .title,
 .user-approval-toast .title {
-    font-weight: bold;
     border-bottom: 1px solid #4a4a4a;
     padding-bottom: 5px;
 }
@@ -1165,7 +1158,6 @@ body.modern-theme .side-menu-button .menu-icon {
     font-size: 22px;
     color: #fff;
     font-family: 'Minecraft';
-    font-weight: 700;
     letter-spacing: 1px;
     text-transform: none;
 }
@@ -1257,7 +1249,6 @@ pre {
 
 .slide-notice h1 {
     font-size: 16px;
-    font-weight: bold;
     margin: 0;
     text-align: left;
     font-family: 'Minecraft';

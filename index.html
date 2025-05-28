@@ -32,11 +32,13 @@ body.classic-theme .theme-container.open,
 body.modern-theme .theme-container.open {
     display: block;
 }
+body.classic-theme .slide-notice,
+body.modern-theme .slide-notice {
+ display: none;
+}
     </style>
 </head>
-<body>
-       <div class="blur-accelerated"></div>
-
+<body style="background-color: #1d1d1d;">
 
 <div class="body-load" id="bodyLoad">
     <div id="uxnotice" class="slide-notice">
@@ -65,7 +67,7 @@ body.modern-theme .theme-container.open {
       <button class="theme-button" type="button" id="moderndrop">Moderno</button>
       <button class="theme-button" type="button" id="classicdrop">Clasico</button>
       <button class="theme-button" type="button" id="metrodrop">Metro</button>
-      <button class="theme-button" type="button" id="mcdrop">Minecraft Launcher</button>
+      <button class="theme-button" type="button" id="minecraftdrop">Minecraft Launcher</button>
   </div>
 </div>
             <button class="side-menu-button" type="button" data-icon="&#xE13D" id="users"><span class="menu-icon"></span>Mijos del server <span class="counter">(8) Registrados</span></button>
@@ -84,7 +86,7 @@ body.modern-theme .theme-container.open {
             <button class="theme-button" type="button" id="modern">Moderno (Recomendado para celulares full premium o PC)</button>
             <button class="theme-button" type="button" id="classic">Clasico (Recomendado para celulares del tianguis)</button>
             <button class="theme-button" type="button" id="metro">Metro (Recomendado para todos los dispositivos)</button>
-            <button class="theme-button" type="button" id="mc">Minecraft Launcher (Recomendado para nose)</button>
+            <button class="theme-button" type="button" id="minecraft">Minecraft Launcher (Recomendado para nose)</button>
             <button class="theme-button" type="button" id="close-theme">Cerrar</button>
         </div>
        <div class="main-page">
@@ -704,6 +706,8 @@ const classicThemeButton = document.getElementById('classicdrop');
 const modernThemeButton = document.getElementById('moderndrop');
 const metroThemeButton = document.getElementById('metrodrop');
 const closeThemeButton = document.getElementById('close-theme');
+const minecraftTheme = document.getElementById('minecraft');
+const minecraftThemeButton = document.getElementById('minecraftdrop');
 themeStyle.rel = 'stylesheet';
 document.head.appendChild(themeStyle);
 
@@ -777,6 +781,12 @@ modernThemeButton.addEventListener('click', () => {
 metroThemeButton.addEventListener('click', () => {
     setTheme('metro');
 
+});
+minecraftThemeButton.addEventListener('click', () => {
+    setTheme('minecraft');
+});
+minecraftTheme.addEventListener('click', () => {
+    setTheme('minecraft');
 });
 
 var LoginButton = document.getElementById('account');
@@ -897,7 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
 });
-var bannedToast = document.getElementById('bannedToast');
+var bannedToast = document.getElementById('bannedToastg');
 var closeToastButton = document.getElementById('closeToast');
 var banDuration = document.getElementById('banDuration');
 var loggedInUser = getCookie('loggedInUser');

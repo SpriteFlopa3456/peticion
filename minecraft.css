@@ -1,7 +1,7 @@
-/* Windows 8.1 Metro UI inspired design */
+/* Minecraft Java inspired design */
 
 body {
-    font-family: 'Segoe-UI';
+    font-family: 'Minecraft';
     padding: 0;
     margin: 0 auto;
     display: flex;
@@ -10,25 +10,18 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: #1d1d1d;
+    background: #1e1e1e;
     color: #fff;
     text-rendering: optimizeLegibility;
 }
-.server-status {
-    background-color: #232323;
 
+.server-status {
+    background-color: #2d2d2d;
 }
+
 @font-face {
-    font-family: 'Segoe-UI';
-    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI.ttf);
-}
-@font-face {
-    font-family: 'Segoe-UI-Bold';
-    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI%20Bold.ttf);
-}
-@font-face {
-    font-family: 'Segoe-UI-Light';
-    src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI%20Light.ttf);
+    font-family: 'Minecraft';
+    src: url('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Minecraft.ttf');
 }
 
 .container {
@@ -36,14 +29,14 @@ body {
     margin: 0 auto;
     margin-top: 50px;
     padding: 24px 32px;
-    background: #232323;
-    border-radius: 0;
-    box-shadow: none;
+    background: #2d2d2d;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: none;
+    border: 2px solid #4a4a4a;
 }
 
 .topbar {
@@ -52,19 +45,19 @@ body {
     left: 0;
     width: 100%;
     height: 54px;
-    border-bottom: none;
-    box-shadow: none;
+    border-bottom: 2px solid #4a4a4a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 102;
     color: #fff;
     display: flex;
     align-items: center;
-    padding-left: 24px; /* Add padding for left alignment */
+    padding-left: 24px;
     font-size: 25px;
     letter-spacing: 1px;
     font-weight: 500;
-    font-family: Segoe-UI-Light;
-    text-transform: lowercase;
-    background: transparent; /* Ensure background is transparent or matches app */
+    font-family: 'Minecraft';
+    text-transform: none;
+    background: #2d2d2d;
 }
 
 .topbar h2 {
@@ -74,75 +67,73 @@ body {
     line-height: 1;
     color: #fff;
     letter-spacing: 2px;
-    font-family: 'Segoe-UI-Light', 'Segoe UI', Arial, sans-serif;
-    text-transform: lowercase;
+    font-family: 'Minecraft';
+    text-transform: none;
     flex: 1;
-    /* Vertically center if needed */
     display: flex;
     align-items: center;
     z-index: 103;
     height: 100%;
 }
 
-
 .button {
     padding: 16px 32px;
     font-size: 19px;
-
     color: #fff;
-    background: #0078d7;
-    border: none;
-    border-radius: 0;
+    background: #3b8526;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
     cursor: pointer;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-shadow: none;
-    font-family: 'Segoe-UI';
+    font-family: 'Minecraft';
     transition: background 0.2s, transform 0.1s;
     outline: none;
-   font-weight: bold;
+    font-weight: bold;
     letter-spacing: 0.5px;
 }
 
 .button:active {
-    background: #005fa3;
+    background: #2d6a1e;
     transform: scale(0.98);
 }
 
 .button:hover {
-    background: #2899f5;
+    background: #4a9e2e;
 }
 
 input[type="text"], .login input[type="password"] {
     padding: 12px;
     font-size: 19px;
-    border: none;
-    border-radius: 0;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
     margin-top: 20px;
     width: 300px;
-    border: 2px solid #727374;
-    background: #f3f3f3;
-    color: #757575;
-    box-shadow: none;
+    background: #1e1e1e;
+    color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     outline: none;
+    font-family: 'Minecraft';
 }
 
 input[type="text"]:focus, .login input[type="password"]:focus {
-    border: 2px solid #3d3d3d;
+    border: 2px solid #3b8526;
 }
 
 .alert-container {
     animation: alert 0.6s ease-in-out;
-    background: #ffb900;
-    color: #222;
-    border: none;
-    border-radius: 0;
+    background: #f0a020;
+    color: #fff;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
     width: 80%;
     margin: 0;
     display: block;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: 12px 0;
     font-weight: 500;
     letter-spacing: 0.5px;
+    font-family: 'Minecraft';
 }
 
 @keyframes alert {
@@ -151,36 +142,35 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 }
 
 .uptime {
-    background: #232323;
+    background: #2d2d2d;
     color: #fff;
     padding: 16px;
-    border-radius: 0;
+    border-radius: 4px;
     font-size: 20px;
     font-weight: bold;
-    box-shadow: none;
-    border: none;
-
-
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid #4a4a4a;
+    font-family: 'Minecraft';
 }
 
-
 .uptime-bar {
-    background: #00bcf2;
+    background: #3b8526;
     height: 10px;
     width: 100%;
     max-width: 100%;
-    border-radius: 0;
+    border-radius: 2px;
     margin-top: 10px;
-    box-shadow: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .p {
-    color: #ffb900;
+    color: #f0a020;
     font-size: 16px;
     margin: 4px;
     font-weight: bold;
     text-shadow: none;
     letter-spacing: 0.5px;
+    font-family: 'Minecraft';
 }
 
 .body-load {
@@ -188,7 +178,7 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     width: fit-content;
     width: 100vw;
     min-height: 100vh;
-    background: #1d1d1d;
+    background: #1e1e1e;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -198,17 +188,17 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 }
 
 .body-load .container {
-    background: #232323;
-    border: none;
-    box-shadow: none;
-    transition: none;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
     position: relative;
     z-index: 1;
 }
 
 .body-load .container:hover {
-    transform: none;
-    box-shadow: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .body-load .button-container {
@@ -221,26 +211,38 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     transition: background 0.2s;
     position: relative;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 4px;
 }
 
 .body-load .button-container button::after {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+}
+
+.body-load .button-container button:hover::after {
+    transform: translateX(0);
 }
 
 .body-load .button-container button:hover {
-    background: #2899f5;
+    background: #4a9e2e;
 }
 
 .body-load .uptime {
-    background: #232323;
-    border: none;
-    transition: none;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
+    transition: transform 0.2s;
 }
 
 .body-load .uptime:hover {
-    transform: none;
-    box-shadow: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .body-load .uptime-bar {
@@ -255,37 +257,22 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     color: #fff;
     width: 32px;
     height: 32px;
-    background: #0076d700;
-
-    border: none;
-    box-shadow: none;
+    background: #3b8526;
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 100;
     outline: none;
     font-size: 22px;
-    border-radius: 20px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s;
-}
-.menu-bars::before {
-    content: '\E111';
-    font-family: 'Segoe-UI-Symbol'!important;
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 16pt;
-    font-weight: 100;
-    scale: 1.05;
-    color: #fff;
-    border-radius: 30px;
-    box-shadow: inset 0 0 0 2px #fff;
+    font-family: 'Minecraft';
 }
 
 .menu-bars:hover, .menu-bars:active {
-    background: #2899f5;
+    background: #4a9e2e;
 }
 
 .side-menu {
@@ -293,39 +280,21 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     top: 0;
     left: 0;
     width: 100vw;
-
     height: 100%;
-    background: #232323;
-    box-shadow: none;
+    background: #2d2d2d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     display: none;
     z-index: 100;
     font-size: 22px;
-}
-.side-menu .menu-bars {
-position: absolute;
-top: 10px;
-left: 10px;
-margin: 0;
-}
-.side-menu .menu-bars::before {
- content: '\E112';
-    font-family: 'Segoe-UI-Symbol'!important;
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 16pt;
-    font-weight: 100;
-    color: #fff;
-    border-radius: 30px;
-    box-shadow: inset 0 0 0 2px #fff;
+    border-right: 2px solid #4a4a4a;
 }
 
-@font-face {
-    font-family: 'Segoe-UI-Symbol';
-    src: url('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI%20Symbol.ttf');
+.side-menu .menu-bars {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0;
 }
 
 .side-menu .topbar {
@@ -334,15 +303,17 @@ margin: 0;
     left: 0;
     width: 100%;
     margin-top: 0;
-    background: #232323;
+    background: #2d2d2d;
     color: #fff;
-    border-bottom: none;
-    box-shadow: none;
-    font-family: Segoe-UI-Light;
+    border-bottom: 2px solid #4a4a4a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Minecraft';
 }
+
 .side-menu .topbar h2 {
     margin-left: 10px;
 }
+
 .theme-dropdown {
     display: none;
     width: 90vw;
@@ -351,51 +322,55 @@ margin: 0;
     left: 0;
     top: 100%;
     min-width: 220px;
-    background: #e6e6e6;
-     transform-origin: top;
-    border: 2px solid #0078d7;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    background: #2d2d2d;
+    transform-origin: top;
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     z-index: 200;
     padding: 12px 0 8px 0;
     animation: dropdown-fade 0.4s forwards;
 }
+
 .theme-dropdown button:hover {
-    background: #0076d700;
-  
+    background: #3b8526;
 }
+
 @keyframes dropdown-fade {
     from { transform: scaleY(0.25);}
-
-    to   { opacity: 1; transform: scaleY(1);}
+    to { opacity: 1; transform: scaleY(1);}
 }
+
 #themes {
     position: relative;
 }
+
 .theme-dropdown .theme-button {
     width: 90%;
     margin: 6px auto;
-    color: black;
-    background: #e6e6e6;
-   
-    text-transform: lowercase;
+    color: #fff;
+    background: #2d2d2d;
+    text-transform: none;
     display: block;
     font-size: 22px;
     text-align: left;
     padding: 10px 0;
+    font-family: 'Minecraft';
 }
+
 .theme-dropdown .theme-button:hover {
-    color: #000000;
+    color: #fff;
 }
+
 .theme-dropdown #current-theme {
     color: #fff;
     font-size: 15px;
     margin: 0 0 8px 0;
     text-align: center;
+    font-family: 'Minecraft';
 }
 
 .side-menu h1 {
     margin-left: 30px;
-
     font-size: 38px;
     font-weight: bold;
     text-align: center;
@@ -404,13 +379,14 @@ margin: 0;
     line-height: 1.2;
     color: #fff;
     letter-spacing: 1px;
+    font-family: 'Minecraft';
 }
 
 .side-menu-button {
     width: 100%;
     height: 72px;
-    font-family: 'Segoe-UI';
-    background: #232323;
+    font-family: 'Minecraft';
+    background: #2d2d2d;
     color: #fff;
     text-align: left;
     padding: 20px 32px;
@@ -418,50 +394,60 @@ margin: 0;
     border: none;
     font-size: 24px;
     border-radius: 0;
+    border-bottom: 2px solid #4a4a4a;
 }
+
 .side-menu-button::before {
     height: 20px;
     width: 20px;
-    
-    font-family: 'Segoe-UI-Symbol'!important;
-    background: #0078d7;
+    font-family: 'Minecraft';
+    background: #3b8526;
 }
+
 .theme-button:active, .theme-button:hover {
-    background: #0078d7;
+    background: #3b8526;
     color: #fff;
 }
 
 .side-menu-button:active {
     color: #fff;
 }
+
 .slide-in {
     animation: slide-in 0.7s forwards;
 }
+
 .slide-out {
     animation: slide-out 0.7s forwards;
 }
+
 @keyframes slide-in {
     from { transform: translateX(100%);}
     to { transform: translateX(0);}
 }
+
 @keyframes slide-out {
     from { transform: translateX(0);}
     to { transform: translateX(100%);}
 }
+
 @keyframes open-menus {
     0% { opacity: 0; transform: scale(1.1);}
     50% { opacity: 0.5;}
     100% { opacity: 1; transform: scale(1.0);}
 }
+
 @keyframes close-menus {
     0% { opacity: 1; transform: scale(1.0);}
     50% { opacity: 0.5;}
     100% { opacity: 0; transform: scale(1.1);}
 }
+
 @keyframes slide-body-out {
     0% { transform: translateX(0);}
     100% { transform: translateX(-100%);}
 }
+
 @keyframes slide-body-in {
     0% { transform: translateX(-100%);}
     100% { transform: translateX(0);}
@@ -477,10 +463,10 @@ margin: 0;
     animation: open-menus 0.3s;
     max-width: 500px;
     padding: 20px;
-    background: #232323;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: none;
     z-index: 105;
     color: #fff;
@@ -489,13 +475,14 @@ margin: 0;
 .theme-button {
     width: 100%;
     height: 50px;
-    background: #232323;
+    background: #2d2d2d;
     color: #fff;
-    border: none;
+    border: 2px solid #4a4a4a;
     margin-top: 10px;
     font-size: 16px;
-    border-radius: 0;
+    border-radius: 4px;
     transition: background 0.2s, color 0.2s;
+    font-family: 'Minecraft';
 }
 
 .background-opacity {
@@ -513,8 +500,10 @@ footer {
     font-size: 20px;
     color: #bbb;
     padding: 16px 0;
-    background: #232323;
+    background: #2d2d2d;
     border-radius: 0;
+    border-top: 2px solid #4a4a4a;
+    font-family: 'Minecraft';
 }
 
 .topbar h2 {
@@ -523,6 +512,7 @@ footer {
     padding: 10px 0;
     color: #fff;
     letter-spacing: 1px;
+    font-family: 'Minecraft';
 }
 
 .users-container {
@@ -533,7 +523,7 @@ footer {
     height: 100vh;
     position: absolute;
     z-index: 9;
-    background: #232323;
+    background: #2d2d2d;
 }
 
 .users-cards {
@@ -543,31 +533,28 @@ footer {
     width: 90vw;
     padding: 20px;
     margin-top: 40px;
-
 }
 
-
-
 .user-card {
-    background: #232323;
-    border: none;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
-   
     gap: 8px;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background 0.2s;
     color: #fff;
-    border-radius: 0;
+    border-radius: 4px;
+    font-family: 'Minecraft';
 }
-
 
 .user-card-name {
     font-size: 18px;
     font-weight: bold;
     margin: 0;
     text-align: left;
+    font-family: 'Minecraft';
 }
 
 .ban-time {
@@ -575,6 +562,7 @@ footer {
     color: #ff6b6b;
     display: block;
     margin-top: 5px;
+    font-family: 'Minecraft';
 }
 
 .user-card.banned-user .ban-time {
@@ -587,14 +575,16 @@ footer {
     display: flex;
     align-items: center;
     gap: 6px;
+    font-family: 'Minecraft';
 }
 
 .user-card-moto {
     font-size: 14px;
     margin: 0;
     text-align: left;
-    color:#0078d7;
+    color: #3b8526;
     font-weight: bold;
+    font-family: 'Minecraft';
 }
 
 .user-card-status::before {
@@ -603,7 +593,7 @@ footer {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #00bcf2;
+    background: #3b8526;
 }
 
 .user-card-status.banned::before {
@@ -613,35 +603,43 @@ footer {
 .user-card-banned-text {
     color: #A20025;
     font-weight: 500;
+    font-family: 'Minecraft';
 }
 
 .peticion {
-    background: #0078d7;
+    background: #3b8526;
 }
 
 .user-card-status.admin::before {
-    background: #ffb900;
+    background: #f0a020;
 }
+
 .user-card-status.moderator::before {
-    background: #008A00;
+    background: #3b8526;
 }
+
 .user-card-admin-text {
-    color: #ffb900;
+    color: #f0a020;
+    font-family: 'Minecraft';
 }
+
 .user-card-moderator-text {
-    color: #008A00;
+    color: #3b8526;
+    font-family: 'Minecraft';
 }
+
 .separator {
     width: 100%;
     padding: 10px 20px;
     margin: 0;
-    background: #333;
+    background: #2d2d2d;
     text-align: left;
     font-size: 20px;
     font-weight: bold;
     color: #fff;
     border-radius: 0;
-    font-family: Segoe-UI-Bold;
+    font-family: 'Minecraft';
+    border-bottom: 2px solid #4a4a4a;
 }
 
 .separator::before {
@@ -650,10 +648,9 @@ footer {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #0078d7;
+    background: #3b8526;
     margin-right: 10px;
 }
-
 
 .login-container {
     display: none;
@@ -664,36 +661,43 @@ footer {
     height: 100vh;
     position: absolute;
     z-index: 9;
-    background: #232323;
+    background: #2d2d2d;
 }
+
 .login-container button {
     padding: 15px 25px;
-    background: #0078d7;
+    background: #3b8526;
     color: #fff;
-    border-radius: 0;
+    border-radius: 4px;
     margin: 10px 0;
     cursor: pointer;
     font-size: 16px;
-    border: none;
-    box-shadow: none;
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-shadow: none;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    font-family: 'Minecraft';
     transition: background 0.2s;
 }
+
 .login-container button:active {
-    background: #005fa3;
+    background: #2d6a1e;
 }
+
 .login-container button:hover {
-    background: #2899f5;
+    background: #4a9e2e;
 }
+
 .login-container p {
     font-size: 16px;
     color: #fff;
     margin: 20px;
+    font-family: 'Minecraft';
 }
+
 .logged-in {
     font-weight: bold;
 }
+
 .banned-toast {
     position: fixed;
     top: 0;
@@ -706,17 +710,21 @@ footer {
     padding-bottom: 77px;
     padding-left: 10px;
     pointer-events: all;
-    background: #363636;
+    background: #2d2d2d;
     display: none;
     flex-direction: column;
-    align-items:start;
+    align-items: start;
     animation: rotate-in 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
     transform-style: preserve-3d;
+    border-bottom: 2px solid #4a4a4a;
+    font-family: 'Minecraft';
 }
+
 @keyframes rotate-in {
     0% { transform: rotateX(120deg);}
     100% { transform: rotateX(0deg);}
 }
+
 .banned-toast::after {
     content: '';
     position: fixed;
@@ -725,7 +733,7 @@ footer {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.192);
-    z-index: -2; /* Moved behind the toast */
+    z-index: -2;
     pointer-events: none;
 }
 
@@ -733,17 +741,20 @@ footer {
     font-weight: bold;
     text-align: left;
     font-size: 22px;
+    font-family: 'Minecraft';
 }
 
 .banned-toast .message {
     font-size: 14px;
     text-align: left;
     margin-left: 10px;
+    font-family: 'Minecraft';
 }
+
 .banned-toast button {
-   background-color: transparent;
+    background-color: #3b8526;
     color: #fff;
-    border: 2px solid #fff;
+    border: 2px solid #4a4a4a;
     padding: 10px 95px;
     width: 100px;
     position: absolute;
@@ -751,18 +762,20 @@ footer {
     justify-content: center;
     left: 10px;
     bottom: 10px;
-    border-radius: 0;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    text-transform: lowercase;
+    text-transform: none;
     margin-top: 10px;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Minecraft';
 }
 
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(-20px);}
     100% { opacity: 1; transform: translateY(0);}
 }
+
 @keyframes fadeOut {
     0% { opacity: 1; transform: translateY(0);}
     100% { opacity: 0; transform: translateY(-20px);}
@@ -777,8 +790,9 @@ footer {
     height: 100vh;
     position: absolute;
     z-index: 9;
-    background: #232323;
+    background: #2d2d2d;
 }
+
 .worldsettings-container h1 {
     font-size: 28px;
     font-weight: bold;
@@ -787,81 +801,98 @@ footer {
     padding: 10px 0;
     line-height: 1.2;
     color: #fff;
+    font-family: 'Minecraft';
 }
+
 .worldsettings-container button {
     padding: 15px 25px;
-    background: #0078d7;
+    background: #3b8526;
     color: #fff;
-    border-radius: 0;
+    border-radius: 4px;
     margin: 10px 0;
     cursor: pointer;
     font-size: 16px;
-    border: none;
-    box-shadow: none;
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-shadow: none;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    font-family: 'Minecraft';
     transition: background 0.2s;
 }
+
 .worldsettings-container button:active {
-    background: #005fa3;
+    background: #2d6a1e;
 }
+
 .worldsettings-container button:hover {
-    background: #2899f5;
+    background: #4a9e2e;
 }
+
 .worldsettings-container button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #0078d7;
+    box-shadow: 0 0 0 2px #3b8526;
 }
+
 .worldsettings-container p {
     color: #bbb;
     margin: 5px 0;
+    font-family: 'Minecraft';
 }
+
 .worldsettings-container select {
     padding: 10px;
     font-size: 16px;
-    border: none;
-    border-radius: 0;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
     margin-top: 20px;
     width: 300px;
-    background: #2d2d2d;
+    background: #1e1e1e;
     color: #fff;
-    box-shadow: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    font-family: 'Minecraft';
 }
+
 .worldsettings-container select:focus {
-    border: 2px solid #0078d7;
-    box-shadow: 0 0 6px #0078d7;
+    border: 2px solid #3b8526;
+    box-shadow: 0 0 6px #3b8526;
 }
+
 .worldsettings-container input[type="file"]:focus {
-    border: 2px solid #0078d7;
-    box-shadow: 0 0 6px #0078d7;
+    border: 2px solid #3b8526;
+    box-shadow: 0 0 6px #3b8526;
 }
+
 .worldsettings-container input[type="file"]::file-selector-button {
-    background: #0078d7;
+    background: #3b8526;
     color: #fff;
-    border: none;
+    border: 2px solid #4a4a4a;
     padding: 10px 15px;
-    border-radius: 0;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Minecraft';
 }
+
 .worldsettings-container input[type="file"]::file-selector-button:hover {
-    background: #2899f5;
+    background: #4a9e2e;
 }
+
 .advanced-settings {
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .worldsettings-container input[type="checkbox"],
 .worldsettings-container input[type="radio"] {
     margin-right: 10px;
     cursor: pointer;
     padding: 20px;
 }
+
 .installed-packs {
     display: flex;
     flex-direction: row;
@@ -870,53 +901,67 @@ footer {
     padding: 20px;
     z-index: 9;
     box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 1px 3px rgba(255,255,255,0.08) inset;
-    background: #232323;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
 }
+
 .installed-packs h3 {
     font-size: 21px;
     color: #fff;
     text-align: center;
     margin-top: 0;
+    font-family: 'Minecraft';
 }
+
 .installed-packs-cards-container {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
+
 .installed-pack-card {
-    background: #232323;
-    border: none;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
     padding: 10px 15px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     color: #fff;
     transition: all 0.3s;
+    border-radius: 4px;
+    font-family: 'Minecraft';
 }
+
 .installed-pack-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0,120,215,0.3);
-    background: #0078d7;
-    border-left: 5px solid #00bcf2;
+    box-shadow: 0 4px 16px rgba(59, 133, 38, 0.3);
+    background: #3b8526;
+    border-left: 5px solid #4a9e2e;
     color: #fff;
 }
+
 .installed-pack-remove-button-container button {
     background: #ff6b6b;
     color: #fff;
-    border: none;
+    border: 2px solid #4a4a4a;
     padding: 10px 15px;
-    border-radius: 0;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Minecraft';
 }
+
 .installed-pack-remove-button-container button:hover {
     background: #d32f2f;
 }
+
 .installed-pack-remove-button-container button:active {
     background: #b71c1c;
 }
+
 .installed-pack-remove-button-container {
     display: flex;
     justify-content: center;
@@ -924,17 +969,19 @@ footer {
     margin-top: 10px;
     gap: 10px;
 }
+
 .installed-pack-card img {
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
 }
+
 .admin-approval-toast,
 .user-approval-toast {
-    background: #232323;
-    border: none;
+    background: #2d2d2d;
+    border: 2px solid #4a4a4a;
     padding: 15px 20px;
-    border-radius: 0;
+    border-radius: 4px;
     position: fixed;
     top: 20px;
     right: 20px;
@@ -946,75 +993,88 @@ footer {
     flex-direction: column;
     gap: 10px;
     color: #fff;
+    font-family: 'Minecraft';
 }
+
 .admin-approval-toast .title,
 .user-approval-toast .title {
     font-weight: bold;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #4a4a4a;
     padding-bottom: 5px;
 }
+
 .admin-approval-toast .button-container {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
     margin-top: 10px;
 }
+
 .admin-approval-toast button,
 .user-approval-toast button {
     padding: 8px 15px;
-    border-radius: 0;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    border: none;
+    border: 2px solid #4a4a4a;
     transition: background 0.2s;
+    font-family: 'Minecraft';
 }
+
 .admin-approval-toast #approveChanges {
-    background: #00bcf2;
+    background: #3b8526;
     color: #fff;
 }
+
 .admin-approval-toast #rejectChanges {
     background: #ff6b6b;
     color: #fff;
 }
+
 .user-approval-toast.approved {
-    border-left: 5px solid #00bcf2;
+    border-left: 5px solid #3b8526;
 }
+
 .user-approval-toast.rejected {
     border-left: 5px solid #ff6b6b;
 }
+
 .user-approval-toast .close-toast {
     align-self: flex-end;
-    background: #444;
+    background: #4a4a4a;
     color: #fff;
 }
+
 @keyframes fadeIn {
-      0% {
+    0% {
         opacity: 0;
         transform: translateX(100px);
     }
     100% {
         opacity: 1;
     }
-
 }
+
 @keyframes fadeOut {
     0% { opacity: 1; transform: translateY(0);}
     100% { opacity: 0; transform: translateY(-20px);}
 }
 
 .side-menu-button .menu-icon {
-    font-family: 'Segoe-UI-Symbol';
+    font-family: 'Minecraft';
     font-size: 28px;
     padding: 8px;
-    background: #0078d7;
+    background: #3b8526;
     margin-right: 18px;
     vertical-align: middle;
     display: inline-block;
     transition: opacity 0.2s;
 }
+
 body.metro-theme .side-menu-button .menu-icon {
     opacity: 1;
 }
+
 body.classic-theme .side-menu-button .menu-icon,
 body.modern-theme .side-menu-button .menu-icon {
     opacity: 0;
@@ -1031,9 +1091,9 @@ body.modern-theme .side-menu-button .menu-icon {
     height: 100vh;
     position: absolute;
     z-index: 109;
-    background: #232323;
+    background: #2d2d2d;
     padding: 0 0 0 32px;
-
+    border-right: 2px solid #4a4a4a;
 }
 
 .wiki-container h1 {
@@ -1042,12 +1102,11 @@ body.modern-theme .side-menu-button .menu-icon {
     padding: 0;
     color: #fff;
     letter-spacing: 2px;
-    font-family: 'Segoe-UI-Light';
-    text-transform: lowercase;
+    font-family: 'Minecraft';
+    text-transform: none;
     font-size: 42px;
     width: 100%;
     border: none;
-
 }
 
 .wiki-section {
@@ -1056,13 +1115,13 @@ body.modern-theme .side-menu-button .menu-icon {
 }
 
 .wiki-section h2 {
-    font-family: 'Segoe-UI-Light', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Minecraft';
     font-size: 28px;
-    color: #0078d7;
+    color: #3b8526;
     margin: 0 0 16px 0;
     letter-spacing: 1px;
-    text-transform: lowercase;
-    border-left: 4px solid #0078d7;
+    text-transform: none;
+    border-left: 4px solid #3b8526;
     padding-left: 12px;
 }
 
@@ -1074,32 +1133,30 @@ body.modern-theme .side-menu-button .menu-icon {
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
-    ;
     padding: 0 0 0 20px;
 }
 
 .wiki-container .idea-card,
 .wiki-section .idea-card {
-    background: #292929;
-    border-left: 6px solid #0078d7;
+    background: #2d2d2d;
+    border-left: 6px solid #3b8526;
     border-radius: 0 8px 8px 0;
     padding: 22px 28px 18px 20px;
     margin-top: 10px;
     color: #fff;
-    font-family: 'Segoe-UI';
+    font-family: 'Minecraft';
     transition: background 0.2s, border-color 0.2s;
     position: relative;
-    border: none;
-    
+    border: 2px solid #4a4a4a;
 }
+
 .idea-card::before {
-border-left: 6px solid #0078d7;
+    border-left: 6px solid #3b8526;
 }
 
 @keyframes rotate-cards-in {
     0% { transform: rotateY(90deg);}
     100% { transform: rotateY(0);}
-   
 }
 
 .wiki-container .idea-card h3,
@@ -1107,7 +1164,7 @@ border-left: 6px solid #0078d7;
     margin: 0 0 8px 0;
     font-size: 22px;
     color: #fff;
-    font-family: 'Segoe-UI';
+    font-family: 'Minecraft';
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: none;
@@ -1118,10 +1175,9 @@ border-left: 6px solid #0078d7;
     margin: 0;
     color: #bdbdbd;
     font-size: 16px;
-    font-family: 'Segoe-UI', Arial, sans-serif;
+    font-family: 'Minecraft';
     line-height: 1.5;
 }
-
 
 @media (max-width: 700px) {
     .wiki-container {
@@ -1140,30 +1196,34 @@ border-left: 6px solid #0078d7;
         padding: 16px 10px 12px 12px;
     }
 }
+
 .wiki-reader {
     display: none;
     width: 100vw;
     height: 150vh;
     position: absolute;
     z-index: 109;
-    background: #232323;
+    background: #2d2d2d;
 }
+
 pre {
-    background: #292929;
+    background: #1e1e1e;
     color: #fff;
     padding: 12px 16px;
     border-radius: 4px;
-    font-family: Segoe-UI;
+    font-family: 'Minecraft';
     white-space: pre-wrap;
     word-wrap: break-word;
     margin-top: 20px;
+    border: 2px solid #4a4a4a;
 }
+
 .slide-notice {
     position: fixed;
     top: 0;
     right: 0;
     display: flex;
-    background-color: #1f0068;
+    background-color: #2d2d2d;
     width: 70%;
     padding: 20px;
     flex-direction: column;
@@ -1172,7 +1232,11 @@ pre {
     margin-top: 10px;
     animation: notice 0.5s forwards;
     z-index: 1200;
+    border: 2px solid #4a4a4a;
+    border-radius: 4px;
+    font-family: 'Minecraft';
 }
+
 @keyframes notice {
     from {
         transform: translateX(200px);
@@ -1181,24 +1245,27 @@ pre {
         transform: translateX(0);
     }
 }
+
 @keyframes fade-out {
-      from {
+    from {
         opacity: 1;
     }
     to {
         opacity: 0;
     }
 }
+
 .slide-notice h1 {
     font-size: 16px;
     font-weight: bold;
     margin: 0;
     text-align: left;
-   
+    font-family: 'Minecraft';
 }
+
 .slide-notice p {
-    font-size:17px;
+    font-size: 17px;
     margin: 0;
     text-align: left;
-
+    font-family: 'Minecraft';
 }

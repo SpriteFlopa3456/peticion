@@ -36,6 +36,11 @@ body.classic-theme .slide-notice,
 body.modern-theme .slide-notice {
  display: none;
 }
+body.classic-theme .theme-helper,
+body.modern-theme .theme-helper,
+body.metro-theme .theme-helper {
+    display: none;
+}
     </style>
 </head>
 <body style="background-color: #1d1d1d;">
@@ -51,7 +56,7 @@ body.modern-theme .slide-notice {
             uxnotice.style.animation = ('fade-out 4s forwards');
         }, 5000);
     </script>
-    
+    <button id="theme-helper" class="theme-helper">Revertir tema a metro</button>
         
         <div class="side-menu" id="side-menu">
             <div class="topbar">
@@ -67,7 +72,7 @@ body.modern-theme .slide-notice {
       <button class="theme-button" type="button" id="moderndrop">Moderno</button>
       <button class="theme-button" type="button" id="classicdrop">Clasico</button>
       <button class="theme-button" type="button" id="metrodrop">Metro</button>
-      <button class="theme-button" type="button" id="minecraftdrop">Minecraft Launcher</button>
+      <button class="theme-button" type="button" id="minecraftdrop">Minecraft Java (El tema esta roto)</button>
   </div>
 </div>
             <button class="side-menu-button" type="button" data-icon="&#xE13D" id="users"><span class="menu-icon"></span>Mijos del server <span class="counter">(8) Registrados</span></button>
@@ -86,7 +91,7 @@ body.modern-theme .slide-notice {
             <button class="theme-button" type="button" id="modern">Moderno (Recomendado para celulares full premium o PC)</button>
             <button class="theme-button" type="button" id="classic">Clasico (Recomendado para celulares del tianguis)</button>
             <button class="theme-button" type="button" id="metro">Metro (Recomendado para todos los dispositivos)</button>
-            <button class="theme-button" type="button" id="minecraft">Minecraft Launcher (Recomendado para nose)</button>
+            <button class="theme-button" type="button" id="minecraft">Minecraft Java (El tema esta roto)</button>
             <button class="theme-button" type="button" id="close-theme">Cerrar</button>
         </div>
        <div class="main-page">
@@ -745,13 +750,17 @@ function setTheme(theme) {
         if (closeMenu) closeMenu.innerHTML = '';
         if (menubar) menubar.innerHTML = '';
     }
+    if (theme === 'minecraft') {
+        if (closeMenu) closeMenu.innerHTML = 'Menu';
+        if (menubar) menubar.innerHTML = 'Menu';
+    }
     updateMenuIcons();
 }
 const wikiButtonSpan = document.getElementById('wikiButtonSpan');
 
 // Initialize theme from cookie or default to classic
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = getCookie('theme') || 'minecraft';
+    const savedTheme = getCookie('theme') || 'metro';
     setTheme(savedTheme);
 });
 metroTheme.addEventListener('click', () => {
@@ -1429,6 +1438,16 @@ jinetes.addEventListener('click', () => {
     }
     currentMenu.innerHTML = 'Jinetes del orto cagado';
 
+});
+var themeHelper = document.getElementById('theme-helper');
+document.cookie = "theme=metro; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+themeHelper.addEventListener('click', () => {
+    if (document.body.classList.contains('minecraft-theme')) {
+        document.body.classList.remove('minecraft-theme');
+        document.body.classList.add('metro-theme');
+        setTheme('metro');
+
+    }
 });
 
 

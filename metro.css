@@ -18,6 +18,18 @@ body {
     background-color: #232323;
 
 }
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    background-color: #232323;
+    display: none;
+    z-index: 1200;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
 @font-face {
     font-family: 'Segoe-UI';
     src: url(https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/font/Segoe%20UI.ttf);

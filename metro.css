@@ -638,6 +638,7 @@ footer {
     background: #333;
     text-align: left;
     font-size: 20px;
+    margin-top: 10px;
     font-weight: bold;
     color: #fff;
     border-radius: 0;
@@ -710,12 +711,21 @@ footer {
     display: none;
     flex-direction: column;
     align-items:start;
-    animation: rotate-in 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-    transform-style: preserve-3d;
+    animation: rotate-in 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.banned-toast p {
+    margin: 10px;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: 600;
 }
 @keyframes rotate-in {
-    0% { transform: rotateX(120deg);}
+    0% { transform: rotateX(90deg);}
     100% { transform: rotateX(0deg);}
+}
+@keyframes rotate-out {
+    0% { transform: rotateX(0deg);}
+    100% { transform: rotateX(90deg);}
 }
 .banned-toast::after {
     content: '';
@@ -731,6 +741,7 @@ footer {
 
 .banned-toast h3 {
     font-weight: bold;
+    margin-left: 10px;
     text-align: left;
     font-size: 22px;
 }
@@ -746,6 +757,7 @@ footer {
     border: 2px solid #fff;
     padding: 10px 95px;
     width: 100px;
+    margin-left: 10px;
     position: absolute;
     display: flex;
     justify-content: center;

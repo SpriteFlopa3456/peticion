@@ -44,7 +44,11 @@ body.metro-theme .theme-helper {
     </style>
 </head>
 <body style="background-color: #1d1d1d;">
-
+    <div class="banned-toast" id="webviewToast">
+        <h3>Esta aplicacion no esta disponible en este momento.</h3>
+        <p>Por favor, usa el navegador para acceder a esta pagina.</p>
+        <button id="closeWebviewToast">Cerrar</button>
+    </div>
 <div class="body-load" id="bodyLoad">
     <div id="uxnotice" class="slide-notice">
         <h1>Interfaz de usuario</h1>
@@ -191,6 +195,7 @@ body.metro-theme .theme-helper {
         <button id="closeToast">Cerrar</button>
 
     </div>
+
     <Div class="worldsettings-container" id="worldsettings">
         <h1>Configuraciones del Mundo</h1>
         <p>Selecciona las configuraciones que deseas aplicar al mundo.</p>
@@ -293,12 +298,13 @@ body.metro-theme .theme-helper {
     </Div> ---->
 
     <script>
+        var webviewToast = document.getElementById('webviewToast');
         // On page load
       document.onreadystatechange = function() {
             const isWebview = /wv|WebView|MobileApp/i.test(window.navigator.userAgent);
 if (isWebview) {
-        const currentMenu = document.getElementById('currentmenu');
-        if (currentMenu) currentMenu.textContent = 'Que haces aqui dale pa fuera';
+            webviewToast.style.display = 'block';
+            bodyLoad.style.display = 'none';
     }
 
 // Update the text based on the detection
@@ -916,7 +922,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
 });
-var bannedToast = document.getElementById('bannedToastg');
+var bannedToast = document.getElementById('bannedToast');
 var closeToastButton = document.getElementById('closeToast');
 var banDuration = document.getElementById('banDuration');
 var loggedInUser = getCookie('loggedInUser');
@@ -963,16 +969,7 @@ function checkUserBanStatus() {
                     
                     banDuration.textContent = `${days}d ${hours}h ${minutes}m`;
                     bannedToast.style.display = 'flex';
-                    bannedToast.style.animation = 'fadeIn 0.5s ease-in-out';
-                    setTimeout(() => {
-                        bannedToast.style.animation = 'none';
-                        bannedToast.style.display = 'none';
-
-                    }, 5300);
-                    setTimeout (() => {
-                        bannedToast.style.animation = 'fadeOut 0.3s ease-in-out';
-                        
-                    }, 5000);
+                
                     
                     // Update user cookie with ban status
                     user.isBanned = true;
@@ -1449,6 +1446,7 @@ themeHelper.addEventListener('click', () => {
 
     }
 });
+
 
 
 

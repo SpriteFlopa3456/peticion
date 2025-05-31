@@ -309,7 +309,7 @@ body.minecraft-theme .uptime {
                 <h3>¿Juan tiene el nucleo del diavlo?</h3>
                 <p>.</p>
             </div>
-            <div id="lifeCycle" class="idea-card">
+            <div id="ciclo" class="idea-card">
                 <h3>Toda la existencia del server</h3>
                 <p>"La persistencia de lo útil: la odisea de una netbook en la era de la obsolescencia programada".</p>
             </div>
@@ -317,13 +317,15 @@ body.minecraft-theme .uptime {
                 <h3>Especificaciones del server</h3>
                 <p>Especificaciones del server.</p>
             </div>
-            <div id="locationOfServer" class="idea-card">
+            <div id="ubicacion" class="idea-card">
                 <h3>¿Donde esta almacenado el server?</h3>
                 <p>Donde esta almacenado.</p>
             </div>
-            <div id="ipaddress" class="idea-card">
+            <div id="ip" class="idea-card">
                 <h3>Mi IP y mi cuenta bancaria no</h3>
+               
                 <p>NO.</p>
+                
             </div>
             <div class="idea-card">
                 <h3>¿Porque juan es caquita?</h3>
@@ -427,7 +429,6 @@ function updateClickCount() {
         requestButton.textContent = "Límite alcanzado";
         requestButton.style.cursor = "not-allowed";
         requestButton.style.background = "gray";
-        requestButton.pointerEvents = "none";
     } else {
         requestButton.disabled = false;
         requestButton.textContent = "Realizar peticion";
@@ -1362,6 +1363,65 @@ document.addEventListener('DOMContentLoaded', function() {
 
     carousel.addEventListener('mouseleave', () => {
         resetAutoAdvance();
+    });
+
+    // Add wiki card click functionality
+    const ideaCards = document.querySelectorAll('.idea-card');
+    const wikiContent = document.getElementById('wikiContent');
+    const roles = document.getElementById('roles');
+    const ip = document.getElementById('ip');
+    const ipaddress = document.getElementById('ipaddress');
+
+    ideaCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', async () => {
+            const title = card.querySelector('h3').textContent;
+            const cardId = card.id;
+            
+            try {
+                // Show loading state
+                wikiContent.innerHTML = '<p>Cargando...</p>';
+                
+                // Show wiki reader
+                wikiReader.style.display = 'flex';
+                wikiReader.style.animation = 'slide-in 0.7s forwards';
+                
+                // Fetch content from GitHub raw content
+                const response = await fetch(`https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/${cardId}.txt`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load content for ${cardId}`);
+                }
+                if (cardId === 'ip') {
+                    fetch('https://api.ipify.org?format=json')
+                    .then(response => response.json())
+                    .then(data => {
+                        wikiContent.innerHTML = `<h2>${title}</h2>\n<p>Tu IP es: ${data.ip} por chistosito</p>`;
+                    });
+                }
+                
+                const content = await response.text();
+                
+                // Update content with formatted text
+                wikiContent.innerHTML = `<h2>${title}</h2>\n<pre>${content}</pre>`;
+                
+                // Update current menu
+                document.getElementById('currentmenu').innerHTML = title;
+            } catch (error) {
+                console.error('Error loading wiki content:', error);
+                wikiContent.innerHTML = `<h2>${title}</h2>\n<p>Error loading content. Please try again later.</p>`;
+            }
+        });
+    });
+
+    // Add close functionality to wiki reader
+    wikiReader.addEventListener('click', (e) => {
+        if (e.target === wikiReader) {
+            wikiReader.style.animation = 'slide-out 0.7s forwards';
+            setTimeout(() => {
+                wikiReader.style.display = 'none';
+                document.getElementById('currentmenu').innerHTML = 'Wiki';
+            }, 700);
+        }
     });
 });
 </script>

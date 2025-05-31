@@ -46,6 +46,11 @@ body.modern-theme .theme-helper,
 body.metro-theme .theme-helper {
     display: none;
 }
+body.classic-theme .uptime,
+body.modern-theme .uptime,
+body.minecraft-theme .uptime {
+    display: none;
+}
     </style>
 </head>
 <body style="background-color: #1d1d1d;">
@@ -53,6 +58,7 @@ body.metro-theme .theme-helper {
        
         <div class="metroload" id="loader">
             <p style="position:absolute; font-family: 'Segoe-UI-Light'; font-size: 30px; color: white;">Server inzano</p>
+            <p style="position:absolute; font-family: 'Segoe-UI-Light'; font-size: 30px; color: white;" id="appVersion"></p>
             <div class="loader-animation">
                 <span style="--index:0"></span>
                 <span style="--index:1"></span>
@@ -100,7 +106,7 @@ body.metro-theme .theme-helper {
       <button class="theme-button" type="button" id="minecraftdrop">Minecraft Java (El tema esta roto)</button>
   </div>
 </div>
-            <button class="side-menu-button" type="button" data-icon="&#xE13D" id="users"><span class="menu-icon"></span>Mijos del server <span class="counter">(8) Registrados</span></button>
+            <button class="side-menu-button" type="button" data-icon="&#xE13D" id="users"><span class="menu-icon"></span>Mijos del server</button>
             <button class="side-menu-button" type="button" data-icon="" id="account"><span class="menu-icon"></span><span id="account-text">Iniciar Sesión</span></button>
             <button class="side-menu-button" type="button" data-icon="" id="worldsettings"><span class="menu-icon"></span>Cambiar configuracion del mundo</button>
             <button class="side-menu-button" type="button" data-icon="" id="wiki"><span class="menu-icon"></span> <span id="wiki-span">Wiki (Solo tema metro)</span></button>
@@ -122,7 +128,7 @@ body.metro-theme .theme-helper {
        <div class="main-page">
        <div class="background-opacity" id="background-opacity"></div>
         <div class="topbar">
-            <button class="menu-bars" id="menu"></button>
+            <button class="menu-bars" href="home" id="menu"></button>
             <h2 id="currentmenu">Peticion Forzada</h2>
         </div>
     <div class="container">
@@ -142,10 +148,37 @@ body.metro-theme .theme-helper {
 
     <br>
     <div class="uptime">
-        <h3 >Proximamente noticias aqui... </h3>
+        <h3 >Noticias </h3>
        <!---<div class="uptime-bar" id="uptime-bar"></div>
         <p id="health">---%</p> 
         <p class="p" id="energy">Estado de energia: --</p> --->
+        <div class="news-container">
+            <div class="news-carousel">
+                <div class="news-slide active">
+                    <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Notifications-Metro-icon.png" alt="News 1">
+                    <h3>Nueva seccion de noticias</h3>
+                    <p>Ahora puedes ver las noticias del server. Solo para el tema metro.</p>
+                </div>
+                <div class="news-slide">
+                    <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Shortcuts-Metro-icon.png" alt="News 2">
+                    <h3>Limite de peticiones</h3>
+                    <p>Ahora puedes pedir que prenda el server hasta 10 veces por dia.</p>
+                </div>
+                <div class="news-slide">
+                    <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Apps-Coding-app-Metro-icon.png" alt="News 3">
+                    <h3>Temas</h3>
+                    <p>El tema de basado en minecraft java esta en desarrollo.</p>
+                </div>
+                <button class="carousel-arrow carousel-prev">❮</button>
+                <button class="carousel-arrow carousel-next">❯</button>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-dot active"></button>
+                <button class="carousel-dot"></button>
+                <button class="carousel-dot"></button>
+            </div>
+        </div>
+
         <p style="margin: 0; font-size: 12px; color: gray;" id="cookieexp">Expira en: --</p>
     </div>
     
@@ -321,16 +354,28 @@ body.metro-theme .theme-helper {
     <script>
         var webviewToast = document.getElementById('webviewToast');
         var loadingContainer = document.getElementById('loadingContainer');
+        var appVersion = document.getElementById('appVersion');
         // On page load
       document.onreadystatechange = function() {
             const isWebview = /wv|WebView|MobileApp/i.test(window.navigator.userAgent);
+            const isApp = /APP\/Rev1\.0/i.test(window.navigator.userAgent);
 if (isWebview) {
     loadingContainer.style.display = 'block';
+    appVersion.textContent = '0.2';
            setTimeout(function() {
             webviewToast.style.display = 'block';
             bodyLoad.style.display = 'none';
             loadingContainer.style.display = 'none';
            }, 5000);
+
+    }
+    if (isApp) {
+        loadingContainer.style.display = 'block';
+        appVersion.textContent = '1.0';
+        setTimeout(function() {
+            bodyLoad.style.display = 'block';
+            loadingContainer.style.display = 'none';
+        }, 5000);
     }
 
 // Update the text based on the detection
@@ -516,6 +561,12 @@ var mainPage = document.querySelector('.main-page');
 function openSideMenu() {
     if (document.body.classList.contains('metro-theme')) {
         sideMenu.style.display = 'block';
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        
         sideMenu.style.animation = 'slide-in 0.7s ease';
         mainPage.style.animation = 'slide-body-out 0.7s ease';
         setTimeout(() => {
@@ -1251,231 +1302,70 @@ wikiButton.addEventListener('click', () => {
 
 </script>
 <script>
-    const rolesButton = document.getElementById('roles');
+// Carousel functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.news-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const prevButton = document.querySelector('.carousel-prev');
+    const nextButton = document.querySelector('.carousel-next');
+    let currentSlide = 0;
+    let autoAdvanceInterval;
 
-const wikiContent = document.getElementById('wikiContent');
-rolesButton.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/roles.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data;
-
-        })
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar los roles.';
-        }); 
-    
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
     }
-    currentMenu.innerHTML = 'Roles de los mijos';
 
-});
-const lifecycle = document.getElementById('lifeCycle');
-lifecycle.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ciclo.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data;
-
-        })
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar los roles.';
-        }); 
-    
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
     }
-    currentMenu.innerHTML = 'Ciclo de vida filosofico';
 
-});
-const core = document.getElementById('core');
-core.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/nucleo.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data;
-
-        })
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar los roles.';
-        }); 
-    
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
     }
-    currentMenu.innerHTML = 'Ciclo de vida filosofico';
 
-});
-const specs = document.getElementById('specs');
-specs.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/esp.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data;
-
-        })
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar los roles.';
-        }); 
-    
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
+    function resetAutoAdvance() {
+        clearInterval(autoAdvanceInterval);
+        autoAdvanceInterval = setInterval(nextSlide, 5000);
     }
-    currentMenu.innerHTML = 'Ciclo de vida filosofico';
 
-});
-const locationOfServer = document.getElementById('locationOfServer');
-locationOfServer.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ubicacion.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data;
+    // Event listeners
+    prevButton.addEventListener('click', () => {
+        prevSlide();
+        resetAutoAdvance();
+    });
 
-        })
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar.';
-        }); 
-    
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
-    }
-    currentMenu.innerHTML = 'Ubicacion del servidor';
+    nextButton.addEventListener('click', () => {
+        nextSlide();
+        resetAutoAdvance();
+    });
 
-});
-const ipaddress= document.getElementById('ipaddress');
-ipaddress.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/ip.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data; 
-
-        })
-
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar.';
-        }); 
-    // Get client IP using a public IP lookup service
-    fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-            wikiContent.innerHTML += `\n\nTu dirección IP es: ${data.ip}`;
-        })
-        .catch(error => {
-            console.error('Error getting IP:', error);
-            wikiContent.innerHTML += '\n\nNo se pudo obtener tu IP';
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+            resetAutoAdvance();
         });
+    });
 
-    // Get location using IP-API
-    fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-            wikiContent.innerHTML += `\n\nTu ubicación es:\nPaís: ${data.country}\nCiudad: ${data.city}\nRegión: ${data.region}\nLatitud: ${data.latitude}\nLongitud: ${data.longitude}\nTu Internet es: ${data.org}\n Por chistosito y la ubicacion no es exacta pero la latitud y longitud si....`;
-        })
-        .catch(error => {
-            console.error('Error getting location:', error);
-            wikiContent.innerHTML += '\n\nNo se pudo obtener tu ubicación';
-        });
+    // Auto advance
+    resetAutoAdvance();
 
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
-    }
-    currentMenu.innerHTML = 'IP del servidor';
+    // Pause on hover
+    const carousel = document.querySelector('.news-carousel');
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoAdvanceInterval);
+    });
 
+    carousel.addEventListener('mouseleave', () => {
+        resetAutoAdvance();
+    });
 });
-const jinetes = document.getElementById('jinetes');
-jinetes.addEventListener('click', () => {
-    wikiReader.style.display = 'flex';
-    fetch('https://raw.githubusercontent.com/SpriteFlopa3456/peticion/refs/heads/push/wiki/jinetes.txt')
-        .then(response => response.text())
-        .then(data => {
-            wikiContent.innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error fetching roles:', error);
-            wikiReader.innerHTML = 'Error al cargar.';
-        });
-    if (document.body.classList.contains('metro-theme')) {
-        wikiContainer.style.animation = 'slide-body-out 0.5s ease';
-        wikiReader.style.animation = 'slide-body-in 0.5s forwards';
-    } else if (document.body.classList.contains('classic-theme') || document.body.classList.contains('modern-theme')) {
-        wikiContainer.style.animation = 'slide-out 0.5s ease';
-        setTimeout(() => {
-            wikiContainer.style.animation = 'none';
-            wikiContainer.style.display = 'none';
-        }, 500);
-    }
-    currentMenu.innerHTML = 'Jinetes del orto cagado';
-
-});
-var themeHelper = document.getElementById('theme-helper');
-document.cookie = "theme=metro; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-themeHelper.addEventListener('click', () => {
-    if (document.body.classList.contains('minecraft-theme')) {
-        document.body.classList.remove('minecraft-theme');
-        document.body.classList.add('metro-theme');
-        setTheme('metro');
-
-    }
-});
-
-
-
-
 </script>
 
 </body>

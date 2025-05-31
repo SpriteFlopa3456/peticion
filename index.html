@@ -160,9 +160,9 @@ body.minecraft-theme .uptime {
                     <p>Ahora puedes ver las noticias del server. Solo para el tema metro.</p>
                 </div>
                 <div class="news-slide">
-                    <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Shortcuts-Metro-icon.png" alt="News 2">
-                    <h3>Limite de peticiones</h3>
-                    <p>Ahora puedes pedir que prenda el server hasta 10 veces por dia.</p>
+                    <img src="https://images.icon-icons.com/17/PNG/256/iphone_phone_apple_2054.png" alt="News 2">
+                    <h3>App de celular</h3>
+                    <p>Ahora puedes usar la app de celular para pedir que prenda el server.</p>
                 </div>
                 <div class="news-slide">
                     <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Apps-Coding-app-Metro-icon.png" alt="News 3">
@@ -534,19 +534,7 @@ requestButton.addEventListener('click', function() {
     
         checkServerStatus();
     }, 1000);
-    var alertcontainer = document.querySelector('.alert-container');
-    // Show the alert past 1AM
-    var currentTime = new Date();
-    var currentHour = currentTime.getHours();
-    if (currentHour >= 1 && currentHour < 7) {
-        setTimeout(function() {
-            alertcontainer.style.display = 'block';
-        }, 3000); // Show after 1 second
-        setTimeout(function() {
-            alertcontainer.style.display = 'none';
-        }, 25000); // Hide after 5 seconds
-    }
-
+   
 
 console.log('DOM fully loaded and parsed');
 }

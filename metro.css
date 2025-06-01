@@ -275,7 +275,7 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     width: 32px;
     height: 32px;
     background: #0076d700;
-    line-height: 1;
+    
     border: none;
     box-shadow: none;
     z-index: 100;
@@ -295,7 +295,7 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     height: 40px;
     line-height: 40px;
     text-align: center;
-    font-size: 16pt;
+    font-size: 22px;
     font-weight: 100;
     scale: 1.05;
     color: #fff;
@@ -325,7 +325,6 @@ position: absolute;
 top: 10px;
 left: 10px;
 margin: 0;
-line-height: 1;
 }
 .side-menu .menu-bars::before {
  content: '\E112';
@@ -335,7 +334,7 @@ line-height: 1;
     height: 40px;
     line-height: 40px;
     text-align: center;
-    font-size: 16pt;
+    font-size: 22px;
     font-weight: 100;
     color: #fff;
     border-radius: 30px;
@@ -667,7 +666,6 @@ footer {
     text-align: left;
     font-size: 20px;
     margin-top: 10px;
-    font-weight: bold;
     color: #fff;
     border-radius: 0;
     font-family: Segoe-UI-Bold;

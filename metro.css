@@ -1359,3 +1359,75 @@ pre {
     right: 10px;
     line-height: 1;
 }
+.bugs-container {
+    display: none;
+    animation: slide-in 0.7s forwards;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 120%;
+    position: absolute;
+    margin-left: 20px;
+    z-index: 109;
+    background: #232323;
+}
+.bugs-container h1 {
+    font-size: 38px;
+    text-transform: lowercase;
+    font-family: 'Segoe-UI-Light';
+
+    text-align: center;
+    margin-top: 15px;
+}
+.bug-card {
+    background-color: #1f1f1f; /* Dark theme background */
+    margin: 12px 0px;         /* Consistent horizontal margins */
+    padding: 16px;             /* Uniform padding */
+    border-radius: 0;          /* Sharp corners, no rounding */
+    transition: background-color 0.2s ease; /* Smooth hover effect */
+    cursor: pointer;
+    width: 90vw;  /* Adjusted width accounting for margins */
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+    font-family: 'Segoe-UI', sans-serif; /* Windows Phone default font */
+    color: #ffffff;            /* White text for dark background */
+    box-shadow: none; 
+    border: 2px solid #fffcfc;         /* Flat design, no shadows */
+  }
+ .nav-bar {
+    display: none;
+    background-color: #2d2d2d;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    z-index: 1000;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe-UI-Symbol';
+  }
+  .nav-bar-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Segoe-UI-Symbol';
+    position: absolute;
+  }
+  .nav-bar-button button {
+    background-color: #2d2d2da8;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Segoe-UI-Symbol';
+    border-radius: 30px;
+    box-shadow: inset 0 0 0 2px #fff;
+    width: 40px;
+    height: 40px;
+  }
+  .nav-bar-button button span {
+   font-family: 'Segoe-UI-Symbol';
+    color: #fff;
+  }
+

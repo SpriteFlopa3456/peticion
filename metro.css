@@ -46,7 +46,7 @@ body {
 .container {
     max-width: 600px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 70px;
     padding: 24px 32px;
     background: #232323;
     border-radius: 0;
@@ -241,6 +241,7 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     border: none;
     box-shadow: none;
     transition: none;
+    margin-top: 20%;
     position: relative;
     z-index: 1;
 }
@@ -1458,10 +1459,9 @@ pre {
     animation: slide-in 0.7s forwards;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
-    height: 120%;
+    width: 100vw;
+    height: 100%;
     position: absolute;
-    margin-left: 20px;
     z-index: 109;
     background: #232323;
   }
@@ -1485,7 +1485,7 @@ pre {
     margin-top: 20px;
 }
 .serverStatusContainer iframe {
-    width: 100%;
+    width: 100vw;
     height: 40%;
     display: flex;
     align-items: center;
@@ -1503,6 +1503,7 @@ pre {
     position: relative;
     text-align: left;
     overflow: hidden;
+    margin-left: 10px;
     font-family: 'Segoe-UI', sans-serif; /* Windows Phone default font */
     color: #ffffff;            /* White text for dark background */
     box-shadow: none; 

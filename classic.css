@@ -6,7 +6,7 @@ body {
             flex-direction: column;
             text-align: center;
             align-items: center;
-
+            overflow: hidden;
             min-height: 100vh;
             color: #333;
         }
@@ -1024,4 +1024,56 @@ body {
 
 .carousel-next {
     right: 10px;
+}
+.serverStatusContainer {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 9;
+    background: linear-gradient(to bottom, #e8e8e8, #d1d1d1);
+}
+.serverStatusContainer iframe {
+    width: 80%;
+    height: 50%;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.bugs-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 9;
+    background: linear-gradient(to bottom, #e8e8e8, #d1d1d1);
+}
+.wiki-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 9;
+    background: linear-gradient(to bottom, #e8e8e8, #d1d1d1);
+}
+h4 {
+    display: none;
+}
+#server-status {
+    display: none;
+}
+#bugs {
+    display: none;
+}
+#wiki {
+    display: none;
 }

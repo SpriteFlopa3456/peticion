@@ -51,6 +51,7 @@ body.modern-theme .uptime,
 body.minecraft-theme .uptime {
     display: none;
 }
+
     </style>
 </head>
 <body style="background-color: #1d1d1d;">
@@ -91,7 +92,6 @@ body.minecraft-theme .uptime {
         
         <div class="side-menu" id="side-menu">
             <div class="topbar">
-            <h1>Menu</h1>
             <button class="menu-bars" id="close-menu"></button>
             </div>
             <button class="side-menu-button" type="button" data-icon="&#xE10F" id="home"><span class="menu-icon"></span>Inicio</button>
@@ -112,6 +112,7 @@ body.minecraft-theme .uptime {
             <button class="side-menu-button" type="button" data-icon="" id="wiki"><span class="menu-icon"></span>Wiki (Solo tema metro)</button>
             <button class="side-menu-button" type="button" data-icon="" id="bugs"><span class="menu-icon"></span>Bugs actuales</button>
             <button class="side-menu-button" type="button" data-icon="" ><span class="menu-icon"></span><span id="players"></span></button>
+            <button class="side-menu-button" type="button" data-icon="" id="server-status"><span class="menu-icon"></span>Estado del server</button>
             <div class="separator">Server Alternativo</div>
             <button class="side-menu-button" type="button" id=""></button>
 
@@ -137,6 +138,7 @@ body.minecraft-theme .uptime {
        <div class="background-opacity" id="background-opacity"></div>
         <div class="topbar">
             <button class="menu-bars" href="home" id="menu"></button>
+            <h4>SERVER INZANO</h4>
             <h2 id="currentmenu">Peticion Forzada</h2>
         </div>
     <div class="container">
@@ -155,15 +157,15 @@ body.minecraft-theme .uptime {
     <br>
 
     <br>
-    <div class="uptime">
+  <!--  <div class="uptime">
         <h3 >Noticias </h3>
-       <!---<div class="uptime-bar" id="uptime-bar"></div>
+       <div class="uptime-bar" id="uptime-bar"></div>
         <p id="health">---%</p> 
-        <p class="p" id="energy">Estado de energia: --</p> --->
+        <p class="p" id="energy">Estado de energia: --</p> 
         <div class="news-container">
             <div class="news-carousel">
                 <div class="news-slide active">
-                    <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Notifications-Metro-icon.png" alt="News 1">
+                    <img src="https://iconsd.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Notifications-Metro-icon.png" alt="News 1">
                     <h3>Nueva seccion de noticias</h3>
                     <p>Ahora puedes ver las noticias del server. Solo para el tema metro.</p>
                 </div>
@@ -176,7 +178,7 @@ body.minecraft-theme .uptime {
                     <img src="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Apps-Coding-app-Metro-icon.png" alt="News 3">
                     <h3>Temas</h3>
                     <p>El tema de basado en minecraft java esta en desarrollo.</p>
-                </div>
+                </div> 
                 <button class="carousel-arrow carousel-prev"></button>
                 <button class="carousel-arrow carousel-next"></button>
             </div>
@@ -185,7 +187,7 @@ body.minecraft-theme .uptime {
                 <button class="carousel-dot"></button>
                 <button class="carousel-dot"></button>
             </div>
-        </div>
+        </div>-->
 
         <p style="margin: 0; font-size: 12px; color: gray;" id="cookieexp">Expira en: --</p>
     </div>
@@ -258,6 +260,7 @@ body.minecraft-theme .uptime {
 
     </div>
     <div class="bugs-container" id="bugsContainer"> 
+        <h4>SERVER INZANO</h4>
         <h1>Bugs actuales</h1>
         <div class="bug-card">
             <h3>Los bloques no se colocan correctamente</h3>
@@ -324,7 +327,8 @@ body.minecraft-theme .uptime {
       <button type="button" id="saveWorldSettings">Guardar Configuraciones</button>
   </div>
       <div id="wikiContainer" class="wiki-container">
-        <h1>Wiki</h1>
+        <h4 style="margin-top: 10px;">SERVER INZANO</h4>
+        <h1 style="margin: 0; margin-left: 15px;">Wiki</h1>
         <p>En esta seccion puedes ver las ideas que han sido propuestas por los usuarios.</p>
         <div class="wiki-section">
             <h2>Generados por usuarios</h2>
@@ -369,12 +373,26 @@ body.minecraft-theme .uptime {
 </div>
 <div class="nav-bar">
     <div class="nav-bar-button">
-        <button style="font-family: 'Segoe-UI-Symbol';" id="home"></button>
+        <button style="font-family: 'Segoe-UI-Symbol';"></button>
         <button style="font-family: 'Segoe-UI-Symbol';" id="wiki"></button>
         <button style="font-family: 'Segoe-UI-Symbol';" id="bugs"><span></span></button>
     </div>
 </div>
-       
+</div>
+<div id="serverStatusContainer" class="serverStatusContainer">
+    <h4>SERVER INZANO</h4>
+    <h1>Estado del Server</h1>
+    <div class="nav-bar">
+        <div class="nav-bar-button">
+            <button style="font-family: 'Segoe-UI-Symbol';" id="home"></button>
+        </div>
+    </div>
+    <iframe src="https://static.wikia.nocookie.net/8c21773e-c4da-4652-b91f-035f7c912c47" frameborder="0"></iframe>
+    <div class="server-status-card">
+        <h4>Estado del Server</h4>
+        <p>Fresco como una lechuga.</p>
+    </div>
+</div>
 
 
     <script>
@@ -470,9 +488,24 @@ requestButton.addEventListener('click', function() {
         count++;
         setRequestCount(count);
         updateClickCount();
+        // Avoid bug of sending 2 times the same message in a single click 
+        if (input.value === '') {
+            alert('Por favor, ingresa un mensaje.');
+            return;
+        }
+        if (input.value === lastMessage) {
+            alert('No puedes enviar el mismo mensaje 2 veces.');
+            return;
+        }
+        lastMessage = input.value;
+        input.value = '';
+
         // Your existing request logic here...
-    }
+
+
+ }
 });
+
 
 
         // Hide the loading screen after 2 second        // Token and chat ID for Telegram Bot
@@ -874,6 +907,7 @@ metroTheme.addEventListener('click', () => {
     setTheme('metro');
         themeContainer.classList.remove('open');
     backgroundOpacity.style.display = 'none';
+    window.reload(); // Reload to apply metro theme changes
 });
 // Update your existing theme button listeners
 moderntheme.addEventListener('click', () => {
@@ -1257,7 +1291,8 @@ function handleGesture() {
             sideMenu.style.display === 'block' ||
              wikiContainer.style.display === 'flex' ||
              wikiReader.style.display === 'flex' ||
-             bugsContainer.style.display === 'flex'
+             bugsContainer.style.display === 'flex' ||
+             serverStatusContainer.style.display === 'flex'
 
         ) {
             // Slide out current section
@@ -1269,6 +1304,7 @@ function handleGesture() {
             if (wikiContainer.style.display === 'flex') currentSection = wikiContainer;
             if (wikiReader.style.display === 'flex') currentSection = wikiReader;
             if (bugsContainer.style.display === 'flex') currentSection = bugsContainer;
+            if (serverStatusContainer.style.display === 'flex') currentSection = serverStatusContainer;
 
             if (currentSection) {
                 currentSection.style.animation = 'slide-out 0.5s forwards';
@@ -1287,7 +1323,7 @@ function handleGesture() {
 }
 
 // Attach to overlays/sections that can be closed with swipe
-[userContainer, LoginContainer, worldSettingsForm, wikiContainer, wikiReader, sideMenu, bugsContainer].forEach(section => {
+[userContainer, LoginContainer, worldSettingsForm, wikiContainer, wikiReader, sideMenu, bugsContainer, serverStatusContainer].forEach(section => {
     if (section) {
         section.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
@@ -1328,72 +1364,10 @@ wikiButton.addEventListener('click', () => {
 
 </script>
 <script>
-// Carousel functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('.news-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-    const prevButton = document.querySelector('.carousel-prev');
-    const nextButton = document.querySelector('.carousel-next');
-    let currentSlide = 0;
-    let autoAdvanceInterval;
 
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    function resetAutoAdvance() {
-        clearInterval(autoAdvanceInterval);
-        autoAdvanceInterval = setInterval(nextSlide, 5000);
-    }
-
-    // Event listeners
-    prevButton.addEventListener('click', () => {
-        prevSlide();
-        resetAutoAdvance();
-    });
-
-    nextButton.addEventListener('click', () => {
-        nextSlide();
-        resetAutoAdvance();
-    });
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            showSlide(index);
-            resetAutoAdvance();
-        });
-    });
-
-    // Auto advance
-    resetAutoAdvance();
-
-    // Pause on hover
-    const carousel = document.querySelector('.news-carousel');
-    carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoAdvanceInterval);
-    });
-
-    carousel.addEventListener('mouseleave', () => {
-        resetAutoAdvance();
-    });
 
     // Add wiki card click functionality
-    const ideaCards = document.querySelectorAll('.idea-card');
+
     const wikiContent = document.getElementById('wikiContent');
     const roles = document.getElementById('roles');
     const ip = document.getElementById('ip');
@@ -1450,7 +1424,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 700);
         }
     });
-});
+
 // Update player count periodically
 const serverAddress = "shopping-turtle.gl.at.ply.gg";
 const serverPort = "49732"; // B
@@ -1483,6 +1457,30 @@ bugs.addEventListener('click', () => {
     setTimeout(() => {
         sideMenu.style.animation = 'none';
         bugsContainer.style.animation = 'none';
+        sideMenu.style.display = 'none';
+    }, 500);
+});
+var serverStatus = document.getElementById('server-status');
+var serverStatusContainer = document.getElementById('serverStatusContainer');
+serverStatus.addEventListener('click', () => {
+    serverStatusContainer.style.display = 'flex';
+    sideMenu.style.animation = 'slide-body-out 0.5s ease';
+    currentMenu.innerHTML = 'Estado del server';
+    setTimeout(() => {
+        sideMenu.style.animation = 'none';
+        serverStatusContainer.style.animation = 'none';
+        sideMenu.style.display = 'none';
+    }, 500);
+});
+var homeButton = document.getElementById('home');
+var homeContainer = document.getElementById('homeContainer');
+homeButton.addEventListener('click', () => {
+    homeContainer.style.display = 'flex';
+    serverStatusContainer.style.animation = 'slide-body-out 0.5s ease';
+    currentMenu.innerHTML = 'Inicio';
+    setTimeout(() => {
+        sideMenu.style.animation = 'none';
+        homeContainer.style.animation = 'none';
         sideMenu.style.display = 'none';
     }, 500);
 });

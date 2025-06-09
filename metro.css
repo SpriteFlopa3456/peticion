@@ -14,7 +14,7 @@ body {
     background: #1d1d1d;
     color: #fff;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .server-status {
     background-color: #232323;
@@ -222,12 +222,10 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 
 .body-load {
     animation: fadeIn 1s forwards;
-    width: fit-content;
     width: 100vw;
     min-height: 100vh;
     background: #1d1d1d;
     position: relative;
-    overflow: hidden;
     
     display: flex;
     flex-direction: column;
@@ -1464,7 +1462,7 @@ pre {
     flex-direction: column;
     align-items: flex-start;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     z-index: 109;
     background: #232323;
@@ -1485,16 +1483,17 @@ pre {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    bottom: 0;
     gap: 20px;
     margin-top: 20px;
 }
 .serverStatusContainer iframe {
-    width: 100vw;
+    width: 90vw;
     height: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px;
 }
 .serverStatusContainer .server-status-card {
     background-color: #1f1f1f; /* Dark theme background */
@@ -1507,7 +1506,6 @@ pre {
     position: relative;
     text-align: left;
     overflow: hidden;
-    margin-left: 10px;
     font-family: 'Segoe-UI', sans-serif; /* Windows Phone default font */
     color: #ffffff;            /* White text for dark background */
     box-shadow: none; 

@@ -116,7 +116,7 @@ body.minecraft-theme .uptime {
             <div class="separator">Pagina Alternativa</div>
             <button class="side-menu-button" type="button" data-icon="&#xE10F" id="homenew"><span class="menu-icon"></span>Inicio</button>
             <button class="side-menu-button" type="button" data-icon="" id="chat"><span class="menu-icon"></span>Chat grupal</button>
-
+            <button class="side-menu-button" type="button" data-icon="" id="chat-anarquico"><span class="menu-icon" style="background-color: #ee1111;"></span>Chat ANARQUICO</button>
           <footer id="footer">El server de los papus</footer>
           <script>
             var footer = document.getElementById('footer');
@@ -129,6 +129,10 @@ body.minecraft-theme .uptime {
             });
             var chatButton = document.getElementById('chat');
             chatButton.addEventListener('click', function() {
+                window.location.href = '';
+            });
+            var chatAnarquicoButton = document.getElementById('chat-anarquico');
+            chatAnarquicoButton.addEventListener('click', function() {
                 window.location.href = '';
             });
           </script>

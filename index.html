@@ -113,8 +113,9 @@ body.minecraft-theme .uptime {
             <button class="side-menu-button" type="button" data-icon="" id="bugs"><span class="menu-icon"></span>Bugs actuales</button>
             <button class="side-menu-button" type="button" data-icon="" ><span class="menu-icon"></span><span id="players"></span></button>
             <button class="side-menu-button" type="button" data-icon="" id="server-status"><span class="menu-icon"></span>Estado del server</button>
-            <div class="separator">Server Alternativo</div>
-            <button class="side-menu-button" type="button" id=""></button>
+            <div class="separator">Pagina Alternativa</div>
+            <button class="side-menu-button" type="button" data-icon="&#xE10F" id="homenew"><span class="menu-icon"></span>Inicio</button>
+            <button class="side-menu-button" type="button" data-icon="" id="chat"><span class="menu-icon"></span>Chat grupal</button>
 
           <footer id="footer">El server de los papus</footer>
           <script>
@@ -122,6 +123,14 @@ body.minecraft-theme .uptime {
             var year = new Date().getFullYear();
             footer.textContent = `El server de los papus ${year}`;
 
+            var homenew = document.getElementById('homenew');
+            homenew.addEventListener('click', function() {
+                window.location.href = '';
+            });
+            var chatButton = document.getElementById('chat');
+            chatButton.addEventListener('click', function() {
+                window.location.href = '';
+            });
           </script>
         </div>
         <div class="theme-container" id="themeContainer">

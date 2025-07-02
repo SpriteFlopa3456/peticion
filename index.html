@@ -428,7 +428,7 @@ if (isWebview) {
            }, 5000);
 
     }
-    if (!isApp) {
+    if (isApp) {
         loadingContainer.style.display = 'block';
         bodyLoad.style.display = 'none';
         appVersion.textContent = '1.0';

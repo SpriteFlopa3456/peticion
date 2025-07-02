@@ -14,7 +14,7 @@ body {
     background: #1d1d1d;
     color: #fff;
     text-rendering: optimizeLegibility;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 .server-status {
     background-color: #232323;
@@ -290,9 +290,9 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 
 .menu-bars {
     position: fixed;
-    bottom: 0;
+    bottom: 2px;
     right: 0;
-    margin: 20px;
+
     color: #fff;
     width: 32px;
     height: 32px;
@@ -665,9 +665,6 @@ footer {
     font-weight: 500;
 }
 
-.peticion {
-    background: #0078d7;
-}
 
 .user-card-status.admin::before {
     background: #ffb900;
@@ -685,7 +682,7 @@ footer {
     width: 100%;
     padding: 10px 20px;
     margin: 0;
-    background: #333;
+    background: #000;
     text-align: left;
     font-size: 20px;
     margin-top: 10px;

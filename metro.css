@@ -9,12 +9,13 @@ body {
     text-align: center;
     align-items: center;
     max-width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    box-sizing: border-box;
+   justify-content: center;
     overflow-x: hidden;
     background: #1d1d1d;
     color: #fff;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
 }
 .server-status {
     background-color: #232323;
@@ -49,22 +50,20 @@ body {
 .container {
     max-width: 600px;
     margin: 0 auto;
-    margin-top: 70px;
     padding: 24px 32px;
-    background: #232323;
     border-radius: 0;
     animation: fadeInLoading 1s forwards;
-    margin-top: 20%;
+    margin-top: 25%;
     box-shadow: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:flex-start;
     justify-content: center;
     border: none;
 }
 
 .topbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -113,31 +112,40 @@ body {
             margin-left: 10px;
         }
         .container h1 {
-            text-align: center;
+            text-align: left;
             margin-top: 15px;
             padding: 18px 0;
-            color: #fff;
-            font-family: Segoe-UI-Light;
-            font-size: 38px;
+            color: #ffffff;
+            font-family: 'Segoe-UI-Light';
+            font-size: 32px;
         }
-
+#clickCount {
+    color: #999999;
+}
+#health {
+    color: #999999;
+}
+#estado {
+    text-align: left;
+}
 
 .button {
-    padding: 16px 32px;
-    font-size: 19px;
-
+   background-color: transparent;
     color: #fff;
-    background: #0078d7;
-    border: none;
+    border: 3px solid #fff;
+    width: 70%;
+    font-family: 'Segoe-UI';
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 10px;
+    bottom: 10px;
     border-radius: 0;
     cursor: pointer;
+    font-size: 20px;
+    text-transform: lowercase;
     box-shadow: none;
-    text-shadow: none;
-    font-family: 'Segoe-UI';
-    transition: background 0.2s, transform 0.1s;
-    outline: none;
-   font-weight: bold;
-    letter-spacing: 0.5px;
 }
 
 .button:active {
@@ -145,9 +153,7 @@ body {
     transform: scale(0.98);
 }
 
-.button:hover {
-    background: #2899f5;
-}
+
 
 input[type="text"], .login input[type="password"] {
     padding: 12px;
@@ -156,7 +162,7 @@ input[type="text"], .login input[type="password"] {
     border-radius: 0;
     margin-top: 20px;
     width: 300px;
-    border: 2px solid #727374;
+    text-transform: lowercase;
     background: #f3f3f3;
     color: #757575;
     box-shadow: none;
@@ -164,7 +170,7 @@ input[type="text"], .login input[type="password"] {
 }
 
 input[type="text"]:focus, .login input[type="password"]:focus {
-    border: 2px solid #3d3d3d;
+    border: 3px solid #005fa3;
 }
 
 .alert-container {
@@ -188,21 +194,23 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 }
 
 .uptime {
-    background: #232323;
     color: #fff;
     padding: 16px;
     border-radius: 0;
     font-size: 20px;
-    font-weight: bold;
+    font-family: 'Segoe-UI';
     box-shadow: none;
     border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
 
 }
 
 
 .uptime-bar {
-    background: #00bcf2;
+    background: #0078d7;
     height: 10px;
     width: 100%;
     max-width: 100%;
@@ -224,13 +232,13 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     animation: fadeIn 1s forwards;
     width: 100vw;
     min-height: 100vh;
-    background: #1d1d1d;
+    box-sizing: border-box;
+    background: #0c0c0c;
     position: relative;
-    
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 @keyframes rotateIn {
     0% { transform: rotate(90deg);}
@@ -238,12 +246,11 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 }
 
 .body-load .container {
-    background: #232323;
+    /* background: #232323; */
     border: none;
     box-shadow: none;
     transition: none;
-    margin-top: 20%;
-    position: relative;
+    margin-top: 25%;
     z-index: 1;
 }
 
@@ -274,7 +281,6 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 }
 
 .body-load .uptime {
-    background: #232323;
     border: none;
     transition: none;
 }
@@ -290,9 +296,9 @@ input[type="text"]:focus, .login input[type="password"]:focus {
 
 .menu-bars {
     position: fixed;
-    bottom: 2px;
+    bottom: 0;
     right: 0;
-
+    margin: 20px;
     color: #fff;
     width: 32px;
     height: 32px;
@@ -334,8 +340,7 @@ input[type="text"]:focus, .login input[type="password"]:focus {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100%;
-    background: #232323;
+    height: fit-content;
     box-shadow: none;
     overflow: hidden;
     display: none;
@@ -457,20 +462,20 @@ margin: 0;
     width: 100%;
     height: 72px;
     font-family: 'Segoe-UI';
-    background: #232323;
+    background-color: #000;
     text-transform: capitalize;
     color: #fff;
     text-align: left;
    
-    padding: 20px 32px;
+    padding: 18px 30px;
     outline: none;
     border: none;
     font-size: 24px;
     border-radius: 0;
 }
 .side-menu-button::before {
-    height: 20px;
-    width: 20px;
+    height: 18px;
+    width: 18px;
     
     font-family: 'Segoe-UI-Symbol'!important;
     background: #4064fc;
@@ -563,7 +568,7 @@ footer {
     color: #bbb;
     padding: 16px 0;
     margin: 0;
-    background: #232323;
+    background: inherit;
     border-radius: 0;
 }
 
@@ -666,6 +671,7 @@ footer {
 }
 
 
+
 .user-card-status.admin::before {
     background: #ffb900;
 }
@@ -682,7 +688,7 @@ footer {
     width: 100%;
     padding: 10px 20px;
     margin: 0;
-    background: #000;
+    background: #202020;
     text-align: left;
     font-size: 20px;
     margin-top: 10px;
@@ -1092,7 +1098,7 @@ body.modern-theme .side-menu-button .menu-icon {
     flex-direction: column;
     align-items: flex-start;
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
     position: absolute;
     z-index: 109;
     background: #232323;

@@ -8,8 +8,7 @@ body {
     text-align: center;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
      transform: translate3d(0, 0, 0);
     background: linear-gradient(135deg, #1f1c2c, #928dab);

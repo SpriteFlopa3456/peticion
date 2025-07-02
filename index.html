@@ -77,7 +77,7 @@ body.minecraft-theme .uptime {
         <p>Por favor, usa el navegador para acceder a esta pagina.</p>
         <button id="closeWebviewToast">Cerrar</button>
     </div>
-    <p>Esta pagina no recibira más actualizaciones. <a style="color: #0078d7; text-decoration: wavy;" href="https://robin-pure-miserably.ngrok-free.app/">Actualiza a la otra pagina </a></p>
+    <p style="color: white; z-index: 20000;" id="update">Esta pagina no recibira más actualizaciones. <a style="color: #0078d7; text-decoration: wavy;" href="https://robin-pure-miserably.ngrok-free.app/">Actualiza a la otra pagina </a></p>
 <div class="body-load" id="bodyLoad">
     <script>
         var uxnotice = document.getElementById('uxnotice')
@@ -407,6 +407,7 @@ body.minecraft-theme .uptime {
         var webviewToast = document.getElementById('webviewToast');
         var loadingContainer = document.getElementById('loadingContainer');
         var appVersion = document.getElementById('appVersion');
+        var update = document.getElementById('update')
         // On page load
       document.onreadystatechange = function() {
             const isWebview = /wv|WebView|MobileApp/i.test(window.navigator.userAgent);
@@ -427,10 +428,11 @@ if (isWebview) {
            }, 5000);
 
     }
-    if (isApp) {
+    if (!isApp) {
         loadingContainer.style.display = 'block';
         bodyLoad.style.display = 'none';
         appVersion.textContent = '1.0';
+        update.innerHTML= '<p id="update">Esta app no recibira más actualizaciones. <a style="color: #0078d7; text-decoration: wavy;" href="https://robin-pure-miserably.ngrok-free.app/update/">Actualizar </a></p>'
         setTimeout(function() {
             loadingContainer.style.animation= 'fadeOut 0.5s ease';
             setTimeout(function() {

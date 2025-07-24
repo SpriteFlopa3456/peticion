@@ -51,6 +51,14 @@ body.modern-theme .uptime,
 body.minecraft-theme .uptime {
     display: none;
 }
+  @-webkit-keyframes slide-out-notice {
+    from {
+      -webkit-transform: rotateX(0deg);
+    }
+    to {
+      -webkit-transform: rotateX(-90deg);
+    }
+    }
 
     </style>
 </head>
@@ -73,11 +81,21 @@ body.minecraft-theme .uptime {
         </div>
     </div>
     <div class="banned-toast" id="webviewToast">
-        <h3>Esta aplicacion no esta disponible en este momento.</h3>
-        <p>Por favor, usa el navegador para acceder a esta pagina.</p>
+        <h3>Actualiza a la ultima version.</h3>
+        <p>Esta version no es compatible con las ultimas funciones.</p>
         <button id="closeWebviewToast">Cerrar</button>
     </div>
-    <p style="color: white; z-index: 20000;" id="update">Esta pagina no recibira más actualizaciones. <a style="color: #0078d7; text-decoration: wavy;" href="https://robin-pure-miserably.ngrok-free.app/">Actualiza a la otra pagina </a></p>
+    <script>
+        var closeWebviewToast = document.getElementById('closeWebviewToast');
+        closeWebviewToast.addEventListener('click', function() {
+            webviewToast.style.animation = 'slide-out-notice 0.25s cubic-bezier(0.65, 0.1, 0.75, 0.2)';
+            webviewToast.style.backfaceVisibility = 'hidden';
+            webviewToast.style.animationFillMode = 'forwards';
+            setTimeout(function() {
+                webviewToast.style.display = 'none';
+            }, 250);
+        });
+    </script>
 <div class="body-load" id="bodyLoad">
     <script>
         var uxnotice = document.getElementById('uxnotice')
@@ -416,28 +434,44 @@ if (isWebview) {
     loadingContainer.style.display = 'block';
     bodyLoad.style.display = 'none';
     appVersion.textContent = '0.2';
-           setTimeout(function() {
-            
-            bodyLoad.style.display = 'none';
-           
-            loadingContainer.style.animation= 'fadeOut 0.5s ease';
             setTimeout(function() {
-                loadingContainer.style.display = 'none';
-                webviewToast.style.display = 'block';
-            }, 500);
-           }, 5000);
+                
+                bodyLoad.style.display = 'flex';
+            
+                loadingContainer.style.animation= 'fadeOut 0.5s ease';
+                setTimeout(function() {
+                    loadingContainer.style.display = 'none';
+                    webviewToast.style.display = 'block';
+                    update.style.display = 'block';
+                }, 500);
+            }, 5000);
 
     }
     if (isApp) {
         loadingContainer.style.display = 'block';
         bodyLoad.style.display = 'none';
         appVersion.textContent = '1.0';
-        update.innerHTML= '<p id="update">Esta app no recibira más actualizaciones. <a style="color: #0078d7; text-decoration: wavy;" href="https://robin-pure-miserably.ngrok-free.app/update/">Actualizar </a></p>'
         setTimeout(function() {
+            bodyLoad.style.display = 'flex';
             loadingContainer.style.animation= 'fadeOut 0.5s ease';
             setTimeout(function() {
                 loadingContainer.style.display = 'none';
-                bodyLoad.style.display = 'block';
+                webviewToast.style.display = 'block';
+                update.style.display = 'block';
+            }, 500);
+        }, 5000);
+    }
+    if (!isWebview && !isApp) {
+        loadingContainer.style.display = 'block';
+        bodyLoad.style.display = 'none';
+        appVersion.textContent = 'Pagina Principal';
+        setTimeout(function() {
+            bodyLoad.style.display = 'flex';
+            loadingContainer.style.animation= 'fadeOut 0.5s ease';
+            setTimeout(function() {
+                loadingContainer.style.display = 'none';
+                webviewToast.style.display = 'block';
+                update.style.display = 'block';
             }, 500);
         }, 5000);
     }

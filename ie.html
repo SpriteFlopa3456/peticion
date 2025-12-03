@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 8.1 Tiles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .tiles-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 600px;
+        }
+        
+        .tile {
+            width: 200px;
+            height: 200px;
+            background-color: #0078d4;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            font-weight: bold;
+            /* fixed transition syntax for IE11 */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            padding: 0;
+            outline: 2px solid transparent;
+        }
+        
+        .tile:hover {
+            outline: 2px solid white;
+        }
+        
+        .tile:active {
+            /* use transform for scaling */
+            transform: scale(0.95);
+        }
+        
+        .tile1 {
+            background-color: #0078d4;
+        }
+        
+        .tile2 {
+            background-color: #e81828;
+        }
+        .tile-label {
+         background-color: #0000009a;
+         width: 100%;
+         display: flex;
+         align-items: center;
+         padding: 5px;
+         height: 32px;
+         font-family: 'Segoe UI', sans-serif;
+         font-weight: lighter;
+         font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification"></div>
+    <div class="tiles-container">
+        <!-- removed inline onclick to attach listeners in script for clarity -->
+        <button id="tile1" class="tile tile1">
+            <div class="tile-label">Pedir que prendan server</div>
+        </button>
+        <button id="tile2" class="tile tile2">
+            <div class="tile-label">Mijos: 0/10</div>
+        </button>
+    </div>
+    
+    <script>
+        // IE11-compatible JS: use var, no arrow functions, no fetch, no template literals
+        (function () {
+            // configure your token and chat id here
+            var botToken = '7529214947:AAGqRyGp9S3qDJJPnNgkR3uNQkStxQczUsc';
+            var chatId = '7688071745';
+            var url = 'https://api.telegram.org/bot' + botToken + '/sendMessage';
+
+            function sendTelegramMessage(message, onSuccess, onError) {
+                try {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', url, true);
+                    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status >= 200 && xhr.status < 300) {
+                                if (typeof onSuccess === 'function') {
+                                    // Try to parse JSON safely
+                                    try {
+                                        var resp = JSON.parse(xhr.responseText);
+                                    } catch (e) {
+                                        resp = xhr.responseText;
+                                    }
+                                    onSuccess(resp);
+                                }
+                            } else {
+                                if (typeof onError === 'function') onError(xhr);
+                            }
+                        }
+                    };
+
+                    var payload = {
+                        chat_id: chatId,
+                        text: message
+                    };
+
+                    xhr.send(JSON.stringify(payload));
+                } catch (e) {
+                    if (typeof onError === 'function') onError(e);
+                }
+            }
+
+            function tile1ClickHandler() {
+                // send message
+                sendTelegramMessage('Inicia server',
+                    function () {
+                        // success
+                        try { window.alert('Se envio correctamente tu peticion!'); } catch (e) {}
+                    },
+                    function () {
+                        // error - silently ignore or notify
+                        try { window.alert('Error al enviar la peticion.'); } catch (e) {}
+                    }
+                );
+            }
+
+            function tile2ClickHandler() {
+                try { window.alert('Tile 2 clicked!'); } catch (e) {}
+            }
+
+            // attach listeners when DOM is ready (IE11 supports DOMContentLoaded)
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    var t1 = document.getElementById('tile1');
+                    var t2 = document.getElementById('tile2');
+                    if (t1) t1.addEventListener('click', tile1ClickHandler);
+                    if (t2) t2.addEventListener('click', tile2ClickHandler);
+                });
+            } else {
+                var t1 = document.getElementById('tile1');
+                var t2 = document.getElementById('tile2');
+                if (t1) t1.addEventListener('click', tile1ClickHandler);
+                if (t2) t2.addEventListener('click', tile2ClickHandler);
+            }
+        })();
+    </script>
+</body>
+</html>

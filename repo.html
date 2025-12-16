@@ -5,148 +5,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repository Page</title>
     <style>
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            width: 100vw;
-            height: 100vh;
-            box-sizing: border-box;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
+        :root{
+            --glass-bg: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.12);
+            --accent: #7dd3fc;
+            --muted: rgba(255,255,255,0.7);
+            --card-gap: 14px;
+            --max-width: 1100px;
+            color-scheme: dark;
         }
 
-        .repo-header {
-            display: flex;
-            align-items: center;
+        html,body{height:100%;margin:0;padding:0;font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+        body{
+            background: var(--bg-1);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            color: #e6eef8;
+            display:flex;align-items:flex-start;justify-content:center;padding:32px 16px;
+            box-sizing:border-box;
         }
-        .repo-header img {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
+
+        .page{
+            width:100%;max-width:var(--max-width);
         }
-        .repo-details {
-            margin-top: 20px;
+
+        .hero{
+            display:flex;gap:16px;align-items:center;margin-bottom:20px;
         }
-        .repo-details h2 {
-            margin-bottom: 10px;
+
+        .logo{width:56px;height:56px;border-radius:12px;flex:0 0 56px;background:linear-gradient(135deg,var(--accent),#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700;color:#052026;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+
+        .title{font-size:1.6rem;margin:0}
+        .subtitle{color:var(--muted);margin:0;font-size:0.95rem}
+
+        .grid{
+            display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start;
         }
-        .repo-details p {
-            margin: 5px 0;
+
+        .card{
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+            border:1px solid var(--glass-border);
+            border-radius:14px;padding:18px;backdrop-filter: blur(10px) saturate(120%);
+            box-shadow: 0 8px 30px rgba(2,6,23,0.6);
         }
-        .version-list li {
-            display: flex;
-            
-            align-items: center;
-            margin-bottom: 4px;
+
+        /* Platform-specific cards */
+        .card--windows{
+            --plat-accent: rgba(59,130,246,0.14);
+            border-color: rgba(59,130,246,0.22);
+            background: linear-gradient(180deg, rgba(59,130,246,0.03), rgba(255,255,255,0.015));
+            box-shadow: 0 10px 30px rgba(59,130,246,0.06), 0 8px 30px rgba(2,6,23,0.5);
         }
-        .version-list a {
-            white-space: nowrap;
-            margin-left: 15px;
+
+        .card--android{
+            --plat-accent: rgba(74,222,128,0.14);
+            border-color: rgba(74,222,128,0.22);
+            background: linear-gradient(180deg, rgba(74,222,128,0.03), rgba(255,255,255,0.015));
+            box-shadow: 0 10px 30px rgba(74,222,128,0.06), 0 8px 30px rgba(2,6,23,0.5);
         }
+        .card--linux{
+            --plat-accent: rgba(253,224,71,0.14);
+            border-color: rgba(253,224,71,0.22);
+            background: linear-gradient(180deg, rgba(253,224,71,0.03), rgba(255,255,255,0.015));
+            box-shadow: 0 10px 30px rgba(253,224,71,0.06), 0 8px 30px rgba(2,6,23,0.5);
+        }
+
+        .card .card-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+        .plat-badge{width:36px;height:36px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#001219}
+        .plat-windows{background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#021029}
+        .plat-android{background:linear-gradient(135deg,#86efac,#22c55e);color:#03210b}
+
+        .main-card{padding:20px 22px}
+
+        h1{font-size:1.1rem;margin:0 0 8px 0}
+        h2{font-size:1rem;margin:12px 0}
+
+        .meta{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:0.92rem}
+
+        .version-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--card-gap)}
+
+        .version-item{transition: all 0.2s ease-in-out; display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);}
+
+        .version-item small{color:var(--muted);font-size:0.84rem}
+
+        a.view-btn{background:transparent;border:1px solid rgba(125,211,252,0.15);color:var(--accent);padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem}
+
+        .lite-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+
+        /* Sidebar */
+        .sidebar .card{position:sticky;top:24px}
+
+        /* Responsive */
+        @media (max-width:980px){
+            .grid{grid-template-columns:1fr;}
+            .version-grid{grid-template-columns:repeat(1,1fr)}
+        }
+
+        @media (max-width:420px){
+            .title{font-size:1.05rem}
+            .hero{gap:10px}
+            .logo{width:48px;height:48px;border-radius:10px}
+            body{padding:18px}
+        }
+
+        /* Accessibility focus */
+        a.view-btn:focus{outline:3px solid rgba(125,211,252,0.18);outline-offset:2px}
+
+        .version-item:hover{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); transform: translateY(-5px);}
     </style>
 </head>
 <body>
-    <div class="repo-header">
-        <h1>Repositorio de las Apps del Server</h1>
-    </div>
-    <div class="repo-details">
-        <h2>Archivos</h2>
-        <p>Este repositorio contiene las aplicaciones del servidor.</p>
-        <p><strong>Lenguaje:</strong> Kotlin</p>
-        <p><strong>Última actualización:</strong> 2025-09-13</p>
-        <p><strong>Licencia:</strong> MIT</p>
-        <h2>Versiones</h2>
-        <p>Son las versiones normales de la aplicación con soporte completo para las últimas características de Android y del Server.</p>
-        <p>Las versiones estan organizadas por Title Update representando las principales actualizaciones de la aplicación.</p>
-        <p style="font-weight: bold;">Necesitas Android 8.0 Oreo (API 26) como mínimo para ejecutar estas versiones.</p>
-        <p style="font-weight: bold;">En futuras actualizaciones, se necesitara Android 10 (API 29) para seguir utilizando estas versiones.</p>
-        <ul class="version-list">
-            <li>
-                Title Update 0 (v0.2.1)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU0%20(0.2).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 1 (v1.0.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU1%20(1.0).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 2 (v1.1.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU2%20(1.1).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 3 (v1.11.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU3%20(1.11).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 4 (v1.2.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU4%20(1.2).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 4 v2 (v1.2.1)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU4%20(1.21).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 5 (v1.3.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU5%20(1.3).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 6 (v1.4.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU6%20(1.4).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 7 (v1.5.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU7%20(1.5).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 8 (v1.6.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU8%20(1.6).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 9 (v1.7.0)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU9%20(1.7).apk">Ver</a>
-            </li>
-            <li>
-                Title Update π (v3.14 - 92.3)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU9%20(3.14%20-%2092.2).apk">Ver</a>
-            </li>
-            <li>
-                Title Update π v2 (v3.14 - 93.2)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU9%20(3.14%20-%2093.2).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 10 - X (v1.8)
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TUX%20(1.8).apk">Ver</a>
-            </li>
-            <li>
-                Title Update 11 - XL (v1.9)
-                <!--<a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TUXI%20(1.9).apk">Ver</a>-->
-            </li>
-            <li>
-                Title Update 12 - Ǝ (v2.0)
-                <!--<a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TUXX%20(2.0).apk">Ver</a>-->
-            </li>
-            <li>
-                Title Update 13 (v2.1)
-                <!--<a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TUXX%20(2.1).apk">Ver</a>-->
-            </li>
-        </ul>
-        <h2>Versiones Lite</h2>
-        <p>Las versiones Lite son versiones más ligeras y optimizadas para versiones antiguas de Android.</p>
-        <p>Están diseñadas para funcionar en dispositivos con recursos limitados, ofreciendo una experiencia más fluida y rápida.</p>
-        <p style="font-weight: bold;">Necesitas Android Alpha (API 1) como mínimo para ejecutar la Title Update 2.</p>
-        <p style="font-weight: bold;">Es recomendable utilizar Android 4.2 Jellybean (API 17) para evitar problemas de seguridad</p>
-        <ul>
-            <li>Title Update 0 (TU4 - 1.21) 952KB
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20Lite%20TU0%20(TU4%20-%201.21).apk">Ver</a>
-            </li>
+    <div class="page">
+        <header class="hero">
+            <div>
+                <h1 class="title">Repositorio de las Apps del Server</h1>
+                <p class="subtitle">Colección de builds y variantes</p>
+            </div>
+        </header>
 
-            <li>Title Update 1 (TU6 - 1.4) 72KB
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20Lite%20TU1%20(TU6%20-%201.4).apk">Ver</a>
-            </li>
-            <li>Title Update 2 (TU7 - 1.5) 15KB
-                <a href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20Lite%20TU2%20(TU7%20-%201.5).apk">Ver</a>
-            </li>
-        </ul>
+        <div class="grid">
+            <div>
+                <div class="card card--windows" role="region" aria-labelledby="windows">
+                    <div class="card-header">
+                        <h1 id="windows">Windows</h1>
+                    </div>
+                    <div class="meta">
+                        <div><strong>Lenguaje:</strong> Visual Basic (Nativo) o HTML (Windows Store)</div>
+                        <div><strong>Última actualización:</strong> 2025-12-15</div>
+                        <div><strong>Licencia:</strong> MIT</div>
+                    </div>
+
+                    <h2>Variantes</h2>
+                    <p>Existen 2 variantes de esta aplicacion para Windows</p>
+                <h2>Windows Store</h2>
+                <p>Desarrollada en HTML JS CSS y optimizada específicamente para Windows 8.1 (Pro o Embedded). Requiere habilitar sideloading.</p>
+                <div class="version-grid" role="list">
+                    <div class="version-item" role="listitem">
+                        <div>v1.0.9600.0</div>
+                        <a class="view-btn" href="">Ver</a>
+                    </div>
+                </div>
+                <h2 style="margin-top:14px">Escritorio Nativo</h2>
+                <p>Desarrollado en Visual Basic WinForms con .NET 10; esta versión está optimizada para Windows 7 en adelante.</p>
+                <div class="version-grid" role="list">
+                    <div class="version-item" role="listitem">
+                        <div>v1.0.100.0</div>
+                        <a class="view-btn" href="">Ver</a>
+                    </div>
+                       <div class="version-item" role="listitem">
+                        <div>v1.0.160.1</div>
+                        <a class="view-btn" href="">Ver</a>
+                    </div>
+                </div>
+                </div>
+
+                <div style="height:14px"></div>
+
+                <div style="background: linear-gradient(180deg, rgba(74,222,128,0.03), rgba(255,255,255,0.015));" class="card card--android" role="region" aria-labelledby="android">
+                    <div class="card-header">
+                        <h1 id="android">Android</h1>
+                    </div>
+                    <div class="meta"><div><strong>Lenguaje:</strong> Kotlin</div><div><strong>Última actualización:</strong> 2025-09-13</div><div><strong>Licencia:</strong> MIT</div></div>
+
+                    <h2>Versiones</h2>
+                    <p>Las versiones están organizadas por Title Update representando las principales actualizaciones de la aplicación.</p>
+                    <p style="font-weight:bold;color:var(--muted)">Necesitas Android 8.0 Oreo (API 26) como mínimo para ejecutar estas versiones.</p>
+
+                    <div class="version-grid" role="list">
+                        <div class="version-item" role="listitem">
+                            <div>
+                                <div>Title Update 0 <small>(v0.2.1)</small></div>
+                            </div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU0%20(0.2).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 1 <small>(v1.0.0)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU1%20(1.0).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 2 <small>(v1.1.0)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU2%20(1.1).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 3 <small>(v1.11.0)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU3%20(1.11).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 4 <small>(v1.2.0)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU4%20(1.2).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 4 v2 <small>(v1.2.1)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU4%20(1.21).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 5 <small>(v1.3.0)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU5%20(1.3).apk">Ver</a>
+                        </div>
+                        <div class="version-item" role="listitem">
+                            <div>Title Update 6 <small>(v1.4.0)</small></div>
+                            <a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20TU6%20(1.4).apk">Ver</a>
+                        </div>
+                    </div>
+
+                    <h2 style="margin-top:14px">Versiones Lite</h2>
+                    <p class="meta" style="margin-top:6px;color:var(--muted)">Las versiones Lite son más ligeras, optimizadas para dispositivos con recursos limitados.</p>
+                    <div class="lite-list">
+                        <div class="version-item"><div>TU0 (TU4 - 1.21) — 952KB</div><a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20Lite%20TU0%20(TU4%20-%201.21).apk">Ver</a></div>
+                        <div class="version-item"><div>TU1 (TU6 - 1.4) — 72KB</div><a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20Lite%20TU1%20(TU6%20-%201.4).apk">Ver</a></div>
+                        <div class="version-item"><div>TU2 (TU7 - 1.5) — 15KB</div><a class="view-btn" href="https://github.com/SpriteFlopa3456/peticion/raw/refs/heads/push/repo/Server%20Inzano%20Lite%20TU2%20(TU7%20-%201.5).apk">Ver</a></div>
+                    </div>
+                </div>
+
+                <!---Linux-->
+                <div style="height:14px"></div>
+                <div class="card card--linux" role="region" aria-labelledby="linux">
+                    <div class="card-header">
+                        <h1 id="linux">Linux</h1>
+                    </div>
+                    <div class="meta"><div><strong>Lenguaje:</strong> Python</div><div><strong>Última actualización:</strong> 2024-11-20</div><div><strong>Licencia:</strong> MIT</div></div>
+
+                    <h2>Versiones</h2>
+                    <p>Las versiones de Linux están empaquetadas como AppImage para máxima compatibilidad.</p>
+
+                    <div class="version-grid" role="list">
+                       <!-- <div class="version-item" role="listitem">
+                            <div>
+                                <div>v1.0.0</div>
+                            </div>
+                            <a class="view-btn" href="">Ver</a>
+                        </div> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <aside class="sidebar">
+                <div class="card">
+                    <h2>Notas</h2>
+                    <p class="meta">Esta página está optimizada para móvil y escritorio. Usa los botones "Ver" para descargar artefactos directamente desde GitHub.</p>
+                    <h2 style="margin-top:12px">Compatibilidad</h2>
+                    <p class="meta">Recomendado Android 8+ para versiones completas; Android 4.2+ para Lite.</p>
+                    <p class="meta">Recomendado Windows 7+ para versiones nativas; Windows 8.1+ para versiones de Windows Store.</p>
+                    <p class="meta">Linux requiere una distribución moderna con soporte para AppImage.</p>
+                </div>
+            </aside>
+        </div>
     </div>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Image Viewer - Array Object</title>
+    <title>The Juan Files</title>
     
 </head>
 <style>
@@ -86,14 +86,14 @@
             inset 0 2px 8px rgba(255,255,255,0.02);
         position: relative;
         z-index: 10;
-         -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255,255,255,0.02));
+         -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255,255,255,0.07));
     }
 
     .frame {
         position: relative;
         border-radius: 12px;
         padding: 12px;
-        background: linear-gradient(180deg,#2f231c,#1e1411),
+        background: linear-gradient(180deg,#2f2311c7,#1e1411c7),
         url(wood.jpg);
         background-size: cover;
         background-position: center;
@@ -136,6 +136,17 @@
     /* subtle glass reflection fake */
     img::after{
         content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        pointer-events: none;
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 60%, transparent 100%);  
+        mix-blend-mode: screen;
+
     }
 
     /* skeuomorphic circular control buttons */
@@ -185,6 +196,11 @@
 
         z-index: 50;
     }
+    /* text glow effect */
+    p {
+        text-shadow: 0 0 6px rgba(255,255,255,0.3);
+        -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255,255,255,0.5));
+    }
 
 </style>
 <body>
@@ -200,9 +216,9 @@
         <button style="width: 62px; height: 62px;" class="btn" id="playPause" title="Pause/Play">⏯</button>
         <button class="btn" id="nextBtn" title="Next">⏩</button>
     </div>
-    
 
-    <p id="countdownToNext">The Juan Files - 2026</p>
+
+    <p style="-webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255,255,255,0.02)); " id="countdownToNext">The Juan Files - 2026</p>
 
     <script>
         // ...existing code...

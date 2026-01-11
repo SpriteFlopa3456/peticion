@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Image Viewer - Array Object</title>
+    
+</head>
+<style>
+    :root{
+        --bg:#121212;
+        --plaque-top:#111111;
+        --plaque-bottom:#444342;
+        --metal-1:#cfcfcf;
+        --metal-2:#8b8b8b;
+        --glass: rgba(255,255,255,0.08);
+    }
+
+    /* body leather + subtle texture */
+    body {
+        background-color: var(--bg);
+        background-image:
+            radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 10%),
+            linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03)),
+            url('data:image/png;base64,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');
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        color: #f3efe8;
+        overflow: hidden;
+        background: radial-gradient(circle, #1e1e1e, #121212);
+    }
+
+    /* embossed plaque title (skeuomorphic) */
+    .title {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        max-width: 980px;
+        height: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(0,0,0,0.7);
+        background: linear-gradient(180deg, var(--plaque-top), var(--plaque-bottom));
+        box-shadow:
+            0 8px 18px rgba(0,0,0,0.6),
+            inset 0 2px 2px rgba(255,255,255,0.03),
+            inset 0 -3px 6px rgba(0,0,0,0.6);
+        text-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 -2px 6px rgba(0,0,0,0.8);
+        z-index: 40;
+        backdrop-filter: blur(2px);
+    }
+
+    .title h1 {
+        margin: 0;
+        letter-spacing: 1px;
+        font-size: 20px;
+        color: #f6efe6;
+    }
+
+    /* viewer frame (wood/metal + glass) */
+    .viewer {
+        margin-top: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 92%;
+        max-width: 980px;
+        padding: 28px;
+        background:
+            linear-gradient(180deg, rgba(34, 34, 34, 0.753), rgba(0, 0, 0, 0.712)),
+            url(frame.jpg);
+        background-size: cover;
+        background-position: center;
+        box-shadow:
+            0 20px 50px rgba(0,0,0,0.7),
+            0 6px 14px rgba(0,0,0,0.5),
+            inset 0 2px 8px rgba(255,255,255,0.02);
+        position: relative;
+        z-index: 10;
+         -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255,255,255,0.02));
+    }
+
+    .frame {
+        position: relative;
+        border-radius: 12px;
+        padding: 12px;
+        background: linear-gradient(180deg,#2f231c,#1e1411),
+        url(wood.jpg);
+        background-size: cover;
+        background-position: center;
+        box-shadow:
+            0 16px 30px rgba(0,0,0,0.7),
+            inset 0 2px 6px rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.03);
+       
+    }
+
+    /* stitched trim using gradients */
+    .frame::before{
+        content: "";
+        position: absolute;
+        inset: 6px;
+        border-radius: 10px;
+        background:
+            linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 8px);
+        pointer-events: none;
+        mix-blend-mode: overlay;
+        opacity: 0.6;
+    }
+
+    img {
+        display:block;
+        max-width: 80vw;
+        max-height: 64vh;
+        width: auto;
+        height: auto;
+        border-radius: 8px;
+        box-shadow:
+            0 18px 40px rgba(0,0,0,0.7),
+            inset 0 1px 0 rgba(255,255,255,0.04),
+            0 6px 18px rgba(0,0,0,0.6);
+        transform: translateZ(0);
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12));
+    }
+
+    /* subtle glass reflection fake */
+    img::after{
+        content: "";
+    }
+
+    /* skeuomorphic circular control buttons */
+    .controls {
+        display:flex;
+        gap:14px;
+        justify-content:center;
+        margin-top:16px;
+    }
+
+    .btn {
+        width:56px;
+        height:56px;
+        border-radius: 50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background-image: url('button.png');
+        
+        background-position: center;
+        box-shadow:
+            0 6px 14px rgba(0,0,0,0.6),
+            inset 0 2px 4px rgba(255,255,255,0.6),
+            inset 0 -4px 8px rgba(0,0,0,0.35);
+        border: 1px solid rgba(255,255,255,0.25);
+        color:#1b1b1b;
+        cursor: pointer;
+        user-select: none;
+        -webkit-box-reflect: below 4px linear-gradient(transparent, rgba(255,255,255,0.1));
+    }
+
+    .btn:active{
+        transform: translateY(3px);
+        box-shadow:
+            0 3px 8px rgba(0,0,0,0.6),
+            inset 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    p#countdownToNext {
+        margin-top:14px;
+        color:#d9cfc6;
+        font-size:12px;
+        opacity:0.9;
+    }
+
+</style>
+<body>
+
+    <div class="viewer">
+        <div class="frame">
+            <img src="0-1.jpg" id="photos" height="426" width="640" alt="The Juan Files"/>
+        </div>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+        <button class="btn" id="prevBtn" title="Previous">⏪</button>
+        <button style="width: 62px; height: 62px;" class="btn" id="playPause" title="Pause/Play">⏯</button>
+        <button class="btn" id="nextBtn" title="Next">⏩</button>
+    </div>
+
+    <p id="countdownToNext">The Juan Files - 2026</p>
+
+    <script>
+        // ...existing code...
+        var myImageArray = ["0-1.jpg","0-2.jpg","0-3.jpg","0-4.jpg","0-5.jpg","0-6.jpg","0-7.jpg"];
+        var position = 0;
+        var intervalMs = 2500;
+        var playing = true;
+        var timer = setInterval(nextImage, intervalMs);
+
+        function nextImage() {
+            position++;
+            if (position > myImageArray.length - 1) position = 0;
+            document.getElementById("photos").src = myImageArray[position];
+        }
+
+        function prevImage() {
+            position--;
+            if (position < 0) position = myImageArray.length - 1;
+            document.getElementById("photos").src = myImageArray[position];
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', function(){
+            prevImage();
+            resetTimer();
+        });
+        document.getElementById('nextBtn').addEventListener('click', function(){
+            nextImage();
+            resetTimer();
+        });
+        document.getElementById('playPause').addEventListener('click', function(){
+            playing = !playing;
+            if(playing){
+                timer = setInterval(nextImage, intervalMs);
+            } else {
+                clearInterval(timer);
+            }
+        });
+
+        function resetTimer(){
+            if(playing){
+                clearInterval(timer);
+                timer = setInterval(nextImage, intervalMs);
+            }
+        }
+        // ...existing code...
+    </script>
+</body>
+</html>
